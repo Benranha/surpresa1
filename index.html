@@ -145,15 +145,54 @@
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
-      padding: 4px;
+      padding: 8px;
+      background: none;
+      border: none;
+      position: relative;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      z-index: 101;
     }
 
     .nav-toggle span {
       display: block;
-      width: 24px;
+      width: 22px;
       height: 1.5px;
       background: var(--forest);
-      transition: var(--transition);
+      transform-origin: center;
+      transition: transform .35s cubic-bezier(.65,.05,.36,1),
+                  opacity .25s ease,
+                  background .3s ease;
+    }
+
+    .nav-toggle.active span {
+      background: var(--gold);
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .nav-toggle.active span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    /* Scroll progress bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      z-index: 200;
+      transition: width .08s linear;
+      box-shadow: 0 0 12px rgba(184,146,74,.4);
     }
 
     /* ─── Hero ──────────────────────────────────────────── */
@@ -172,7 +211,7 @@
       inset: -10%;
       background-image: url('https://picsum.photos/seed/swiss-alps-hero/1800/900');
       background-size: cover;
-      background-position: center;
+      background-position: center calc(50% + var(--scrollY, 0px));
       animation: kenburns 20s ease-in-out infinite alternate;
     }
 
@@ -770,10 +809,10 @@
 
     .quote-bg {
       position: absolute;
-      inset: -5%;
+      inset: -8%;
       background-image: url('https://picsum.photos/seed/swiss-valley-quote/1800/900');
       background-size: cover;
-      background-position: center top;
+      background-position: center calc(30% + var(--scrollY, 0px));
       animation: kenburns2 18s ease-in-out infinite alternate;
     }
 
@@ -915,7 +954,9 @@
     .fade-in {
       opacity: 0;
       transform: translateY(35px);
-      transition: opacity .7s ease, transform .7s ease;
+      transition: opacity .8s cubic-bezier(.22,.61,.36,1),
+                  transform .9s cubic-bezier(.22,.61,.36,1);
+      will-change: opacity, transform;
     }
 
     .fade-in.visible {
@@ -923,86 +964,344 @@
       transform: translateY(0);
     }
 
-    .fade-in-delay-1 { transition-delay: .1s; }
-    .fade-in-delay-2 { transition-delay: .2s; }
-    .fade-in-delay-3 { transition-delay: .3s; }
-    .fade-in-delay-4 { transition-delay: .4s; }
-    .fade-in-delay-5 { transition-delay: .5s; }
+    .fade-in-delay-1 { transition-delay: .08s; }
+    .fade-in-delay-2 { transition-delay: .16s; }
+    .fade-in-delay-3 { transition-delay: .24s; }
+    .fade-in-delay-4 { transition-delay: .32s; }
+    .fade-in-delay-5 { transition-delay: .40s; }
+
+    /* ─── Scroll reveal variants ─────────────────────────── */
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale,
+    .reveal-clip {
+      opacity: 0;
+      transition: opacity .9s cubic-bezier(.22,.61,.36,1),
+                  transform 1s cubic-bezier(.22,.61,.36,1),
+                  clip-path 1.1s cubic-bezier(.65,.05,.36,1);
+      will-change: opacity, transform;
+    }
+    .reveal-left  { transform: translateX(-50px); }
+    .reveal-right { transform: translateX(50px); }
+    .reveal-scale { transform: scale(.92); }
+    .reveal-clip  {
+      clip-path: inset(0 100% 0 0);
+      opacity: 1;
+    }
+
+    .reveal-left.visible,
+    .reveal-right.visible,
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-clip.visible {
+      clip-path: inset(0 0 0 0);
+    }
+
+    /* ─── Parallax images ────────────────────────────────── */
+    .parallax-img-wrap {
+      overflow: hidden;
+    }
+    .parallax-img {
+      will-change: transform;
+      transition: transform .15s linear;
+    }
+
+    /* ─── Hero parallax helper ───────────────────────────── */
+    .hero-bg,
+    .quote-bg {
+      will-change: transform;
+    }
+
+    /* ─── Animated section divider ───────────────────────── */
+    .section-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 0 1.5rem;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .9s cubic-bezier(.22,.61,.36,1) .15s;
+    }
+    .section-header.centered .section-divider { margin-left: auto; margin-right: auto; transform-origin: center; }
+    .section-header.visible .section-divider,
+    .section-header.fade-in.visible .section-divider {
+      transform: scaleX(1);
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-bg, .quote-bg { animation: none !important; }
+      .parallax-img { transform: none !important; }
+      .fade-in, .reveal-left, .reveal-right, .reveal-scale, .reveal-clip {
+        transition: opacity .3s ease !important;
+        transform: none !important;
+        clip-path: none !important;
+      }
+    }
 
     /* ─── Mobile Menu ───────────────────────────────────── */
     .mobile-menu {
-      display: none;
+      display: flex;
       position: fixed;
       inset: 0;
-      z-index: 99;
-      background: var(--forest);
+      z-index: 110;
+      background:
+        radial-gradient(ellipse at top right, rgba(184,146,74,.18), transparent 55%),
+        radial-gradient(ellipse at bottom left, rgba(36,61,41,.6), transparent 55%),
+        linear-gradient(160deg, var(--forest) 0%, #0e1812 100%);
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2rem;
+      gap: 1.75rem;
+      padding: 5rem 1.5rem 2rem;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: scale(1.04);
+      transition: opacity .45s cubic-bezier(.25,.46,.45,.94),
+                  transform .55s cubic-bezier(.25,.46,.45,.94),
+                  visibility 0s linear .45s;
     }
 
-    .mobile-menu.open { display: flex; }
+    .mobile-menu.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: scale(1);
+      transition: opacity .45s cubic-bezier(.25,.46,.45,.94),
+                  transform .55s cubic-bezier(.25,.46,.45,.94),
+                  visibility 0s linear 0s;
+    }
+
+    .mobile-menu::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1px;
+      height: 0;
+      background: linear-gradient(to bottom, transparent, rgba(184,146,74,.3), transparent);
+      transform: translate(-50%, -50%);
+      transition: height .7s cubic-bezier(.25,.46,.45,.94) .15s;
+    }
+
+    .mobile-menu.open::before { height: 70%; }
+
+    .mobile-menu-logo {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--cream);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity .5s ease .3s, transform .5s ease .3s;
+    }
+    .mobile-menu-logo span { color: var(--gold); }
+    .mobile-menu.open .mobile-menu-logo { opacity: 1; transform: translateY(0); }
 
     .mobile-menu a {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
+      font-size: clamp(1.7rem, 7vw, 2.4rem);
       font-weight: 300;
       color: var(--white);
-      letter-spacing: .05em;
+      letter-spacing: .03em;
+      position: relative;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .5s cubic-bezier(.25,.46,.45,.94),
+                  transform .55s cubic-bezier(.25,.46,.45,.94),
+                  color .25s ease;
+      padding: .15rem 1rem;
     }
 
-    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-menu a::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transform: translateY(-50%);
+      transition: width .35s cubic-bezier(.25,.46,.45,.94);
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu a:active { color: var(--gold2); }
+    .mobile-menu a:hover::before { width: .7rem; }
+
+    .mobile-menu.open a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .mobile-menu.open a:nth-of-type(1) { transition-delay: .15s; }
+    .mobile-menu.open a:nth-of-type(2) { transition-delay: .21s; }
+    .mobile-menu.open a:nth-of-type(3) { transition-delay: .27s; }
+    .mobile-menu.open a:nth-of-type(4) { transition-delay: .33s; }
+    .mobile-menu.open a:nth-of-type(5) { transition-delay: .39s; }
+    .mobile-menu.open a:nth-of-type(6) { transition-delay: .45s; }
+    .mobile-menu.open a:nth-of-type(7) { transition-delay: .51s; }
 
     .mobile-close {
       position: absolute;
-      top: 1.5rem;
-      right: 2rem;
-      font-size: 1.8rem;
-      color: rgba(255,255,255,.6);
+      top: 1.1rem;
+      right: 1.25rem;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: rgba(255,255,255,.7);
       cursor: pointer;
-      background: none;
-      border: none;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(184,146,74,.25);
+      border-radius: 50%;
       line-height: 1;
+      transition: transform .3s ease, color .3s ease, border-color .3s ease;
+    }
+
+    .mobile-close:hover,
+    .mobile-close:active {
+      transform: rotate(90deg);
+      color: var(--gold);
+      border-color: var(--gold);
     }
 
     /* ─── Responsive ─────────────────────────────────────── */
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .nav-toggle { display: flex; }
-      .nav { padding: 1.1rem 1.5rem; }
-      .nav.scrolled { padding: .85rem 1.5rem; }
+      .nav { padding: 1rem 1.25rem; }
+      .nav.scrolled { padding: .75rem 1.25rem; }
+      .nav-logo { font-size: 1.15rem; }
 
-      .section { padding: 5rem 1.25rem; }
-      .section-title { font-size: 2rem; }
+      .section { padding: 4.5rem 1.25rem; }
+      .section-title { font-size: clamp(1.75rem, 6vw, 2.4rem); }
+      .section-header { margin-bottom: 2.75rem; }
+      .section-subtitle { font-size: .92rem; }
+
+      .hero-content { padding: 0 1.5rem; }
 
       .feature-grid { grid-template-columns: 1fr; gap: 2rem; }
       .feature-grid.reverse { direction: ltr; }
-      .feature-img { height: 320px; }
+      .feature-img { height: 300px; }
 
-      .restaurant-list { grid-template-columns: 1fr; }
+      .restaurant-list { grid-template-columns: 1fr; gap: 1.5rem; }
       .restaurant-card { grid-template-columns: 1fr; }
-      .restaurant-img { min-height: 200px; }
+      .restaurant-img { min-height: 200px; height: 200px; }
+      .restaurant-body { padding: 1.5rem 1.4rem; }
 
-      .hotels-grid { grid-template-columns: 1fr 1fr; }
-      .hotels-grid-bottom { grid-template-columns: 1fr; }
+      .hotels-grid { grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+      .hotels-grid-bottom { grid-template-columns: 1fr; gap: 1.4rem; }
+      .hotel-body { padding: 1.4rem 1.3rem; }
+      .hotel-img { height: 210px; }
 
-      .mountains-grid { grid-template-columns: 1fr; }
+      .mountains-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+      .mountain-card { height: 320px; }
+      .mountain-content { padding: 1.5rem 1.4rem; }
+      .mountain-name { font-size: 1.6rem; }
+      .mountain-desc { max-height: 100px; opacity: 1; }
 
-      .facts-grid { grid-template-columns: 1fr 1fr; }
+      .facts-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+      .fact-card { padding: 2rem 1.4rem; }
+      .fact-number { font-size: 2.8rem; }
+
+      .cards-grid { gap: 1.5rem; }
+      .card-body { padding: 1.4rem 1.3rem; }
+
+      .quote-content { padding: 4rem 1.25rem; }
+      .quote-tip-box { padding: 1.25rem 1.4rem; }
+      .quote-tip-text { font-size: .95rem; }
+
+      .general-quiz-wrap { padding: 1.75rem 1.4rem; }
+      .footer-links { gap: 1.25rem; flex-wrap: wrap; padding: 0 1rem; }
     }
 
     @media (max-width: 600px) {
+      .nav { padding: .85rem 1rem; }
+      .nav.scrolled { padding: .65rem 1rem; }
+      .nav-logo { font-size: 1.05rem; }
+
+      .section { padding: 3.75rem 1rem; }
+      .section-header { margin-bottom: 2.25rem; }
+      .section-label { font-size: .6rem; }
+
+      .hero { min-height: 560px; }
+      .hero-title { font-size: clamp(2.6rem, 13vw, 3.4rem); }
+      .hero-subtitle { font-size: 1rem; margin-bottom: 2rem; padding: 0 .5rem; }
+      .hero-eyebrow { font-size: .6rem; letter-spacing: .25em; }
+      .hero-cta { padding: .8rem 1.8rem; font-size: .68rem; }
+      .hero-scroll { bottom: 1.5rem; font-size: .55rem; }
+      .hero-scroll-line { height: 38px; }
+
       .intro-strip { flex-direction: column; }
-      .intro-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+      .intro-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+        padding: 1.6rem 1rem;
+      }
+      .intro-item:last-child { border-bottom: none; }
+      .intro-item-number { font-size: 2.2rem; }
 
-      .cards-grid { grid-template-columns: 1fr; }
-      .hotels-grid { grid-template-columns: 1fr; }
-      .hotels-grid-bottom { grid-template-columns: 1fr; }
-      .facts-grid { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .card-img { height: 210px; }
+      .card-title { font-size: 1.3rem; }
 
-      .hero-title { font-size: 3rem; }
-      .quote-text { font-size: 1.4rem; }
+      .hotels-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .hotels-grid-bottom { grid-template-columns: 1fr; gap: 1.25rem; margin-top: 1.25rem; }
+      .hotel-img { height: 220px; }
+      .facts-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+      .restaurant-img { height: 180px; min-height: 180px; }
+      .restaurant-name { font-size: 1.3rem; }
+      .restaurant-meta { gap: .5rem; }
+      .restaurant-meta span { font-size: .62rem; padding: .25rem .65rem; }
+
+      .mountain-card { height: 280px; }
+      .mountain-name { font-size: 1.45rem; }
+      .mountain-altitude { font-size: .85rem; }
+      .mountain-desc { font-size: .8rem; }
+
+      .quote-section { min-height: 60vh; }
+      .quote-content { padding: 3.5rem 1rem; }
+      .quote-text { font-size: clamp(1.25rem, 5vw, 1.5rem); }
+      .quote-mark { font-size: 5rem; }
+      .quote-tip-box { padding: 1.1rem 1.2rem; }
+      .quote-tip-text { font-size: .88rem; line-height: 1.6; }
+      .quote-tip-label { font-size: .58rem; }
+
+      .footer { padding: 3rem 1rem 2.25rem; }
+      .footer-logo { font-size: 1.5rem; }
+      .footer-tagline { font-size: .72rem; margin-bottom: 1.75rem; }
+      .footer-links { gap: 1rem .9rem; margin-bottom: 1.75rem; }
+      .footer-links a { font-size: .62rem; }
+
+      .general-quiz-wrap { padding: 1.5rem 1.2rem; }
+      .quiz-q-text { font-size: 1.05rem; }
+      .quiz-opt { font-size: .82rem; padding: .65rem .9rem; }
+      .quiz-result-box { padding: 1.5rem 1rem; }
+      .quiz-score-text { font-size: 1.2rem; }
+
+      .detail-back {
+        top: .9rem;
+        left: .9rem;
+        padding: .5rem 1rem;
+        font-size: .68rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .section { padding: 3.25rem .85rem; }
+      .hero-title { font-size: 2.4rem; }
+      .hero-cta { padding: .7rem 1.5rem; }
+      .nav-logo { font-size: .95rem; }
+      .mobile-menu a { font-size: 1.55rem; }
     }
 
     /* ─── Guia Prático ──────────────────────────────────── */
@@ -1359,6 +1658,9 @@
 </head>
 <body>
 
+  <!-- ═══ SCROLL PROGRESS ════════════════════════════════ -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
   <!-- ═══ NAVIGATION ════════════════════════════════════ -->
   <nav class="nav" id="nav">
     <a href="#hero" class="nav-logo">Suíça <span>—</span> Para Ela</a>
@@ -1378,7 +1680,8 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobile-menu">
-    <button class="mobile-close" id="mobile-close">✕</button>
+    <span class="mobile-menu-logo">Suíça <span>—</span> Para Ela</span>
+    <button class="mobile-close" id="mobile-close" aria-label="Fechar menu">✕</button>
     <a href="#lugares" class="mobile-link">Lugares</a>
     <a href="#restaurantes" class="mobile-link">Restaurantes</a>
     <a href="#hoteis" class="mobile-link">Hotéis</a>
@@ -1406,23 +1709,23 @@
 
   <!-- ═══ INTRO STRIP ═══════════════════════════════════ -->
   <div class="intro-strip">
-    <div class="intro-item fade-in">
+    <div class="intro-item reveal-scale">
       <span class="intro-item-number">4</span>
       <span class="intro-item-label">Lugares românticos</span>
     </div>
-    <div class="intro-item fade-in fade-in-delay-1">
+    <div class="intro-item reveal-scale fade-in-delay-1">
       <span class="intro-item-number">4</span>
       <span class="intro-item-label">Restaurantes chiques</span>
     </div>
-    <div class="intro-item fade-in fade-in-delay-2">
+    <div class="intro-item reveal-scale fade-in-delay-2">
       <span class="intro-item-number">5</span>
       <span class="intro-item-label">Hotéis com charme</span>
     </div>
-    <div class="intro-item fade-in fade-in-delay-3">
+    <div class="intro-item reveal-scale fade-in-delay-3">
       <span class="intro-item-number">4</span>
       <span class="intro-item-label">Montanhas icônicas</span>
     </div>
-    <div class="intro-item fade-in fade-in-delay-4">
+    <div class="intro-item reveal-scale fade-in-delay-4">
       <span class="intro-item-number">41.3k</span>
       <span class="intro-item-label">km² de paraíso</span>
     </div>
@@ -1980,11 +2283,22 @@
   </div>
 
   <script>
-    /* ── Nav scroll ────────────────────────────────── */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ── Nav scroll + Scroll progress bar ──────────── */
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
+    const progressBar = document.getElementById('scroll-progress');
+
+    function updateScrollUI() {
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 60);
+      if (progressBar) {
+        const docH = document.documentElement.scrollHeight - window.innerHeight;
+        const pct  = docH > 0 ? Math.min(100, (y / docH) * 100) : 0;
+        progressBar.style.width = pct + '%';
+      }
+    }
+    updateScrollUI();
 
     /* ── Mobile menu ───────────────────────────────── */
     const toggle   = document.getElementById('nav-toggle');
@@ -1992,26 +2306,98 @@
     const closeBtn = document.getElementById('mobile-close');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    const openMenu  = () => { menu.classList.add('open');  document.body.style.overflow = 'hidden'; };
-    const closeMenu = () => { menu.classList.remove('open'); document.body.style.overflow = ''; };
+    const openMenu  = () => {
+      menu.classList.add('open');
+      toggle.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeMenu = () => {
+      menu.classList.remove('open');
+      toggle.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
 
-    toggle.addEventListener('click', openMenu);
+    toggle.addEventListener('click', () => {
+      menu.classList.contains('open') ? closeMenu() : openMenu();
+    });
     closeBtn.addEventListener('click', closeMenu);
     mobileLinks.forEach(l => l.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+    });
 
-    /* ── IntersectionObserver fade-in ──────────────── */
-    const fadeEls = document.querySelectorAll('.fade-in');
+    /* ── IntersectionObserver — fade-in & reveals ──── */
+    const revealEls = document.querySelectorAll(
+      '.fade-in, .reveal-left, .reveal-right, .reveal-scale, .reveal-clip'
+    );
 
-    const observer = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          revealObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    fadeEls.forEach(el => observer.observe(el));
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ── Parallax (scroll-driven, rAF batched) ─────── */
+    const heroSection = document.querySelector('.hero');
+    const heroContent = document.querySelector('.hero-content');
+    const heroScroll  = document.querySelector('.hero-scroll');
+    const heroOverlay = document.querySelector('.hero-overlay');
+    const heroBg      = document.querySelector('.hero-bg');
+    const quoteContent = document.querySelector('.quote-content');
+    const quoteBg      = document.querySelector('.quote-bg');
+
+    let ticking = false;
+    function runParallax() {
+      const vh = window.innerHeight;
+      const y  = window.scrollY;
+
+      // Hero: content fades + lifts; bg drifts down (extends kenburns subtly)
+      if (heroSection && heroContent) {
+        const hRect = heroSection.getBoundingClientRect();
+        if (hRect.bottom > 0 && hRect.top < vh) {
+          const p = Math.max(0, Math.min(1, -hRect.top / heroSection.offsetHeight));
+          heroContent.style.transform = `translate3d(0, ${(p * 80).toFixed(1)}px, 0)`;
+          heroContent.style.opacity = (1 - p * 1.1).toFixed(3);
+          if (heroScroll) heroScroll.style.opacity = (1 - p * 2).toFixed(3);
+          if (heroOverlay) heroOverlay.style.opacity = (1 + p * 0.18).toFixed(3);
+          if (heroBg) heroBg.style.setProperty('--scrollY', (p * 60).toFixed(1) + 'px');
+        }
+      }
+
+      // Quote section parallax
+      if (quoteContent && quoteBg) {
+        const qSection = quoteContent.parentElement;
+        const qRect = qSection.getBoundingClientRect();
+        if (qRect.bottom > 0 && qRect.top < vh) {
+          const center = qRect.top + qRect.height / 2;
+          const p = (center - vh / 2) / vh; // -1..+1 ish
+          quoteContent.style.transform = `translate3d(0, ${(p * 30).toFixed(1)}px, 0)`;
+          quoteBg.style.setProperty('--scrollY', (p * -40).toFixed(1) + 'px');
+        }
+      }
+
+      ticking = false;
+    }
+
+    function onScroll() {
+      updateScrollUI();
+      if (prefersReducedMotion) return;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(runParallax);
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    if (!prefersReducedMotion) requestAnimationFrame(runParallax);
 
     /* ── Smooth scroll for anchors ─────────────────── */
     document.querySelectorAll('a[href^="#"]').forEach(a => {
