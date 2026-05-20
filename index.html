@@ -1202,6 +1202,159 @@
 
     /* cursor pointer nos cards clicáveis */
     [data-place] { cursor: pointer; }
+
+    /* ─── Detail Section com Imagem ────────────────────── */
+    .detail-section-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .detail-section-img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      display: block;
+    }
+
+    .detail-section-prose {}
+
+    @media (max-width: 700px) {
+      .detail-section-inner { grid-template-columns: 1fr; }
+      .detail-section-img { height: 200px; }
+    }
+
+    /* ─── Quiz (card e geral) ───────────────────────────── */
+    .detail-quiz {
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 2px solid rgba(184,146,74,.2);
+    }
+
+    .detail-quiz-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--forest);
+      margin-bottom: 1.75rem;
+    }
+
+    .quiz-q-wrap { margin-bottom: .5rem; }
+
+    .quiz-q-num {
+      font-family: 'Jost', sans-serif;
+      font-size: .65rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: .5rem;
+    }
+
+    .quiz-q-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--forest);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .quiz-options { display: grid; gap: .55rem; margin-bottom: .75rem; }
+
+    .quiz-opt {
+      padding: .75rem 1.1rem;
+      border: 1px solid rgba(184,146,74,.3);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-family: 'Jost', sans-serif;
+      font-size: .88rem;
+      font-weight: 300;
+      color: var(--text);
+      background: transparent;
+      text-align: left;
+      transition: background .18s, border-color .18s, color .18s;
+    }
+
+    .quiz-opt:hover:not(:disabled) { background: rgba(184,146,74,.08); border-color: rgba(184,146,74,.5); }
+
+    .quiz-opt.correct {
+      background: #d4edda; border-color: #28a745; color: #155724; font-weight: 500;
+    }
+
+    .quiz-opt.wrong {
+      background: #f8d7da; border-color: #dc3545; color: #721c24;
+    }
+
+    .quiz-opt:disabled { cursor: default; }
+
+    .quiz-feedback {
+      font-family: 'Jost', sans-serif;
+      font-size: .82rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      min-height: 1.2em;
+    }
+
+    .quiz-result-box {
+      text-align: center;
+      padding: 2rem;
+      border: 1px solid rgba(184,146,74,.3);
+      border-radius: var(--radius);
+      margin-top: 1rem;
+    }
+
+    .quiz-score-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--forest);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .quiz-restart-btn {
+      display: inline-block;
+      padding: .7rem 1.6rem;
+      background: var(--forest);
+      color: var(--gold2);
+      border: 1px solid rgba(184,146,74,.4);
+      border-radius: var(--radius);
+      font-family: 'Jost', sans-serif;
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+
+    .quiz-restart-btn:hover { background: var(--forest2); }
+
+    /* Quiz geral na página */
+    .general-quiz-wrap {
+      max-width: 680px;
+      margin: 2.5rem auto 0;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(184,146,74,.18);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+    }
+
+    .general-quiz-wrap .quiz-q-text { color: var(--cream); }
+    .general-quiz-wrap .quiz-q-num  { color: var(--gold2); }
+    .general-quiz-wrap .detail-quiz-title { color: var(--cream2); }
+    .general-quiz-wrap .quiz-opt { color: var(--cream); border-color: rgba(184,146,74,.25); }
+    .general-quiz-wrap .quiz-opt:hover:not(:disabled) { background: rgba(184,146,74,.12); }
+    .general-quiz-wrap .quiz-opt.correct { color: #155724; }
+    .general-quiz-wrap .quiz-opt.wrong   { color: #721c24; }
+    .general-quiz-wrap .quiz-feedback    { color: rgba(247,243,236,.6); }
+    .general-quiz-wrap .quiz-score-text  { color: var(--cream); }
+    .general-quiz-wrap .quiz-result-box  { border-color: rgba(184,146,74,.25); }
   </style>
 </head>
 <body>
@@ -1216,6 +1369,7 @@
       <li><a href="#montanhas">Montanhas</a></li>
       <li><a href="#curiosidades">Curiosidades</a></li>
       <li><a href="#guia">Guia</a></li>
+      <li><a href="#quiz">Quiz</a></li>
     </ul>
     <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1231,6 +1385,7 @@
     <a href="#montanhas" class="mobile-link">Montanhas</a>
     <a href="#curiosidades" class="mobile-link">Curiosidades</a>
     <a href="#guia" class="mobile-link">Guia</a>
+    <a href="#quiz" class="mobile-link">Quiz</a>
   </div>
 
   <!-- ═══ HERO ══════════════════════════════════════════ -->
@@ -1765,6 +1920,26 @@
     </div>
   </section>
 
+  <!-- ═══ QUIZ GERAL ══════════════════════════════════════ -->
+  <section class="section section--dark" id="quiz">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Você prestou atenção?</span>
+        <h2 class="section-title">Quiz Geral<br />sobre a Suíça</h2>
+        <p class="section-subtitle">10 perguntas para testar tudo que você aprendeu neste guia. Boa sorte!</p>
+      </div>
+      <div class="general-quiz-wrap fade-in" id="general-quiz-wrap">
+        <div id="general-quiz-body"></div>
+        <div id="general-quiz-result" hidden>
+          <div class="quiz-result-box">
+            <span id="general-score-text" class="quiz-score-text"></span>
+            <button id="general-restart" class="quiz-restart-btn">Jogar novamente</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ FOOTER ════════════════════════════════════════ -->
   <footer class="footer">
     <span class="footer-logo">Suíça <span>—</span> Para Ela</span>
@@ -1777,6 +1952,7 @@
       <li><a href="#montanhas">Montanhas</a></li>
       <li><a href="#curiosidades">Curiosidades</a></li>
       <li><a href="#guia">Guia</a></li>
+      <li><a href="#quiz">Quiz</a></li>
     </ul>
 
     <div class="footer-divider"></div>
@@ -1862,6 +2038,12 @@
           { heading: 'Como chegar', text: 'De Interlaken Ost, tome o trem BOB (Berner Oberland-Bahn) diretamente até Grindelwald — 35 minutos de trajeto. Os trens partem a cada 30 minutos. Com o Swiss Travel Pass, o trajeto é gratuito. De carro, siga pela A8 até Interlaken e depois pela Cantonalstraße — mas o trem é muito mais panorâmico.' },
           { heading: 'Melhor época', text: 'Julho e agosto para caminhadas com flores alpinas e clima agradável (10–22°C). Dezembro a março para neve impecável e atmosfera natalina nas ruas de chalés. Junho oferece o equilíbrio perfeito: poucos turistas, neve nas alturas, verde nos vales.' },
           { heading: 'Dica especial', text: 'Acorde cedo — antes das 7h — e caminhe até a base do Eiger. A luz da manhã batendo na parede norte é um espetáculo fotográfico impossível de reproduzir. Evite ir apenas de teleférico: a caminhada até Pfingstegg (40 minutos de trilha fácil) revela ângulos que nenhuma foto de cartão-postal mostra.' }
+        ],
+        quiz: [
+          { q: "Qual é a altitude de Grindelwald?", opts: ["634 m","1.034 m","2.034 m","3.034 m"], correct: 1, feedback: "Grindelwald fica a 1.034 metros de altitude no Oberland Bernês." },
+          { q: "Como se chama a parede norte do Eiger?", opts: ["Ostwand","Südwand","Nordwand","Westwand"], correct: 2, feedback: "A Nordwand do Eiger tem 1.800 metros de rocha vertical — uma das mais temidas do alpinismo." },
+          { q: "Qual trem conecta Interlaken Ost a Grindelwald?", opts: ["RER","TGV","BOB","ICE"], correct: 2, feedback: "O BOB (Berner Oberland-Bahn) faz o trajeto em 35 minutos." },
+          { q: "Para onde leva o funicular Männlichen?", opts: ["Topo do Eiger","Vista panorâmica do trio alpino","Geleira Aletsch","Lago Brienz"], correct: 1, feedback: "O funicular de Männlichen oferece uma das vistas mais completas do trio Eiger-Mönch-Jungfrau." }
         ]
       },
       montreux: {
@@ -1875,6 +2057,12 @@
           { heading: 'Como chegar', text: 'De Genebra, são 70 minutos de trem direto. De Lausanne, apenas 25 minutos. Trens IC e RE passam frequentemente — com o Swiss Travel Pass, o trajeto é incluído. Há também ferry no verão saindo de Genebra que faz a rota pelo lago em 3h30, com paradas em Lausanne e Vevey — a mais bela maneira de chegar.' },
           { heading: 'Melhor época', text: 'Julho para o Jazz Festival (reserve hotel com 6+ meses de antecedência). Junho e setembro para clima ameno, menos turistas e lago azul-esmeralda sem multidão. Dezembro tem a magia do Natal com mercados tradicionais e luzes refletidas no lago.' },
           { heading: 'Dica especial', text: 'Vá até Vevey (15 minutos de trem) e visite o museu Charlie Chaplin, que viveu ali até o fim da vida. Depois, caminhe de volta a Montreux pela margem do lago — 1 hora de caminhada plana com vistas constantes para o lago e os Alpes franceses. Um dos percursos mais belos da Europa.' }
+        ],
+        quiz: [
+          { q: "Em que mês ocorre o famoso festival de Montreux?", opts: ["Março","Julho","Outubro","Dezembro"], correct: 1, feedback: "O Montreux Jazz Festival acontece em julho, desde 1967." },
+          { q: "Qual escritor imortalizou o Château de Chillon?", opts: ["Victor Hugo","Voltaire","Lord Byron","Alexandre Dumas"], correct: 2, feedback: "Lord Byron escreveu 'O Prisioneiro de Chillon' inspirado na fortaleza medieval no lago." },
+          { q: "Quanto tempo dura o trem de Genebra a Montreux?", opts: ["30 minutos","70 minutos","2 horas","3 horas"], correct: 1, feedback: "De Genebra, são aproximadamente 70 minutos de trem direto até Montreux." },
+          { q: "Qual é o apelido da região de Montreux?", opts: ["Riviera Alpina","Riviera Suíça","Costa do Lago","Paraíso do Léman"], correct: 1, feedback: "Montreux é conhecida como a 'Riviera Suíça' pelo seu clima suave e palmeiras à beira do Lago Léman." }
         ]
       },
       lucerna: {
@@ -1888,6 +2076,12 @@
           { heading: 'Como chegar', text: 'De Zurique: 50 minutos de trem direto (IC, a cada 30 minutos). De Interlaken: 2 horas de trem panorâmico pela rota do Golden Pass, com vistas dos lagos. De Basileia: 1h20. Lucerna tem uma das estações ferroviárias mais bonitas da Suíça, em frente ao lago — chegue e já se encante.' },
           { heading: 'Melhor época', text: 'Qualquer época funciona — Lucerna é uma das poucas cidades suíças igualmente linda no verão e no inverno. Agosto tem o Festival Internacional de Música, um dos mais respeitados do mundo clássico. Dezembro tem o Mercado de Natal na Franziskanerplatz, com presentes artesanais e glühwein.' },
           { heading: 'Dica especial', text: 'Reserve jantar no Restaurant Schiffrestaurant Wilhelm Tell — um barco ancorado no lago que serve fondue e raclette com vista para as montanhas. Depois, caminhe pelas ruelas do centro histórico após as 22h, quando os turistas somem e a cidade revela sua alma medieval e silenciosa.' }
+        ],
+        quiz: [
+          { q: "Em que século foi construída a Kapellbrücke?", opts: ["Século X","Século XIV","Século XVI","Século XVIII"], correct: 1, feedback: "A Kapellbrücke foi construída em 1333 — século XIV — como parte das muralhas da cidade de Lucerna." },
+          { q: "O que Mark Twain disse sobre o Lion Monument de Lucerna?", opts: ["'A escultura mais bela da Europa'","'A escultura mais triste e comovente do mundo'","'Um monumento ao valor suíço'","'A obra de arte mais impressionante dos Alpes'"], correct: 1, feedback: "Mark Twain chamou o Lion Monument de 'a escultura mais triste e comovente do mundo'." },
+          { q: "Qual é o lago onde fica Lucerna?", opts: ["Lago Thun","Lago Léman","Lago dos Quatro Cantões","Lago Brienz"], correct: 2, feedback: "Lucerna fica às margens do Vierwaldstättersee — o Lago dos Quatro Cantões." },
+          { q: "Quanto tempo leva o trem de Zurique a Lucerna?", opts: ["20 minutos","50 minutos","1h30","2 horas"], correct: 1, feedback: "De Zurique, o trem IC chega a Lucerna em aproximadamente 50 minutos." }
         ]
       },
       interlaken: {
@@ -1901,6 +2095,12 @@
           { heading: 'Como chegar', text: 'Há duas estações: Interlaken West (trens de Berna e Spiez) e Interlaken Ost (trens para Grindelwald, Lauterbrunnen e Jungfraujoch). De Berna: 55 minutos. De Zurique: 2 horas com uma troca em Berna. De Lucerna: 2 horas pela rota do Golden Pass — belíssima, especialmente a parte por Brienz.' },
           { heading: 'Melhor época', text: 'Junho a setembro para os dois lagos no auge da cor e caminhadas nas montanhas vizinhas. Inverno (dezembro a março) é mais tranquilo, com neve nas alturas e preços de hotel melhores. Evite agosto nos fins de semana — Interlaken fica extremamente movimentada com turistas asiáticos e grupos.' },
           { heading: 'Dica especial', text: 'Alugue uma bicicleta em Interlaken e pedale até o vilarejo de Iseltwald (20 km) à beira do Lago Brienz — o mesmo local viralizado pelo K-drama "Crash Landing on You". A ciclovia à beira do lago é plana e asfaltada. Leve piquenique e passe a tarde ali: poucos lugares na Europa têm água tão azul e montanhas tão próximas.' }
+        ],
+        quiz: [
+          { q: "O que significa o nome 'Interlaken'?", opts: ["Entre as montanhas","Entre os lagos","Entre os vales","Entre os rios"], correct: 1, feedback: "Interlaken significa literalmente 'entre os lagos' — ela fica entre o Lago Thun e o Lago Brienz." },
+          { q: "Qual K-drama tornou o Lago Brienz famoso mundialmente?", opts: ["Goblin","Descendants of the Sun","Crash Landing on You","My Love from the Star"], correct: 2, feedback: "O vilarejo de Iseltwald, à beira do Lago Brienz, viralizou após aparecer em 'Crash Landing on You'." },
+          { q: "Quais são os três picos visíveis do Höheweg de Interlaken?", opts: ["Matterhorn, Eiger, Jungfrau","Eiger, Mönch, Jungfrau","Titlis, Mönch, Pilatus","Rigi, Eiger, Titlis"], correct: 1, feedback: "Do centro de Interlaken, vê-se o trio Eiger, Mönch e Jungfrau — os picos mais icônicos do Oberland Bernês." },
+          { q: "De qual estação de Interlaken partem os trens para o Jungfraujoch?", opts: ["Interlaken West","Interlaken Central","Interlaken Ost","Interlaken Berg"], correct: 0, feedback: "Os trens para Grindelwald, Lauterbrunnen e Jungfraujoch partem de Interlaken Ost — a estação leste." }
         ]
       },
       memories: {
@@ -1914,6 +2114,12 @@
           { heading: 'O que esperar', text: 'Uma experiência de 3 a 4 horas à mesa. O serviço é refinado mas nunca rígido. A carta de vinhos tem foco em rótulos suíços raros — peça ajuda ao sommelier, que conhece cada garrafa pessoalmente. Reserve pelo menos 3 meses antes; nas datas especiais (Natal, Réveillon, Páscoa), 6 meses.' },
           { heading: 'Informações práticas', text: 'Endereço: Grand Resort Bad Ragaz, Hans Albrecht Strasse 1, 7310 Bad Ragaz. De Zurique: 1h15 de trem. Código de vestimenta: smart elegant (sem tênis ou jeans). Preço médio do menu-degustação com harmonização de vinhos: CHF 380–520 por pessoa. Fecha segundas e terças.' },
           { heading: 'Dica', text: 'Reserve para o jantar de sexta ou sábado, quando Wassmer costuma estar presente na cozinha. Chegue cedo e explore o spa termal do Grand Resort — as águas de Bad Ragaz são famosas desde o século XIII — antes do jantar. É uma noite completa, não apenas uma refeição.' }
+        ],
+        quiz: [
+          { q: "Quantas estrelas Michelin tem o Memories?", opts: ["1","2","3","Nenhuma"], correct: 1, feedback: "O Memories tem 2 estrelas Michelin e 19 pontos Gault&Millau." },
+          { q: "Quem é o chef do Memories?", opts: ["René Redzepi","Sven Wassmer","Daniel Humm","Anton Mosimann"], correct: 1, feedback: "O chef Sven Wassmer comanda o Memories, com uma cozinha que narra as estações dos Alpes." },
+          { q: "Em qual resort de luxo fica o Memories?", opts: ["The Alpina Gstaad","Grand Resort Bad Ragaz","Badrutt's Palace","The Omnia"], correct: 1, feedback: "O Memories fica dentro do Grand Resort Bad Ragaz, complexo termal de luxo no leste da Suíça." },
+          { q: "Com quantos meses de antecedência reservar o Memories em datas especiais?", opts: ["1 mês","3 meses","6 meses","1 semana"], correct: 2, feedback: "Para datas como Natal e Réveillon, recomenda-se reservar com 6 meses de antecedência." }
         ]
       },
       chesery: {
@@ -1927,6 +2133,12 @@
           { heading: 'O ambiente', text: 'A lareira central, as vigas de madeira centenária, os candelabros — tudo cria uma atmosfera de chalé de família aristocrática que recebeu seus convidados para jantar. Nos fins de semana de inverno, o piano bar ao lado anima a noite até tarde. O Chesery é o único lugar em Gstaad onde você come bem E dança até a 1h.' },
           { heading: 'Informações práticas', text: 'Endereço: Lauenenstrasse, 3780 Gstaad. Aberto para jantar a partir das 19h (fechado segunda e terça na baixa temporada). Código de vestimenta: smart casual no jantar, mais formal nas noites de piano. Reserva essencial com 4 a 8 semanas de antecedência. Preço médio: CHF 180–280 por pessoa.' },
           { heading: 'Dica', text: 'Peça mesa perto da lareira — há apenas 4 mesas privilegiadas nessa posição. Mencione ao fazer a reserva que é uma ocasião especial; a equipe prepara detalhes surpresa (flores, carta personalizada). Depois do jantar, caminhe pelo Promenade de Gstaad sob as estrelas — a vila à noite de inverno é cinematográfica.' }
+        ],
+        quiz: [
+          { q: "Desde quando existe o Chesery?", opts: ["1945","1958","1973","1989"], correct: 2, feedback: "O Chesery existe desde 1973 e há décadas é o ponto de encontro da jet set alpina de Gstaad." },
+          { q: "Quantas estrelas Michelin tem o Chesery?", opts: ["Nenhuma","1","2","3"], correct: 1, feedback: "O Chesery tem 1 estrela Michelin." },
+          { q: "O que torna o Chesery único à noite nos fins de semana de inverno?", opts: ["Menu especial de ski","Piano bar até tarde","Show de fondue ao vivo","Jantar na neve"], correct: 1, feedback: "O piano bar ao lado do Chesery anima a noite até tarde nos fins de semana de inverno." },
+          { q: "Em que cantão fica Gstaad?", opts: ["Valais","Vaud","Berna","Friburgo"], correct: 2, feedback: "Gstaad fica no cantão de Berna, no Oberland Bernês, apesar de ser geograficamente próxima de Friburgo." }
         ]
       },
       pizgloria: {
@@ -1940,6 +2152,12 @@
           { heading: 'O que fazer além do jantar', text: 'Chegue pela manhã para o Thrill Walk — uma passarela suspensa na rocha com seção de vidro transparente sobre o abismo. Visite a exposição Bond World 007. No inverno, esquie pela rota "007 Run" de 16 km descendo até Lauterbrunnen. Leve um casaco pesado — mesmo no verão, a 2.970 m a temperatura ronda os 5°C.' },
           { heading: 'Como chegar', text: 'De Interlaken, tome o trem até Lauterbrunnen (25 min), depois bondinho até Grütschalp, trem até Mürren e finalmente o teleférico do Schilthorn. Total: cerca de 2h de viagem com as baldeações. Alternativamente, de Stechelberg (vale) sobe teleférico direto em 30 minutos. Com Swiss Travel Pass, parte do trajeto é gratuita.' },
           { heading: 'Dica', text: 'Compre o ingresso "Breakfast at Piz Gloria" — inclui o teleférico de subida + café da manhã no restaurante giratório + descida. É mais barato que pagar separado e o café da manhã com aquela vista é simplesmente irreal. Vá num dia com previsão de bom tempo — o site do Schilthorn tem webcam ao vivo para verificar.' }
+        ],
+        quiz: [
+          { q: "Em qual filme de James Bond o Piz Gloria aparece?", opts: ["007 contra GoldenEye","007 — A Serviço Secreto de Sua Majestade","Cassino Royale","Spectre"], correct: 1, feedback: "O Piz Gloria foi cenário do filme '007 — A Serviço Secreto de Sua Majestade' (1969), com George Lazenby." },
+          { q: "A quantos metros de altitude fica o Piz Gloria?", opts: ["1.970 m","2.970 m","3.970 m","4.970 m"], correct: 1, feedback: "O Piz Gloria fica no cume do Schilthorn, a 2.970 metros de altitude." },
+          { q: "Quanto tempo leva uma rotação completa do restaurante giratório?", opts: ["15 minutos","30 minutos","55 minutos","90 minutos"], correct: 2, feedback: "O restaurante giratório do Piz Gloria completa uma volta de 360° em 55 minutos." },
+          { q: "Qual é o percurso que parte do Schilthorn até Lauterbrunnen no inverno?", opts: ["Rota Alpina","007 Run","Schilthorn Express","Bond Trail"], correct: 1, feedback: "A '007 Run' é uma pista de 16 km descendo do Schilthorn até Lauterbrunnen, em homenagem ao filme de James Bond." }
         ]
       },
       cafedusoleil: {
@@ -1953,6 +2171,12 @@
           { heading: 'O que mais pedir', text: 'Além do fondue, a raclette é igualmente sensacional — queijo derretido raspado sobre batatas cozidas com picles e cebola. Os vin chaud (vinho quente com especiarias) são perfeitos no inverno. Para sobremesa, a tarte au vin cuit é uma joia local da confeitaria genevoise.' },
           { heading: 'Informações práticas', text: 'Endereço: Place du Petit-Saconnex 6, 1202 Genebra. Aberto todos os dias para almoço e jantar. Sem reserva? Chegue antes das 12h ou das 19h para garantir mesa. Preço médio: CHF 30–45 por pessoa (o fondue em si custa em torno de CHF 28). Ambiente casual, sem código de vestimenta.' },
           { heading: 'Dica', text: 'Peça para sentar no salão principal da casa, não no espaço externo — a atmosfera de bistrot histórico, com mesas de madeira escura e garrafas nas prateleiras, é parte essencial da experiência. Depois do jantar, caminhe até o Parc des Bastions (10 minutos a pé) para ver o Muro da Reforma iluminado à noite.' }
+        ],
+        quiz: [
+          { q: "Desde quando existe o Café du Soleil?", opts: ["1749","1849","1899","1949"], correct: 1, feedback: "O Café du Soleil foi fundado em 1849 e mantém a mesma receita de fondue por quase dois séculos." },
+          { q: "Qual é a especialidade do Café du Soleil?", opts: ["Raclette","Rösti","Moitié-Moitié","Fondue de chocolate"], correct: 2, feedback: "O Moitié-Moitié — metade Gruyère, metade Vacherin — é considerado o fondue 'verdadeiro' pelos suíços." },
+          { q: "Em qual cidade fica o Café du Soleil?", opts: ["Berna","Zurique","Genebra","Lausanne"], correct: 2, feedback: "O Café du Soleil fica no bairro Grand-Pré de Genebra." },
+          { q: "Qual bebida acompanha tradicionalmente o fondue suíço?", opts: ["Cerveja","Água gelada","Vinho branco","Suco de uva"], correct: 2, feedback: "O fondue suíço acompanha vinho branco — nunca água gelada, pois os suíços acreditam que dificulta a digestão do queijo." }
         ]
       },
       badrutts: {
@@ -1966,6 +2190,12 @@
           { heading: 'Gastronomia', text: 'O hotel tem sete opções de restaurante e bar. O Le Restaurant serve alta cozinha mediterrâneo-alpina com ingredientes sazonais. O King\'s Club é a boate mais famosa dos Alpes — uma instituição de 50 anos que ainda recebe os melhores DJs. O serviço de quarto é 24h, com menu de alta gastronomia disponível a qualquer hora.' },
           { heading: 'Atividades', text: 'Ski-in ski-out direto para as pistas de Corviglia. Curling no lago gelado no inverno. Polo na neve em janeiro (um dos torneios mais exclusivos do mundo). No verão, golfe, hipismo, vela no lago, trekking nas montanhas engadinenses. O hotel organiza heliesquí e voos de planador sobre os Alpes para hóspedes.' },
           { heading: 'Dica', text: 'Reserve a suíte com terraço voltada para o lago — o nascer do sol sobre o Lago de St. Moritz congelado no inverno é um dos espetáculos visuais mais raros da Europa. Peça ao concierge para reservar a mesa certa no Acla Restaurant para o almoço pós-ski: vista do lago, fondue de trufas, e a sensação de ter chegado ao topo do mundo.' }
+        ],
+        quiz: [
+          { q: "Em que ano foi fundado o Badrutt's Palace?", opts: ["1856","1896","1912","1928"], correct: 1, feedback: "O Badrutt's Palace foi fundado em 1896 por Caspar Badrutt em St. Moritz." },
+          { q: "Qual resort de esqui abriga o Badrutt's Palace?", opts: ["Gstaad","Zermatt","St. Moritz","Davos"], correct: 2, feedback: "O Badrutt's Palace fica em St. Moritz, no cantão de Graubünden — um dos resorts de esqui mais exclusivos do mundo." },
+          { q: "O que é o King's Club do Badrutt's Palace?", opts: ["Clube de golfe","Spa exclusivo","A boate mais famosa dos Alpes","Restaurante estrelado"], correct: 2, feedback: "O King's Club é uma boate lendária de 50 anos dentro do Badrutt's Palace, que ainda recebe os melhores DJs." },
+          { q: "Qual é o nome do fundador do turismo de inverno em St. Moritz?", opts: ["Johann Badrutt","Caspar Badrutt","Hans Badrutt","Karl Badrutt"], correct: 1, feedback: "Caspar Badrutt 'inventou' o turismo de inverno ao apostar com clientes britânicos que voltariam e ficariam encantados com o inverno alpino." }
         ]
       },
       alpina: {
@@ -1979,6 +2209,12 @@
           { heading: 'Six Senses Spa', text: 'O spa de seis andares é operado pela marca Six Senses — a mesma de Maldivas e Bali. Piscina interior, piscina exterior aquecida, sala de gelo, saunas finlandesas, hammam, salas de tratamento e um programa de bem-estar integrativo baseado na tradição alpina. O melhor spa de montanha da Europa, segundo o Condé Nast Traveller.' },
           { heading: 'Gastronomia', text: 'Três restaurantes: SOMMET (alta cozinha franco-alpina com 1 estrela Michelin), YASSS (comida asiática contemporânea, um dos únicos na região) e La Branche (bistrot informal com raclette e fondue). O bar oferece 150 rótulos de whisky escocês — um dos maiores estoques dos Alpes.' },
           { heading: 'Dica', text: 'Reserve para uma semana — não um fim de semana. O Alpina foi projetado para estadias longas: cada dia você encontra uma nova dimensão do hotel. Peça ao concierge um "picnic alpino" para ser entregue no topo da Eggli via teleférico: cesta de madeira com queijos, charcuterie, fruta e vinho local, com manta e vista de 360° para os Alpes.' }
+        ],
+        quiz: [
+          { q: "Em que ano foi inaugurado o The Alpina Gstaad?", opts: ["1985","1998","2005","2012"], correct: 3, feedback: "O Alpina Gstaad foi inaugurado em 2012 após uma reforma total de uma propriedade histórica." },
+          { q: "Qual marca internacional opera o spa do Alpina?", opts: ["Mandarin Oriental","ESPA","Six Senses","Aman"], correct: 2, feedback: "O spa de seis andares do Alpina é operado pela Six Senses, mesma marca presente em Maldivas e Bali." },
+          { q: "Quantas suítes tem o Alpina Gstaad?", opts: ["28","42","56","80"], correct: 2, feedback: "O Alpina Gstaad tem 56 suítes, cada uma com vista para um dos picos icônicos de Gstaad." },
+          { q: "Qual restaurante do Alpina tem estrela Michelin?", opts: ["La Branche","YASSS","SOMMET","Alpine Grill"], correct: 2, feedback: "O SOMMET serve alta cozinha franco-alpina e tem 1 estrela Michelin." }
         ]
       },
       omnia: {
@@ -1992,6 +2228,12 @@
           { heading: 'Gastronomia', text: 'O restaurante do Omnia tem uma das ementas mais criativas de Zermatt: fusion contemporânea com ingredientes valaisanos. O café da manhã — com pão artesanal, queijo local, ovos de fazenda e vista do Matterhorn emergindo das nuvens — foi eleito pela Condé Nast "o melhor café da manhã da Suíça".' },
           { heading: 'Zermatt sem carros', text: 'Zermatt é uma das raras cidades europeias totalmente sem carros a motor — apenas veículos elétricos e carruagens. Isso cria um silêncio e uma qualidade de ar impossíveis em qualquer outro resort alpino. Chegue de trem (obrigatório — carros ficam em Täsch), e descubra que andar a pé aqui é um prazer raro.' },
           { heading: 'Dica', text: 'Reserve a suíte com banheira frente ao Matterhorn — existe exatamente uma dessas. Tome banho de manhã, na escuridão, com apenas a janela iluminada pela luz nascente no pico. Não divulgamos mais detalhes: precisa ser vivido. Suba também ao Gornergrat no amanhecer (primeiro trem às 6h) e volte para o café da manhã no Omnia — essa sequência não tem preço.' }
+        ],
+        quiz: [
+          { q: "Como o Omnia é acessado em Zermatt?", opts: ["Teleférico","Elevador na rocha","Funicular","A pé por escadaria"], correct: 1, feedback: "O Omnia é acessado exclusivamente por um elevador escavado diretamente na rocha — a chegada já é uma experiência." },
+          { q: "O que torna Zermatt única no transporte?", opts: ["Maior aeroporto alpino","Sem carros a combustão","Metrô subterrâneo","Trem de levitação magnética"], correct: 1, feedback: "Zermatt é totalmente sem carros a motor — apenas veículos elétricos circulam. Carros ficam em Täsch." },
+          { q: "Qual pico é o vizinho permanente do Omnia?", opts: ["Eiger","Jungfrau","Matterhorn","Titlis"], correct: 2, feedback: "O Omnia tem o Matterhorn como vizinho permanente, visível das suítes e do restaurante." },
+          { q: "Por que o Omnia não tem TVs nos quartos?", opts: ["Econômica","Intencional — a vista é o entertainment","Regulamento local","Interferência de sinal"], correct: 1, feedback: "A ausência de TVs é intencional: a janela de parede inteira com o Matterhorn é o único entretenimento que o Omnia promete." }
         ]
       },
       schweizerhof: {
@@ -2005,6 +2247,12 @@
           { heading: 'Gastronomia', text: 'O Jack\'s Brasserie no térreo é uma referência histórica de Berna — um bistrô clássico de 150 anos que serve desde Wiener Schnitzel até tártaro de bife, com vinho da Borgonha e cerveja local. O bar do hotel tem a melhor carta de whisky da cidade e é o ponto de encontro da classe política local à noite.' },
           { heading: 'Por que Berna', text: 'Berna é a capital mais esquecida pelos turistas — e por isso a mais autêntica. A Altstadt (cidade velha) medieval tem 6 km de arcadas cobertas, única no mundo. O Museu de Arte é um dos melhores da Suíça. A vista da Nydeggbrücke para os telhados vermelhos e o Aare verde-esmeralda vale a viagem por si só.' },
           { heading: 'Dica', text: 'Peça ao concierge um "Bern by Night" — um roteiro personalizado pelos melhores bares, restaurantes e mirantes noturnos da cidade que nenhum guia turístico lista. O hotel tem parceria com a maioria dos estabelecimentos e garante mesa sem fila. Não deixe de subir ao terraço do Parliament Building ao anoitecer — entrada livre, vistas épicas.' }
+        ],
+        quiz: [
+          { q: "Desde quando existe o Schweizerhof Bern?", opts: ["1799","1859","1903","1931"], correct: 1, feedback: "O Schweizerhof Bern existe desde 1859 e foi o primeiro grande hotel de luxo da capital suíça." },
+          { q: "Qual é o restaurante histórico no térreo do Schweizerhof?", opts: ["Bernese Grill","Jack's Brasserie","Le Palais","Zum Rathaus"], correct: 1, feedback: "O Jack's Brasserie é uma referência histórica de Berna — um bistrô clássico de 150 anos no térreo do hotel." },
+          { q: "O que é o centro histórico de Berna (Altstadt)?", opts: ["Um bairro moderno","Patrimônio Mundial UNESCO com 6 km de arcadas","O maior castelo medieval da Suíça","Um complexo de museus"], correct: 1, feedback: "A Altstadt de Berna é Patrimônio Mundial UNESCO e tem 6 km de arcadas cobertas — única no mundo." },
+          { q: "A quantos metros fica o Schweizerhof da Estação Central de Berna?", opts: ["500 metros","100 metros","1 km","2 km"], correct: 1, feedback: "O Schweizerhof fica a apenas 100 metros da Estação Central de Berna, com acesso fácil a toda a cidade." }
         ]
       },
       cambrian: {
@@ -2018,6 +2266,12 @@
           { heading: 'Gastronomia', text: 'O restaurante do Cambrian serve "mountain market cuisine" — ingredientes de mercados locais transformados com técnica contemporânea. O cardápio muda semanalmente conforme o que os agricultores vizinhos têm disponível. Pequeno-almoço é um festim: pão rústico, queijos do Simmental, frutas silvestres, ovos de campo. Simples e perfeito.' },
           { heading: 'Adelboden', text: 'O vilarejo de Adelboden é um dos segredos mais bem guardados do Oberland Bernês. Sem a fama de Gstaad ou Grindelwald, tem preços mais acessíveis, pistas de esqui excelentes (100+ km) e uma autenticidade que os resorts mais famosos perderam. No verão, as trilhas pelo Engstligenalp são entre as mais belas da Suíça.' },
           { heading: 'Dica', text: 'Reserve para ficar pelo menos 3 noites — Adelboden precisa de tempo para revelar seus segredos. Peça ao hotel um guia local (não um guia turístico: um morador) para uma caminhada pelo platô de Engstligenalp. A paisagem no final de julho, com flores alpinas cobrindo o plateau a 1.964 metros, é um dos espetáculos naturais mais raros da Europa.' }
+        ],
+        quiz: [
+          { q: "Em que cantão fica Adelboden?", opts: ["Valais","Vaud","Berna","Obwalden"], correct: 2, feedback: "Adelboden fica no cantão de Berna, no Oberland Bernês — uma região de extraordinária beleza alpina." },
+          { q: "Qual é o diferencial arquitetônico do Cambrian?", opts: ["Estilo barroco","Design escandinavo contemporâneo","Arquitetura medieval","Chalé tradicional"], correct: 1, feedback: "O Cambrian combina design escandinavo moderno com materiais alpinos centenários de forma magistral." },
+          { q: "Qual é a altitude do platô de Engstligenalp, perto de Adelboden?", opts: ["1.200 m","1.600 m","1.964 m","2.400 m"], correct: 2, feedback: "O platô de Engstligenalp fica a 1.964 metros de altitude e é famoso pelas flores alpinas em julho." },
+          { q: "Quantos km de pistas de esqui tem Adelboden?", opts: ["30 km","60 km","100 km","200 km"], correct: 2, feedback: "Adelboden tem mais de 100 km de pistas de esqui, com qualidade comparável a resorts mais famosos por uma fração do preço." }
         ]
       },
       jungfraujoch: {
@@ -2031,6 +2285,12 @@
           { heading: 'O que há no topo', text: 'O complexo Jungfraujoch Top of Europe inclui o restaurante panorâmico Crystal com vista de 360°, a Gruta de Gelo (um labirinto esculpido dentro do glaciar Aletsch), o observatório meteorológico Sphinx (acessível por elevador externo), a estação de investigação científica e uma exposição sobre a história da construção da ferrovia.' },
           { heading: 'Como chegar', text: 'De Interlaken Ost: tome o trem Berner Oberland-Bahn até Grindelwald ou Lauterbrunnen (35 min), depois para Kleine Scheidegg, e finalmente o Jungfrau Railway até o topo. Total: 2h a 2h30 com baldeações. Alternativamente, de Grindelwald direto pelo Eiger Express (gondola) até Eigergletscher e depois trem. O Eiger Express é mais rápido e mais novo.' },
           { heading: 'Dica', text: 'Vá num dia com previsão de sol verificada no site do Jungfraujoch (eles têm webcam ao vivo). Se nublar no topo, não verá absolutamente nada — e o ingresso custa em torno de CHF 220. Leve óculos escuros de qualidade: a radiação UV a 3.454 m com neve refletindo é intensa. E leve casaco pesado mesmo no verão — lá em cima a temperatura ronda os -5°C.' }
+        ],
+        quiz: [
+          { q: "A que altitude fica o Jungfraujoch?", opts: ["2.500 m","3.000 m","3.454 m","4.158 m"], correct: 2, feedback: "O Jungfraujoch fica a 3.454 metros — o ponto ferroviário mais alto da Europa." },
+          { q: "Em que ano foi inaugurada a linha ferroviária do Jungfraujoch?", opts: ["1880","1912","1935","1960"], correct: 1, feedback: "A ferrovia do Jungfrau foi inaugurada em 1912, após 16 anos de construção dentro do Eiger e do Mönch." },
+          { q: "Qual glaciar é visível do Jungfraujoch?", opts: ["Glaciar Gorner","Glaciar Trient","Glaciar Aletsch","Glaciar Rhône"], correct: 2, feedback: "O Glaciar Aletsch — o maior dos Alpes com 23 km — é claramente visível do Jungfraujoch." },
+          { q: "Por onde passa parte do trajeto da ferrovia do Jungfrau?", opts: ["Sobre pontes suspensas","Dentro de túneis no Eiger e Mönch","Por vales florestados","Por planaltos abertos"], correct: 1, feedback: "A maior parte do trajeto é em túnel escavado dentro do Eiger e do Mönch, com estações de janela na rocha." }
         ]
       },
       gornergrat: {
@@ -2044,6 +2304,12 @@
           { heading: 'No topo', text: 'O Kulmhotel Gornergrat — o hotel habitado mais alto da Suíça — funciona tanto como restaurante quanto como pousada. Dormir lá em cima e ver o Matterhorn ao amanhecer, antes de qualquer turista chegar, é uma experiência que ressignifica o que é "ver" uma montanha. O observatório astronômico no cume é o segundo mais alto da Europa.' },
           { heading: 'Como chegar', text: 'Exclusivamente de trem a partir de Zermatt. A estação Zermatt Bahnhof está a 5 minutos a pé do centro da vila. Trens partem a cada 24 minutos no pico da temporada. Com o Swiss Travel Pass, desconto de 50%. Compre o bilhete antecipado online para evitar filas na estação (especialmente no verão).' },
           { heading: 'Dica', text: 'Tome o trem das 7h08 — o primeiro — e tenha o Matterhorn para você mesma antes das multidões chegarem. Leve pão, queijo e termos de café e café da manhã no cume sentadas numa pedra, com aquela vista. Baixe depois caminhando até Riffelberg (30 minutos de trilha fácil) — a perspectiva do Matterhorn refletido no Lago Riffelsee em julho é uma das fotografias mais reproduzidas da Suíça.' }
+        ],
+        quiz: [
+          { q: "A que altitude fica o Gornergrat?", opts: ["2.089 m","2.489 m","3.089 m","3.489 m"], correct: 2, feedback: "O Gornergrat fica a 3.089 metros de altitude, acima de Zermatt no cantão do Valais." },
+          { q: "Em que ano foi inaugurada a Gornergrat Bahn?", opts: ["1868","1882","1898","1912"], correct: 2, feedback: "A Gornergrat Bahn foi inaugurada em 1898 — é o trem de cremalheira mais antigo da Suíça a ar livre." },
+          { q: "Qual é o nome do lago onde o Matterhorn se reflete em julho?", opts: ["Lago Gorner","Lago Riffelsee","Lago Zmuttbach","Lago Stellisee"], correct: 1, feedback: "O Lago Riffelsee reflete o Matterhorn em julho — uma das fotografias mais reproduzidas da Suíça." },
+          { q: "Quantos picos acima de 4.000 m são visíveis do Gornergrat?", opts: ["10","18","29","45"], correct: 2, feedback: "Do Gornergrat são visíveis 29 picos com mais de 4.000 metros, incluindo o Matterhorn e o Monte Rosa." }
         ]
       },
       titlis: {
@@ -2057,6 +2323,12 @@
           { heading: 'Gruta de Gelo', text: 'A Gruta de Gelo do Titlis é escavada 15 metros dentro do glaciar e tem temperatura constante de -1,5°C. Os corredores foram esculpidos no gelo azul-esverdeado com figuras decorativas de animais e cristais de gelo natural. Uma das atrações mais originais dos Alpes suíços — e funciona o ano inteiro, independente do clima externo.' },
           { heading: 'Como chegar', text: 'De Zurique: 1 hora de trem até Engelberg. De Lucerna: 45 minutos de trem. De Engelberg, o telecabine Titlis Express sobe em três estágios até o cume: Trübsee (1.800 m), Stand (2.428 m) e finalmente Titlis, com o famoso Rotair — o primeiro telecabine giratório do mundo, dando 360° durante a subida final.' },
           { heading: 'Dica', text: 'Combine o Titlis com uma tarde em Engelberg: a vila tem um mosteiro beneditino de 900 anos ainda em funcionamento, com uma qeijaria onde os monges produzem o famoso Klosterkas (queijo do mosteiro). A loja do mosteiro vende queijos e licores artesanais que não existem em nenhum outro lugar do mundo. Compre para levar.' }
+        ],
+        quiz: [
+          { q: "Qual é a atração mais nova e emocionante do Titlis?", opts: ["Gruta de Gelo","Cliff Walk","Rotair","Iglu Hotel"], correct: 1, feedback: "O Cliff Walk — a ponte suspensa mais alta dos Alpes, instalada em 2012 — é a grande atração moderna do Titlis." },
+          { q: "A que temperatura fica a Gruta de Gelo do Titlis?", opts: ["-10°C","0°C","-1,5°C","-5°C"], correct: 2, feedback: "A Gruta de Gelo tem temperatura constante de -1,5°C, ano inteiro, independente do clima externo." },
+          { q: "Qual é o nome do telecabine giratório que sobe ao Titlis?", opts: ["Alpenglow","Rotair","Eiger Express","Titlis Flyer"], correct: 1, feedback: "O Rotair — o primeiro telecabine giratório do mundo — faz 360° durante a subida final ao Titlis." },
+          { q: "Em qual cantão fica Engelberg, base para o Titlis?", opts: ["Uri","Obwalden","Nidwalden","Lucerna"], correct: 1, feedback: "Engelberg fica no cantão de Obwalden, no coração da Suíça central." }
         ]
       },
       harderkulm: {
@@ -2070,6 +2342,12 @@
           { heading: 'O funicular', text: 'O funicular do Harder Kulm existe desde 1908 e faz o percurso em apenas 8 minutos a partir do centro de Interlaken. É um dos funiculares mais inclinados da Suíça — a inclinação chega a 64% em alguns pontos. A cabine de madeira original foi preservada e restaurada; subir nela já é parte da experiência.' },
           { heading: 'Gastronomia', text: 'O Bergrestaurant Harder Kulm no topo serve comida suíça clássica com qualidade surpreendente para um restaurante de montanha: fondue, rösti com ovo e queijo local, e Apfelstrudel com natas. A varanda com vista para os dois lagos é o melhor lugar ao ar livre de Interlaken para comer.' },
           { heading: 'Dica', text: 'Suba à tarde — entre 16h e 18h — para pegar o pôr do sol sobre o Lago Thun. Leve uma garrafa de vinho branco local (compre na loja do funicular, que tem boa seleção) e sente na grama fora do restaurante, voltada para o oeste. Em julho e agosto, o sol se põe exatamente atrás dos Alpes ao fundo do Thun, criando um gradiente de cores que parece filtrado por photoshop — mas é real.' }
+        ],
+        quiz: [
+          { q: "A que altitude fica o Harder Kulm?", opts: ["822 m","1.322 m","2.322 m","3.322 m"], correct: 1, feedback: "O Harder Kulm fica a 1.322 metros de altitude acima de Interlaken." },
+          { q: "Qual é a atração principal do topo do Harder Kulm?", opts: ["Estação de esqui","Two Lakes Bridge","Gruta de gelo","Observatório astronômico"], correct: 1, feedback: "A Two Lakes Bridge — inaugurada em 2015 — oferece vista simultânea do Lago Thun e do Lago Brienz." },
+          { q: "Em quanto tempo o funicular sobe ao Harder Kulm?", opts: ["2 minutos","8 minutos","25 minutos","1 hora"], correct: 1, feedback: "O funicular faz o percurso em apenas 8 minutos a partir do centro de Interlaken." },
+          { q: "Desde quando existe o funicular do Harder Kulm?", opts: ["1868","1908","1945","1972"], correct: 1, feedback: "O funicular do Harder Kulm existe desde 1908 — um dos mais antigos e inclinados da Suíça." }
         ]
       }
     };
@@ -2083,6 +2361,50 @@
     const detailSub    = document.getElementById('detail-subtitle');
     const detailContent = document.getElementById('detail-content');
 
+    function buildQuizHTML(questions, wrapId) {
+      let current = 0, score = 0;
+      const wrap = document.getElementById(wrapId) || (() => {
+        const el = document.createElement('div');
+        el.id = wrapId;
+        return el;
+      })();
+
+      function renderQuestion() {
+        if (current >= questions.length) {
+          wrap.innerHTML = `<div class="quiz-result-box">
+            <span class="quiz-score-text">Você acertou ${score} de ${questions.length}! ${score === questions.length ? '🎉 Perfeito!' : score >= questions.length / 2 ? '👏 Muito bem!' : '💪 Continue explorando!'}</span>
+            <button class="quiz-restart-btn">Tentar novamente</button>
+          </div>`;
+          wrap.querySelector('.quiz-restart-btn').addEventListener('click', () => { current = 0; score = 0; renderQuestion(); });
+          return;
+        }
+        const q = questions[current];
+        wrap.innerHTML = `<div class="quiz-q-wrap">
+          <span class="quiz-q-num">Pergunta ${current + 1} de ${questions.length}</span>
+          <p class="quiz-q-text">${q.q}</p>
+        </div>
+        <div class="quiz-options">
+          ${q.opts.map((o, i) => `<button class="quiz-opt" data-idx="${i}">${o}</button>`).join('')}
+        </div>
+        <p class="quiz-feedback"></p>`;
+        wrap.querySelectorAll('.quiz-opt').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const chosen = +this.dataset.idx;
+            wrap.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+            wrap.querySelectorAll('.quiz-opt').forEach(b => {
+              if (+b.dataset.idx === q.correct) b.classList.add('correct');
+              else if (+b.dataset.idx === chosen) b.classList.add('wrong');
+            });
+            wrap.querySelector('.quiz-feedback').textContent = q.feedback;
+            if (chosen === q.correct) score++;
+            setTimeout(() => { current++; renderQuestion(); }, 1800);
+          });
+        });
+      }
+      renderQuestion();
+      return wrap;
+    }
+
     function openDetail(slug) {
       const d = PLACES[slug];
       if (!d) return;
@@ -2091,12 +2413,25 @@
       detailTag.textContent = d.tag;
       detailTitle.textContent = d.title;
       detailSub.textContent = d.subtitle;
-      detailContent.innerHTML = d.sections.map(s =>
-        `<div class="detail-section">
+
+      const sectionsHTML = d.sections.map((s, i) => {
+        const imgUrl = `https://picsum.photos/seed/${slug}-s${i}/600/420`;
+        const imgTag = `<img class="detail-section-img" src="${imgUrl}" alt="${s.heading}" loading="lazy" />`;
+        const prose  = `<div class="detail-section-prose">
           <h2 class="detail-section-heading">${s.heading}</h2>
           <p class="detail-section-text">${s.text}</p>
-        </div>`
-      ).join('');
+        </div>`;
+        const inner  = i % 2 === 0 ? `${imgTag}${prose}` : `${prose}${imgTag}`;
+        return `<div class="detail-section"><div class="detail-section-inner">${inner}</div></div>`;
+      }).join('');
+
+      detailContent.innerHTML = sectionsHTML + `<div class="detail-quiz">
+        <h2 class="detail-quiz-title">✦ Quiz — teste seus conhecimentos</h2>
+        <div id="card-quiz-body"></div>
+      </div>`;
+
+      buildQuizHTML(d.quiz, 'card-quiz-body');
+
       overlay.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -2115,6 +2450,65 @@
 
     detailBack.addEventListener('click', closeDetail);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
+    /* ── Quiz Geral ────────────────────────────────── */
+    const GENERAL_QUIZ = [
+      { q: "Qual é a moeda oficial da Suíça?", opts: ["Euro","Franco Suíço","Coroa Suíça","Libra"], correct: 1, feedback: "A Suíça usa o Franco Suíço (CHF). O país nunca adotou o Euro, apesar de estar geograficamente no coração da Europa." },
+      { q: "Quantos cantões tem a Suíça?", opts: ["20","23","26","30"], correct: 2, feedback: "A Suíça tem 26 cantões, cada um com sua própria constituição, parlamento e governo." },
+      { q: "Quais são os idiomas oficiais da Suíça?", opts: ["Alemão e Francês","Alemão, Francês e Italiano","Alemão, Francês, Italiano e Romanche","Alemão, Inglês e Francês"], correct: 2, feedback: "A Suíça tem 4 idiomas oficiais: alemão (63%), francês (23%), italiano (8%) e romanche (menos de 1%)." },
+      { q: "Qual é a altitude do Jungfraujoch, o ponto ferroviário mais alto da Europa?", opts: ["2.500 m","3.000 m","3.454 m","4.158 m"], correct: 2, feedback: "O Jungfraujoch fica a 3.454 metros de altitude e tem estação ferroviária desde 1912." },
+      { q: "O que é o Swiss Travel Pass?", opts: ["Um passaporte especial para turistas","Um passe de transporte ilimitado em trens, ônibus e barcos","Um seguro viagem obrigatório","Um cartão de crédito suíço"], correct: 1, feedback: "O Swiss Travel Pass dá acesso ilimitado à rede de transporte público suíça — trens, ônibus e barcos — por 3 a 15 dias." },
+      { q: "Em que cidade fica o famoso Château de Chillon?", opts: ["Genebra","Berna","Zurique","Montreux"], correct: 3, feedback: "O Château de Chillon fica às margens do Lago Léman, perto de Montreux, e foi imortalizado por Lord Byron no poema 'O Prisioneiro de Chillon'." },
+      { q: "Qual é o pico mais icônico de Zermatt?", opts: ["Eiger","Jungfrau","Matterhorn","Mont Blanc"], correct: 2, feedback: "O Matterhorn (4.478 m) é a montanha em forma de pirâmide símbolo da Suíça e um dos picos mais fotografados do mundo, em Zermatt." },
+      { q: "O que é único sobre Zermatt em relação ao transporte?", opts: ["Tem o maior aeroporto dos Alpes","É completamente sem carros a motor","Só se acessa de helicóptero no inverno","Tem teleférico 24 horas"], correct: 1, feedback: "Zermatt é uma das raras cidades europeias totalmente sem carros a combustão — apenas veículos elétricos circulam. Carros ficam estacionados em Täsch." },
+      { q: "Qual festival internacional acontece em Montreux todo mês de julho?", opts: ["Festival de Cinema","Festival de Jazz","Festival de Ópera","Festival de Queijo"], correct: 1, feedback: "O Montreux Jazz Festival, fundado em 1967 por Claude Nobs, é um dos maiores e mais prestigiados festivais de música do mundo." },
+      { q: "Qual glaciar é visível do Jungfraujoch e é o maior dos Alpes?", opts: ["Glaciar do Ródano","Glaciar Mer de Glace","Glaciar Aletsch","Glaciar Gorner"], correct: 2, feedback: "O Glaciar Aletsch tem 23 km de extensão e 900 metros de profundidade em alguns pontos — é o maior glaciar dos Alpes e Patrimônio Mundial da UNESCO." }
+    ];
+
+    (function initGeneralQuiz() {
+      const body    = document.getElementById('general-quiz-body');
+      const result  = document.getElementById('general-quiz-result');
+      const scoreEl = document.getElementById('general-score-text');
+      const restart = document.getElementById('general-restart');
+      if (!body) return;
+
+      let current = 0, score = 0;
+
+      function render() {
+        result.hidden = true;
+        if (current >= GENERAL_QUIZ.length) {
+          body.innerHTML = '';
+          scoreEl.textContent = `Você acertou ${score} de ${GENERAL_QUIZ.length}! ${score === GENERAL_QUIZ.length ? '🎉 Perfeito!' : score >= 7 ? '👏 Excelente!' : score >= 5 ? '😊 Muito bem!' : '💪 Continue explorando!'}`;
+          result.hidden = false;
+          return;
+        }
+        const q = GENERAL_QUIZ[current];
+        body.innerHTML = `<div class="quiz-q-wrap">
+          <span class="quiz-q-num">Pergunta ${current + 1} de ${GENERAL_QUIZ.length}</span>
+          <p class="quiz-q-text">${q.q}</p>
+        </div>
+        <div class="quiz-options">
+          ${q.opts.map((o, i) => `<button class="quiz-opt" data-idx="${i}">${o}</button>`).join('')}
+        </div>
+        <p class="quiz-feedback"></p>`;
+        body.querySelectorAll('.quiz-opt').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const chosen = +this.dataset.idx;
+            body.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+            body.querySelectorAll('.quiz-opt').forEach(b => {
+              if (+b.dataset.idx === q.correct) b.classList.add('correct');
+              else if (+b.dataset.idx === chosen) b.classList.add('wrong');
+            });
+            body.querySelector('.quiz-feedback').textContent = q.feedback;
+            if (chosen === q.correct) score++;
+            setTimeout(() => { current++; render(); }, 1800);
+          });
+        });
+      }
+
+      render();
+      restart.addEventListener('click', () => { current = 0; score = 0; render(); });
+    })();
   </script>
 </body>
 </html>
