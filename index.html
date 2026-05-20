@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suíça — Para Ela</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:   #f7f3ec;
+      --cream2:  #ede7da;
+      --forest:  #1a2e1e;
+      --forest2: #243d29;
+      --gold:    #b8924a;
+      --gold2:   #d4a85a;
+      --text:    #2c2c2c;
+      --muted:   #7a7060;
+      --white:   #ffffff;
+      --shadow:  0 8px 40px rgba(0,0,0,.12);
+      --shadow-hover: 0 20px 60px rgba(0,0,0,.22);
+      --radius:  4px;
+      --transition: .4s cubic-bezier(.25,.46,.45,.94);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    img { display: block; width: 100%; object-fit: cover; }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Typography ────────────────────────────────────── */
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-size: .65rem;
+      font-weight: 500;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 52ch;
+      line-height: 1.8;
+    }
+
+    /* ─── Navigation ────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(247, 243, 236, .7);
+      backdrop-filter: blur(18px) saturate(1.4);
+      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      border-bottom: 1px solid rgba(184,146,74,.15);
+      transition: padding var(--transition), background var(--transition);
+    }
+
+    .nav.scrolled {
+      padding: .9rem 3rem;
+      background: rgba(247, 243, 236, .92);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--forest);
+      letter-spacing: .02em;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--forest);
+      position: relative;
+      padding-bottom: 2px;
+      transition: color var(--transition);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--forest);
+      transition: var(--transition);
+    }
+
+    /* ─── Hero ──────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: -10%;
+      background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1800&q=85');
+      background-size: cover;
+      background-position: center;
+      animation: kenburns 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes kenburns {
+      from { transform: scale(1)   translate(0, 0); }
+      to   { transform: scale(1.08) translate(-2%, -1%); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(26, 46, 30, .55) 0%,
+        rgba(26, 46, 30, .35) 40%,
+        rgba(10, 10, 10, .6)  100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: var(--white);
+      padding: 0 2rem;
+      max-width: 860px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      display: block;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp .9s .3s forwards;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 300;
+      letter-spacing: -.01em;
+      line-height: 1.05;
+      margin-bottom: .5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s .5s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold2);
+    }
+
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 300;
+      font-style: italic;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s .7s forwards;
+      margin-bottom: 2.5rem;
+      color: rgba(255,255,255,.85);
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: .85rem 2.5rem;
+      border: 1px solid var(--gold2);
+      color: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      transition: background var(--transition), color var(--transition);
+      opacity: 0;
+      animation: fadeUp 1s .9s forwards;
+    }
+
+    .hero-cta:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      color: rgba(255,255,255,.6);
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      animation: fadeUp 1s 1.2s both;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,.5));
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: .4; transform: scaleY(1); }
+      50%       { opacity: 1;  transform: scaleY(1.1); }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Intro Strip ───────────────────────────────────── */
+    .intro-strip {
+      background: var(--forest);
+      color: var(--white);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .intro-item {
+      flex: 1;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,.08);
+      position: relative;
+    }
+
+    .intro-item:last-child { border-right: none; }
+
+    .intro-item-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+    }
+
+    .intro-item-label {
+      font-size: .7rem;
+      font-weight: 400;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      margin-top: .4rem;
+      display: block;
+    }
+
+    /* ─── Section Wrapper ───────────────────────────────── */
+    .section {
+      padding: 7rem 2rem;
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 4rem;
+    }
+
+    .section-header.centered { text-align: center; }
+    .section-header.centered .section-subtitle { margin: 0 auto; }
+
+    /* ─── Cards Grid ────────────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-img {
+      height: 240px;
+      overflow: hidden;
+    }
+
+    .card-img img {
+      height: 100%;
+      transition: transform .7s ease;
+    }
+
+    .card:hover .card-img img {
+      transform: scale(1.07);
+    }
+
+    .card-body {
+      padding: 1.75rem;
+    }
+
+    .card-tag {
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: .6rem;
+    }
+
+    .card-title {
+      font-size: 1.45rem;
+      font-weight: 400;
+      margin-bottom: .75rem;
+      color: var(--forest);
+    }
+
+    .card-text {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .card-detail {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--cream2);
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    .card-detail-icon { color: var(--gold); font-size: .9rem; }
+
+    /* ─── Lugares Românticos (dark section) ─────────────── */
+    .section--dark {
+      background: var(--forest);
+      color: var(--white);
+    }
+
+    .section--dark .section-title { color: var(--white); }
+    .section--dark .section-subtitle { color: rgba(255,255,255,.6); }
+    .section--dark .card {
+      background: var(--forest2);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,.07);
+    }
+    .section--dark .card-title { color: var(--white); }
+    .section--dark .card-text  { color: rgba(255,255,255,.55); }
+    .section--dark .card-detail { border-color: rgba(255,255,255,.1); color: rgba(255,255,255,.4); }
+
+    /* ─── Feature Layout (2 col) ────────────────────────── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .feature-grid.reverse { direction: rtl; }
+    .feature-grid.reverse > * { direction: ltr; }
+
+    .feature-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      height: 480px;
+      box-shadow: var(--shadow);
+    }
+
+    .feature-img img { height: 100%; }
+
+    .feature-content { padding: 1rem 0; }
+
+    .feature-content .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      margin-top: .5rem;
+    }
+
+    .feature-stars {
+      display: flex;
+      gap: .25rem;
+      margin-top: 1.5rem;
+    }
+
+    .star { color: var(--gold); font-size: .85rem; }
+
+    .feature-badge {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: .5rem 1.2rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: .65rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+
+    /* ─── Restaurantes ──────────────────────────────────── */
+    .restaurant-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .restaurant-card {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .restaurant-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .restaurant-img {
+      height: 100%;
+      min-height: 220px;
+      overflow: hidden;
+    }
+
+    .restaurant-img img { height: 100%; }
+
+    .restaurant-card:hover .restaurant-img img {
+      transform: scale(1.07);
+      transition: transform .7s ease;
+    }
+
+    .restaurant-body {
+      padding: 2rem;
+    }
+
+    .restaurant-name {
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--forest);
+      margin-bottom: .4rem;
+    }
+
+    .restaurant-location {
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .8rem;
+    }
+
+    .restaurant-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .restaurant-meta {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .restaurant-meta span {
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      background: var(--cream2);
+      color: var(--forest);
+      border-radius: 2px;
+    }
+
+    /* ─── Hotéis ────────────────────────────────────────── */
+    .hotels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .hotel-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .hotel-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .hotel-card:nth-child(4),
+    .hotel-card:nth-child(5) {
+      grid-column: span 1;
+    }
+
+    .hotels-grid-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .hotel-img {
+      height: 260px;
+      overflow: hidden;
+    }
+
+    .hotel-img img {
+      height: 100%;
+      transition: transform .7s ease;
+    }
+
+    .hotel-card:hover .hotel-img img { transform: scale(1.07); }
+
+    .hotel-body { padding: 1.75rem; }
+
+    .hotel-name {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--forest);
+      margin-bottom: .3rem;
+    }
+
+    .hotel-location {
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: .8rem;
+    }
+
+    .hotel-desc {
+      font-size: .87rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .hotel-stars { display: flex; gap: 3px; margin-top: 1rem; }
+    .hotel-stars .star { font-size: .7rem; }
+
+    /* ─── Montanhas ─────────────────────────────────────── */
+    .mountains-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+    }
+
+    .mountain-card {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      height: 380px;
+      cursor: default;
+      box-shadow: var(--shadow);
+    }
+
+    .mountain-card img {
+      height: 100%;
+      transition: transform .9s ease;
+    }
+
+    .mountain-card:hover img { transform: scale(1.07); }
+
+    .mountain-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,46,30,.9) 0%, transparent 55%);
+      transition: background var(--transition);
+    }
+
+    .mountain-card:hover .mountain-overlay {
+      background: linear-gradient(to top, rgba(26,46,30,.95) 0%, rgba(26,46,30,.2) 60%);
+    }
+
+    .mountain-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem;
+      color: var(--white);
+    }
+
+    .mountain-altitude {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--gold2);
+      display: block;
+      margin-bottom: .4rem;
+    }
+
+    .mountain-name {
+      font-size: 1.9rem;
+      font-weight: 300;
+      margin-bottom: .5rem;
+    }
+
+    .mountain-desc {
+      font-size: .85rem;
+      color: rgba(255,255,255,.65);
+      line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height .5s ease, opacity .5s ease;
+    }
+
+    .mountain-card:hover .mountain-desc {
+      max-height: 100px;
+      opacity: 1;
+    }
+
+    /* ─── Curiosidades ──────────────────────────────────── */
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .fact-card {
+      padding: 2.5rem 2rem;
+      background: var(--cream2);
+      border-radius: var(--radius);
+      border-left: 3px solid var(--gold);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .fact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .fact-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+      margin-bottom: .75rem;
+    }
+
+    .fact-title {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--forest);
+      margin-bottom: .6rem;
+    }
+
+    .fact-text {
+      font-size: .87rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ─── Quote Section ─────────────────────────────────── */
+    .quote-section {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .quote-bg {
+      position: absolute;
+      inset: -5%;
+      background-image: url('https://images.unsplash.com/photo-1531400158697-004e0f9af04f?auto=format&fit=crop&w=1800&q=85');
+      background-size: cover;
+      background-position: center top;
+      animation: kenburns2 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes kenburns2 {
+      from { transform: scale(1)    translate(0, 0); }
+      to   { transform: scale(1.06) translate(1%, -1%); }
+    }
+
+    .quote-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,46,30,.75), rgba(10,10,10,.65));
+    }
+
+    .quote-content {
+      position: relative;
+      text-align: center;
+      color: var(--white);
+      padding: 5rem 2rem;
+      max-width: 800px;
+    }
+
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      color: var(--gold);
+      line-height: .5;
+      display: block;
+      margin-bottom: 1rem;
+      opacity: .6;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    .quote-author {
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      display: block;
+      margin-bottom: 2.5rem;
+    }
+
+    .quote-tip-box {
+      display: inline-block;
+      padding: 1.5rem 2.5rem;
+      border: 1px solid rgba(184,146,74,.5);
+      background: rgba(26,46,30,.5);
+      backdrop-filter: blur(8px);
+      max-width: 580px;
+    }
+
+    .quote-tip-label {
+      font-size: .62rem;
+      font-weight: 500;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold2);
+      display: block;
+      margin-bottom: .6rem;
+    }
+
+    .quote-tip-text {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.85);
+      line-height: 1.65;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────── */
+    .footer {
+      background: var(--forest);
+      color: rgba(255,255,255,.5);
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      display: block;
+      margin-bottom: .5rem;
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-tagline {
+      font-size: .8rem;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 2.5rem;
+      display: block;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      list-style: none;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-links a {
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      transition: color .3s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(184,146,74,.4);
+      margin: 0 auto 2rem;
+    }
+
+    .footer-copy {
+      font-size: .72rem;
+      color: rgba(255,255,255,.25);
+    }
+
+    .footer-heart { color: var(--gold); }
+
+    /* ─── Fade-in animation (IntersectionObserver) ──────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-delay-1 { transition-delay: .1s; }
+    .fade-in-delay-2 { transition-delay: .2s; }
+    .fade-in-delay-3 { transition-delay: .3s; }
+    .fade-in-delay-4 { transition-delay: .4s; }
+    .fade-in-delay-5 { transition-delay: .5s; }
+
+    /* ─── Mobile Menu ───────────────────────────────────── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: var(--forest);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: .05em;
+    }
+
+    .mobile-menu a:hover { color: var(--gold); }
+
+    .mobile-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      font-size: 1.8rem;
+      color: rgba(255,255,255,.6);
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+
+    /* ─── Responsive ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav { padding: 1.1rem 1.5rem; }
+      .nav.scrolled { padding: .85rem 1.5rem; }
+
+      .section { padding: 5rem 1.25rem; }
+      .section-title { font-size: 2rem; }
+
+      .feature-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .feature-grid.reverse { direction: ltr; }
+      .feature-img { height: 320px; }
+
+      .restaurant-list { grid-template-columns: 1fr; }
+      .restaurant-card { grid-template-columns: 1fr; }
+      .restaurant-img { min-height: 200px; }
+
+      .hotels-grid { grid-template-columns: 1fr 1fr; }
+      .hotels-grid-bottom { grid-template-columns: 1fr; }
+
+      .mountains-grid { grid-template-columns: 1fr; }
+
+      .facts-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .intro-strip { flex-direction: column; }
+      .intro-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+
+      .cards-grid { grid-template-columns: 1fr; }
+      .hotels-grid { grid-template-columns: 1fr; }
+      .hotels-grid-bottom { grid-template-columns: 1fr; }
+      .facts-grid { grid-template-columns: 1fr; }
+
+      .hero-title { font-size: 3rem; }
+      .quote-text { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAVIGATION ════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">Suíça <span>—</span> Para Ela</a>
+    <ul class="nav-links">
+      <li><a href="#lugares">Lugares</a></li>
+      <li><a href="#restaurantes">Restaurantes</a></li>
+      <li><a href="#hoteis">Hotéis</a></li>
+      <li><a href="#montanhas">Montanhas</a></li>
+      <li><a href="#curiosidades">Curiosidades</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-close" id="mobile-close">✕</button>
+    <a href="#lugares" class="mobile-link">Lugares</a>
+    <a href="#restaurantes" class="mobile-link">Restaurantes</a>
+    <a href="#hoteis" class="mobile-link">Hotéis</a>
+    <a href="#montanhas" class="mobile-link">Montanhas</a>
+    <a href="#curiosidades" class="mobile-link">Curiosidades</a>
+  </div>
+
+  <!-- ═══ HERO ══════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Um guia curado da Europa mais bela</span>
+      <h1 class="hero-title">Suíça<br /><em>Para Ela</em></h1>
+      <p class="hero-subtitle">Lugares românticos, charme alpino e montanhas que roubam o fôlego</p>
+      <a href="#lugares" class="hero-cta">Descobrir o guia</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span>Rolar</span>
+    </div>
+  </section>
+
+  <!-- ═══ INTRO STRIP ═══════════════════════════════════ -->
+  <div class="intro-strip">
+    <div class="intro-item fade-in">
+      <span class="intro-item-number">4</span>
+      <span class="intro-item-label">Lugares românticos</span>
+    </div>
+    <div class="intro-item fade-in fade-in-delay-1">
+      <span class="intro-item-number">4</span>
+      <span class="intro-item-label">Restaurantes chiques</span>
+    </div>
+    <div class="intro-item fade-in fade-in-delay-2">
+      <span class="intro-item-number">5</span>
+      <span class="intro-item-label">Hotéis com charme</span>
+    </div>
+    <div class="intro-item fade-in fade-in-delay-3">
+      <span class="intro-item-number">4</span>
+      <span class="intro-item-label">Montanhas icônicas</span>
+    </div>
+    <div class="intro-item fade-in fade-in-delay-4">
+      <span class="intro-item-number">41.3k</span>
+      <span class="intro-item-label">km² de paraíso</span>
+    </div>
+  </div>
+
+  <!-- ═══ LUGARES ROMÂNTICOS ════════════════════════════ -->
+  <section class="section section--dark" id="lugares">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Onde o romance floresce</span>
+        <h2 class="section-title">Lugares<br />Românticos</h2>
+        <p class="section-subtitle">Cada uma dessas cidades tem uma alma própria — pedras antigas, lagos espelhados e o silêncio perfeito para se perder de mãos dadas.</p>
+      </div>
+
+      <div class="cards-grid">
+        <!-- Grindelwald -->
+        <article class="card fade-in fade-in-delay-1">
+          <div class="card-img">
+            <img
+              src="https://images.unsplash.com/photo-1507608869274-d3177ead5b97?auto=format&fit=crop&w=800&q=80"
+              alt="Grindelwald com o Eiger ao fundo"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Oberland Bernês</span>
+            <h3 class="card-title">Grindelwald</h3>
+            <p class="card-text">A vila mais dramática dos Alpes. O Eiger ergue-se atrás dos chalés enquanto a neve cobre tudo de branco absoluto. Um cenário que parece pintado.</p>
+            <div class="card-detail">
+              <span class="card-detail-icon">✦</span>
+              <span>Altitude: 1.034 m · Cantão de Berna</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Montreux -->
+        <article class="card fade-in fade-in-delay-2">
+          <div class="card-img">
+            <img
+              src="https://images.unsplash.com/photo-1563722832028-adbf8f01c8fd?auto=format&fit=crop&w=800&q=80"
+              alt="Montreux à beira do Lago Genebra"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Lago Leman</span>
+            <h3 class="card-title">Montreux</h3>
+            <p class="card-text">A Riviera Suíça. Palmeiras à beira do lago, o Château de Chillon como cenário e um clima surpreendentemente suave. Romântica em todas as estações.</p>
+            <div class="card-detail">
+              <span class="card-detail-icon">✦</span>
+              <span>À beira do Lago Genebra · Cantão de Vaud</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Lucerna -->
+        <article class="card fade-in fade-in-delay-3">
+          <div class="card-img">
+            <img
+              src="https://images.unsplash.com/photo-1515488764276-beab57c7e5c5?auto=format&fit=crop&w=800&q=80"
+              alt="Ponte da Capela em Lucerna"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Centro da Suíça</span>
+            <h3 class="card-title">Lucerna</h3>
+            <p class="card-text">A Kapellbrücke — a ponte de madeira medieval mais famosa do mundo — reflete nas águas do Rio Reuss. Caminhar aqui ao entardecer é quase irreal.</p>
+            <div class="card-detail">
+              <span class="card-detail-icon">✦</span>
+              <span>Ponte da Capela, séc. XIV · Cantão de Lucerna</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Interlaken -->
+        <article class="card fade-in fade-in-delay-4">
+          <div class="card-img">
+            <img
+              src="https://images.unsplash.com/photo-1573108724029-4c46571d6490?auto=format&fit=crop&w=800&q=80"
+              alt="Vista de Interlaken entre os lagos"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Entre os Lagos</span>
+            <h3 class="card-title">Interlaken</h3>
+            <p class="card-text">Situada entre o Lago Thun e o Lago Brienz, com o trio de picos Eiger, Mönch e Jungfrau no horizonte. A porta de entrada para o coração dos Alpes.</p>
+            <div class="card-detail">
+              <span class="card-detail-icon">✦</span>
+              <span>Lagos Thun &amp; Brienz · Cantão de Berna</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ RESTAURANTES ══════════════════════════════════ -->
+  <section class="section" id="restaurantes">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Gastronomia de alto nível</span>
+        <h2 class="section-title">Restaurantes<br />Chiques</h2>
+        <p class="section-subtitle">A cozinha suíça vai muito além do fondue. Estes endereços combinam ingredientes impecáveis com vistas que fazem parte do prato.</p>
+      </div>
+
+      <div class="restaurant-list">
+        <!-- Memories -->
+        <article class="restaurant-card fade-in fade-in-delay-1">
+          <div class="restaurant-img">
+            <img
+              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=400&q=80"
+              alt="Prato elegante do Memories"
+              loading="lazy"
+            />
+          </div>
+          <div class="restaurant-body">
+            <div class="restaurant-location">Bad Ragaz · 2 Estrelas Michelin</div>
+            <h3 class="restaurant-name">Memories</h3>
+            <p class="restaurant-desc">Do chef Sven Wassmer. Uma das experiências gastronômicas mais memoráveis da Suíça, com menus-degustação que narram as estações dos Alpes de forma poética.</p>
+            <div class="restaurant-meta">
+              <span>Alta Cozinha</span>
+              <span>Menu Degustação</span>
+              <span>Reserva Obrigatória</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Chesery -->
+        <article class="restaurant-card fade-in fade-in-delay-2">
+          <div class="restaurant-img">
+            <img
+              src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=400&q=80"
+              alt="Interior refinado do Chesery em Gstaad"
+              loading="lazy"
+            />
+          </div>
+          <div class="restaurant-body">
+            <div class="restaurant-location">Gstaad · 1 Estrela Michelin</div>
+            <h3 class="restaurant-name">Chesery</h3>
+            <p class="restaurant-desc">Elegância rústica no coração de Gstaad. Ambiente de chalé de luxo, lareira, e uma carta de vinhos excepcional. O ponto de encontro da jet set alpina.</p>
+            <div class="restaurant-meta">
+              <span>Cozinha Francesa</span>
+              <span>Vista Alpina</span>
+              <span>Ambiente Íntimo</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Piz Gloria -->
+        <article class="restaurant-card fade-in fade-in-delay-3">
+          <div class="restaurant-img">
+            <img
+              src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=400&q=80"
+              alt="Vista panorâmica dos Alpes do Piz Gloria"
+              loading="lazy"
+            />
+          </div>
+          <div class="restaurant-body">
+            <div class="restaurant-location">Schilthorn · 2.970 m de altitude</div>
+            <h3 class="restaurant-name">Piz Gloria</h3>
+            <p class="restaurant-desc">O restaurante giratório mais alto da Suíça. Cenário do James Bond "No seu Serviço Secreto", com panorama de 360° sobre 200 picos alpinos. Jantar com as estrelas.</p>
+            <div class="restaurant-meta">
+              <span>Girante 360°</span>
+              <span>James Bond</span>
+              <span>Vista Única</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Café du Soleil -->
+        <article class="restaurant-card fade-in fade-in-delay-4">
+          <div class="restaurant-img">
+            <img
+              src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80"
+              alt="Fondue tradicional do Café du Soleil"
+              loading="lazy"
+            />
+          </div>
+          <div class="restaurant-body">
+            <div class="restaurant-location">Genebra · desde 1849</div>
+            <h3 class="restaurant-name">Café du Soleil</h3>
+            <p class="restaurant-desc">O fondue mais famoso de Genebra. Estabelecimento histórico onde a receita tradicional é guardada como joia. A Suíça na sua forma mais autêntica e aquecedora.</p>
+            <div class="restaurant-meta">
+              <span>Fondue Clássico</span>
+              <span>Histórico</span>
+              <span>Autêntico</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HOTÉIS ════════════════════════════════════════ -->
+  <section class="section section--dark" id="hoteis">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Onde dormir sonhando acordada</span>
+        <h2 class="section-title">Hotéis com<br />Charme Alpino</h2>
+        <p class="section-subtitle">De palácios Belle Époque a refúgios modernos entre picos nevados — cada um destes hotéis é um destino em si mesmo.</p>
+      </div>
+
+      <!-- Top 3 -->
+      <div class="hotels-grid">
+        <!-- Badrutt's Palace -->
+        <article class="hotel-card fade-in fade-in-delay-1">
+          <div class="hotel-img">
+            <img
+              src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80"
+              alt="Badrutt's Palace Hotel em St. Moritz"
+              loading="lazy"
+            />
+          </div>
+          <div class="hotel-body">
+            <span class="hotel-location">St. Moritz</span>
+            <h3 class="hotel-name">Badrutt's Palace</h3>
+            <p class="hotel-desc">O ícone de St. Moritz desde 1896. Uma torre medieval que guarda dentro décadas de glamour, celebridades e o melhor ski-in ski-out dos Alpes.</p>
+            <div class="hotel-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- The Alpina Gstaad -->
+        <article class="hotel-card fade-in fade-in-delay-2">
+          <div class="hotel-img">
+            <img
+              src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80"
+              alt="The Alpina Gstaad hotel de luxo"
+              loading="lazy"
+            />
+          </div>
+          <div class="hotel-body">
+            <span class="hotel-location">Gstaad</span>
+            <h3 class="hotel-name">The Alpina Gstaad</h3>
+            <p class="hotel-desc">Ultra-luxo contemporâneo com vista direta para os três picos mais emblemáticos da região. Spa de seis andares e três restaurantes estrelados. O melhor da Suíça num só lugar.</p>
+            <div class="hotel-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- The Omnia -->
+        <article class="hotel-card fade-in fade-in-delay-3">
+          <div class="hotel-img">
+            <img
+              src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80"
+              alt="The Omnia hotel boutique em Zermatt"
+              loading="lazy"
+            />
+          </div>
+          <div class="hotel-body">
+            <span class="hotel-location">Zermatt</span>
+            <h3 class="hotel-name">The Omnia</h3>
+            <p class="hotel-desc">Hotel boutique suspenso sobre Zermatt com o Matterhorn como vizinho permanente. Acessado por elevador na rocha. Um dos endereços mais dramáticos do mundo.</p>
+            <div class="hotel-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Bottom 2 -->
+      <div class="hotels-grid-bottom" style="margin-top: 2rem;">
+        <!-- Schweizerhof -->
+        <article class="hotel-card fade-in fade-in-delay-4">
+          <div class="hotel-img">
+            <img
+              src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=800&q=80"
+              alt="Schweizerhof em Berna ou Lucerna"
+              loading="lazy"
+            />
+          </div>
+          <div class="hotel-body">
+            <span class="hotel-location">Berna</span>
+            <h3 class="hotel-name">Schweizerhof</h3>
+            <p class="hotel-desc">No coração da capital suíça, a passos da Old City patrimônio UNESCO. Um clássico da hotelaria helvética com restaurante renomado e quartos que olham para os Alpes Berneses.</p>
+            <div class="hotel-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- The Cambrian -->
+        <article class="hotel-card fade-in fade-in-delay-5">
+          <div class="hotel-img">
+            <img
+              src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
+              alt="The Cambrian em Adelboden"
+              loading="lazy"
+            />
+          </div>
+          <div class="hotel-body">
+            <span class="hotel-location">Adelboden</span>
+            <h3 class="hotel-name">The Cambrian</h3>
+            <p class="hotel-desc">Design escandinavo encontra alma alpina neste boutique hotel de Adelboden. Piscina aquecida com vista para o vale, spa minimalista e gastronomia de mercado. Para quem quer fugir do óbvio.</p>
+            <div class="hotel-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MONTANHAS ═════════════════════════════════════ -->
+  <section class="section" id="montanhas">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Onde a terra toca o céu</span>
+        <h2 class="section-title">As Montanhas<br />que Tiram o Fôlego</h2>
+        <p class="section-subtitle">Cada pico tem sua personalidade. Todos eles deixam uma marca que não sai — mesmo muito depois de voltar para casa.</p>
+      </div>
+
+      <div class="mountains-grid">
+        <!-- Jungfraujoch -->
+        <article class="mountain-card fade-in fade-in-delay-1">
+          <img
+            src="https://images.unsplash.com/photo-1527004013197-933b05631fbe?auto=format&fit=crop&w=900&q=80"
+            alt="Jungfraujoch - Topo da Europa"
+            loading="lazy"
+          />
+          <div class="mountain-overlay"></div>
+          <div class="mountain-content">
+            <span class="mountain-altitude">3.454 m · Topo da Europa</span>
+            <h3 class="mountain-name">Jungfraujoch</h3>
+            <p class="mountain-desc">O ponto ferroviário mais alto da Europa leva até um plateau de neve eterno. Geleira Aletsch visível, vistas até a França e um frio que faz a vida parecer urgente.</p>
+          </div>
+        </article>
+
+        <!-- Gornergrat -->
+        <article class="mountain-card fade-in fade-in-delay-2">
+          <img
+            src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=900&q=80"
+            alt="Vista do Matterhorn a partir do Gornergrat"
+            loading="lazy"
+          />
+          <div class="mountain-overlay"></div>
+          <div class="mountain-content">
+            <span class="mountain-altitude">3.089 m · Vista do Matterhorn</span>
+            <h3 class="mountain-name">Gornergrat</h3>
+            <p class="mountain-desc">Frente a frente com o Matterhorn. O trem de cremalheira mais antigo da Suíça leva até um terraço com 29 picos acima de 4.000 m. Visão impossível de esquecer.</p>
+          </div>
+        </article>
+
+        <!-- Titlis -->
+        <article class="mountain-card fade-in fade-in-delay-3">
+          <img
+            src="https://images.unsplash.com/photo-1548012259-6c98b58f7e26?auto=format&fit=crop&w=900&q=80"
+            alt="Titlis com neve e gelo eterno"
+            loading="lazy"
+          />
+          <div class="mountain-overlay"></div>
+          <div class="mountain-content">
+            <span class="mountain-altitude">3.238 m · Neve Eterna</span>
+            <h3 class="mountain-name">Titlis</h3>
+            <p class="mountain-desc">Acessível de Engelberg, tem o Cliff Walk — a ponte suspensa mais alta dos Alpes — e uma gruta de gelo de 15 metros esculpida no glaciar. Para corajosas.</p>
+          </div>
+        </article>
+
+        <!-- Harder Kulm -->
+        <article class="mountain-card fade-in fade-in-delay-4">
+          <img
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=900&q=80"
+            alt="Vista de Interlaken do Harder Kulm"
+            loading="lazy"
+          />
+          <div class="mountain-overlay"></div>
+          <div class="mountain-content">
+            <span class="mountain-altitude">1.322 m · Mirante dos Dois Lagos</span>
+            <h3 class="mountain-name">Harder Kulm</h3>
+            <p class="mountain-desc">Em apenas 10 minutos de funicular, chega-se ao mirante Two Lakes Bridge — com os Lagos Thun e Brienz ao mesmo tempo, emoldurados pelos Alpes. O pôr do sol aqui é uma cerimônia.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CURIOSIDADES ═══════════════════════════════════ -->
+  <section class="section section--dark" id="curiosidades">
+    <div class="section-inner">
+      <div class="section-header centered fade-in">
+        <span class="section-label">Fatos que encantam</span>
+        <h2 class="section-title">6 Curiosidades<br />sobre a Suíça</h2>
+        <p class="section-subtitle">Um país pequeno que guarda proporções impossíveis de grandeza, precisão e beleza.</p>
+      </div>
+
+      <div class="facts-grid">
+        <div class="fact-card fade-in fade-in-delay-1">
+          <span class="fact-number">01</span>
+          <h4 class="fact-title">26 Cantões, 4 Idiomas</h4>
+          <p class="fact-text">A Suíça é oficialmente quadrilíngue: alemão, francês, italiano e romanche. Cada região tem sabor, arquitetura e alma próprias — quatro países em um.</p>
+        </div>
+
+        <div class="fact-card fade-in fade-in-delay-2">
+          <span class="fact-number">02</span>
+          <h4 class="fact-title">O Chocolate Mais Antigo do Mundo</h4>
+          <p class="fact-text">A Suíça consome mais chocolate per capita do que qualquer outro país: cerca de 10 kg por pessoa por ano. Lindt, Nestlé e Toblerone — todas nasceram aqui.</p>
+        </div>
+
+        <div class="fact-card fade-in fade-in-delay-3">
+          <span class="fact-number">03</span>
+          <h4 class="fact-title">Relógios que Definem o Tempo</h4>
+          <p class="fact-text">A Suíça produz mais de 50% de todos os relógios de luxo do mundo. Rolex, Patek Philippe, Omega — marcas que nasceram nas pequenas oficinas do Jura suíço.</p>
+        </div>
+
+        <div class="fact-card fade-in fade-in-delay-4">
+          <span class="fact-number">04</span>
+          <h4 class="fact-title">200 Anos de Neutralidade</h4>
+          <p class="fact-text">Desde 1815, a Suíça não participa de guerras. É sede da Cruz Vermelha, do CERN e de dezenas de organismos internacionais. A paz como filosofia de estado.</p>
+        </div>
+
+        <div class="fact-card fade-in fade-in-delay-5">
+          <span class="fact-number">05</span>
+          <h4 class="fact-title">57% do País são Alpes</h4>
+          <p class="fact-text">Mais da metade do território suíço é montanha. Há 48 picos acima de 4.000 metros — incluindo o Dufourspitze (4.634 m), o mais alto do país. A natureza vence sempre.</p>
+        </div>
+
+        <div class="fact-card fade-in fade-in-delay-5">
+          <span class="fact-number">06</span>
+          <h4 class="fact-title">Trens que nunca atrasam</h4>
+          <p class="fact-text">O sistema ferroviário suíço é o mais denso do mundo: 5.300 km de trilhos para um país menor que o estado de Santa Catarina. Os trens chegam a 99,7% no horário.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ QUOTE / MELHOR ÉPOCA ══════════════════════════ -->
+  <section class="quote-section">
+    <div class="quote-bg"></div>
+    <div class="quote-overlay"></div>
+    <div class="quote-content fade-in">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">A Suíça não é um destino — é um estado de espírito. Um lugar onde o mundo parece ter sido feito com mais cuidado do que o normal.</p>
+      <span class="quote-author">— Uma viajante apaixonada pelos Alpes</span>
+      <div class="quote-tip-box">
+        <span class="quote-tip-label">✦ Melhor época para visitar</span>
+        <p class="quote-tip-text">
+          <strong style="color: var(--gold2);">Junho a setembro</strong> para montanhas verdes, caminhadas e lagos de cor impossível.
+          <strong style="color: var(--gold2);">Dezembro a março</strong> para neve perfeita, fondue à lareira e a magia dos Alpes brancos.
+          Evite abril e novembro — a Suíça "descansa" nesses meses.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════ -->
+  <footer class="footer">
+    <span class="footer-logo">Suíça <span>—</span> Para Ela</span>
+    <span class="footer-tagline">Um guia curado com muito carinho</span>
+
+    <ul class="footer-links">
+      <li><a href="#lugares">Lugares</a></li>
+      <li><a href="#restaurantes">Restaurantes</a></li>
+      <li><a href="#hoteis">Hotéis</a></li>
+      <li><a href="#montanhas">Montanhas</a></li>
+      <li><a href="#curiosidades">Curiosidades</a></li>
+    </ul>
+
+    <div class="footer-divider"></div>
+
+    <p class="footer-copy">
+      Feito com <span class="footer-heart">♥</span> para uma pessoa especial · Fotos via Unsplash
+    </p>
+  </footer>
+
+  <script>
+    /* ── Nav scroll ────────────────────────────────── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ── Mobile menu ───────────────────────────────── */
+    const toggle   = document.getElementById('nav-toggle');
+    const menu     = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('mobile-close');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    const openMenu  = () => { menu.classList.add('open');  document.body.style.overflow = 'hidden'; };
+    const closeMenu = () => { menu.classList.remove('open'); document.body.style.overflow = ''; };
+
+    toggle.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    mobileLinks.forEach(l => l.addEventListener('click', closeMenu));
+
+    /* ── IntersectionObserver fade-in ──────────────── */
+    const fadeEls = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    /* ── Smooth scroll for anchors ─────────────────── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const offset = nav.offsetHeight + 16;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
