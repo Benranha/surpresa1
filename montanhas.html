@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>As Montanhas — Suíça Para Ela</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">Suíça <span>—</span> Para Ela</a>
+    <ul class="nav-links">
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <span class="mobile-menu-logo">Suíça <span>—</span> Para Ela</span>
+    <button class="mobile-close" id="mobile-close" aria-label="Fechar menu">✕</button>
+    <a href="lugares.html" class="mobile-link">Lugares</a>
+    <a href="restaurantes.html" class="mobile-link">Restaurantes</a>
+    <a href="hoteis.html" class="mobile-link">Hotéis</a>
+    <a href="montanhas.html" class="mobile-link">Montanhas</a>
+    <a href="curiosidades.html" class="mobile-link">Curiosidades</a>
+    <a href="guia.html" class="mobile-link">Guia</a>
+    <a href="quiz.html" class="mobile-link">Quiz</a>
+  </div>
+
+  <section class="sub-hero">
+    <div class="sub-hero-bg" id="sub-hero-bg" style="background-image: url('https://picsum.photos/seed/jungfraujoch-topo/1800/900');"></div>
+    <div class="sub-hero-overlay"></div>
+    <div class="sub-hero-content">
+      <span class="sub-hero-eyebrow">Suíça — Para Ela</span>
+      <h1 class="sub-hero-title">As Montanhas</h1>
+      <p class="sub-hero-subtitle">Onde a terra toca o céu</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Onde a terra toca o céu</span>
+        <h2 class="section-title">As Montanhas<br />que Tiram o Fôlego</h2>
+        <p class="section-subtitle">Cada pico tem sua personalidade. Todos eles deixam uma marca que não sai — mesmo muito depois de voltar para casa.</p>
+      </div>
+
+      <div class="mountains-grid">
+        <article class="mountain-card fade-in fade-in-delay-1" data-place="jungfraujoch">
+          <img src="https://picsum.photos/seed/jungfraujoch-topo/900/600" alt="Jungfraujoch - Topo da Europa" loading="lazy" />
+          <div class="mountain-overlay"></div>
+          <div class="mountain-content">
+            <span class="mountain-altitude">3.454 m · Topo da Europa</span>
+            <h3 class="mountain-name">Jungfraujoch</h3>
+            <p class="mountain-desc">O ponto ferroviário mais alto da Europa leva até um plateau de neve eterno. Geleira Aletsch visível, vistas até a França e um frio que faz a vida parecer urgente.</p>
+          </div>
+        </article>
+
+        <article class="mountain-card fade-in fade-in-delay-2" data-place="gornergrat">
+          <img src="https://picsum.photos/seed/gornergrat-matterhorn/900/600" alt="Vista do Matterhorn a partir do Gornergrat" loading="lazy" />
+          <div class="mountain-overlay"></div>
+          <div class="mountain-content">
+            <span class="mountain-altitude">3.089 m · Vista do Matterhorn</span>
+            <h3 class="mountain-name">Gornergrat</h3>
+            <p class="mountain-desc">Frente a frente com o Matterhorn. O trem de cremalheira mais antigo da Suíça leva até um terraço com 29 picos acima de 4.000 m. Visão impossível de esquecer.</p>
+          </div>
+        </article>
+
+        <article class="mountain-card fade-in fade-in-delay-3" data-place="titlis">
+          <img src="https://picsum.photos/seed/titlis-neve-geleira/900/600" alt="Titlis com neve e gelo eterno" loading="lazy" />
+          <div class="mountain-overlay"></div>
+          <div class="mountain-content">
+            <span class="mountain-altitude">3.238 m · Neve Eterna</span>
+            <h3 class="mountain-name">Titlis</h3>
+            <p class="mountain-desc">Acessível de Engelberg, tem o Cliff Walk — a ponte suspensa mais alta dos Alpes — e uma gruta de gelo de 15 metros esculpida no glaciar. Para corajosas.</p>
+          </div>
+        </article>
+
+        <article class="mountain-card fade-in fade-in-delay-4" data-place="harderkulm">
+          <img src="https://picsum.photos/seed/harder-kulm-interlaken/900/600" alt="Vista de Interlaken do Harder Kulm" loading="lazy" />
+          <div class="mountain-overlay"></div>
+          <div class="mountain-content">
+            <span class="mountain-altitude">1.322 m · Mirante dos Dois Lagos</span>
+            <h3 class="mountain-name">Harder Kulm</h3>
+            <p class="mountain-desc">Em apenas 10 minutos de funicular, chega-se ao mirante Two Lakes Bridge — com os Lagos Thun e Brienz ao mesmo tempo, emoldurados pelos Alpes. O pôr do sol aqui é uma cerimônia.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer-logo">Suíça <span>—</span> Para Ela</span>
+    <span class="footer-tagline">Um guia curado com muito carinho</span>
+    <ul class="footer-links">
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <div class="footer-divider"></div>
+    <p class="footer-copy">Feito com <span class="footer-heart">♥</span> para uma pessoa especial · Fotos via Unsplash</p>
+  </footer>
+
+  <div id="detail-overlay" class="detail-overlay" aria-hidden="true">
+    <button class="detail-back" id="detail-back">← Voltar</button>
+    <div class="detail-hero">
+      <img id="detail-hero-img" src="" alt="" loading="eager" />
+      <div class="detail-hero-overlay"></div>
+      <div class="detail-hero-content">
+        <span id="detail-tag" class="detail-tag"></span>
+        <h1 id="detail-title" class="detail-title"></h1>
+        <p id="detail-subtitle" class="detail-subtitle"></p>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div id="detail-content" class="detail-content"></div>
+    </div>
+  </div>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const nav = document.getElementById('nav');
+    const progressBar = document.getElementById('scroll-progress');
+    function updateScrollUI() {
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 60);
+      if (progressBar) { const docH = document.documentElement.scrollHeight - window.innerHeight; progressBar.style.width = (docH > 0 ? Math.min(100, (y / docH) * 100) : 0) + '%'; }
+    }
+    updateScrollUI();
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('mobile-close');
+    const openMenu  = () => { menu.classList.add('open'); toggle.classList.add('active'); toggle.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; };
+    const closeMenu = () => { menu.classList.remove('open'); toggle.classList.remove('active'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
+    toggle.addEventListener('click', () => menu.classList.contains('open') ? closeMenu() : openMenu());
+    closeBtn.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); closeDetail(); } });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in, .reveal').forEach(el => revealObserver.observe(el));
+    const subHeroBg = document.getElementById('sub-hero-bg');
+    let latestY = 0, rafPending = false;
+    window.addEventListener('scroll', () => {
+      latestY = window.scrollY; updateScrollUI();
+      if (!rafPending) { rafPending = true; requestAnimationFrame(() => { if (!prefersReducedMotion && subHeroBg) subHeroBg.style.transform = `translate3d(0, ${latestY * 0.25}px, 0)`; rafPending = false; }); }
+    }, { passive: true });
+
+    const PLACES = {
+      jungfraujoch: {
+        tag: '3.454 m · Topo da Europa',
+        title: 'Jungfraujoch',
+        subtitle: 'O ponto ferroviário mais alto da Europa',
+        img: 'https://picsum.photos/seed/jungfraujoch-topo/1400/800',
+        sections: [
+          { heading: 'A montanha', text: 'O Jungfraujoch não é o pico mais alto da Suíça, mas é certamente o mais famoso. Localizado entre o Mönch e o Jungfrau, a 3.454 metros, está no coração do maior glaciar dos Alpes — o Aletsch, com 23 km de extensão e 900 metros de profundidade. De lá de cima, em dias claros, pode-se ver a Floresta Negra alemã e o Vosges francês. A sensação de estar sobre a "espinha" da Europa é física e inconfundível.' },
+          { heading: 'A ferrovia', text: 'A linha ferroviária Jungfrau foi inaugurada em 1912, após 16 anos de construção. É considerada uma das maiores obras de engenharia do século XX: a maioria do trajeto é em túnel escavado dentro do Eiger e do Mönch, com estações intermediárias (Eigerwand e Eismeer) que têm janelas abertas diretamente na rocha para vistas do glaciar. A viagem de Kleine Scheidegg até o topo leva 35 minutos.' },
+          { heading: 'O que há no topo', text: 'O complexo Jungfraujoch Top of Europe inclui o restaurante panorâmico Crystal com vista de 360°, a Gruta de Gelo (um labirinto esculpido dentro do glaciar Aletsch), o observatório meteorológico Sphinx (acessível por elevador externo), a estação de investigação científica e uma exposição sobre a história da construção da ferrovia.' },
+          { heading: 'Como chegar', text: 'De Interlaken Ost: tome o trem Berner Oberland-Bahn até Grindelwald ou Lauterbrunnen (35 min), depois para Kleine Scheidegg, e finalmente o Jungfrau Railway até o topo. Total: 2h a 2h30 com baldeações. Alternativamente, de Grindelwald direto pelo Eiger Express (gondola) até Eigergletscher e depois trem. O Eiger Express é mais rápido e mais novo.' },
+          { heading: 'Dica', text: 'Vá num dia com previsão de sol verificada no site do Jungfraujoch (eles têm webcam ao vivo). Se nublar no topo, não verá absolutamente nada — e o ingresso custa em torno de CHF 220. Leve óculos escuros de qualidade: a radiação UV a 3.454 m com neve refletindo é intensa. E leve casaco pesado mesmo no verão — lá em cima a temperatura ronda os -5°C.' }
+        ],
+        quiz: [
+          { q: "A que altitude fica o Jungfraujoch?", opts: ["2.500 m","3.000 m","3.454 m","4.158 m"], correct: 2, feedback: "O Jungfraujoch fica a 3.454 metros — o ponto ferroviário mais alto da Europa." },
+          { q: "Em que ano foi inaugurada a linha ferroviária do Jungfraujoch?", opts: ["1880","1912","1935","1960"], correct: 1, feedback: "A ferrovia do Jungfrau foi inaugurada em 1912, após 16 anos de construção dentro do Eiger e do Mönch." },
+          { q: "Qual glaciar é visível do Jungfraujoch?", opts: ["Glaciar Gorner","Glaciar Trient","Glaciar Aletsch","Glaciar Rhône"], correct: 2, feedback: "O Glaciar Aletsch — o maior dos Alpes com 23 km — é claramente visível do Jungfraujoch." },
+          { q: "Por onde passa parte do trajeto da ferrovia do Jungfrau?", opts: ["Sobre pontes suspensas","Dentro de túneis no Eiger e Mönch","Por vales florestados","Por planaltos abertos"], correct: 1, feedback: "A maior parte do trajeto é em túnel escavado dentro do Eiger e do Mönch, com estações de janela na rocha." }
+        ]
+      },
+      gornergrat: {
+        tag: '3.089 m · Vista do Matterhorn',
+        title: 'Gornergrat',
+        subtitle: 'Frente a frente com o pico mais icônico do mundo',
+        img: 'https://picsum.photos/seed/gornergrat-matterhorn/1400/800',
+        sections: [
+          { heading: 'A montanha', text: 'O Gornergrat não compete em altitude com o Jungfraujoch, mas tem algo que o supera em impacto visual: a vista do Matterhorn. O pico piramidal mais fotografado da Terra aparece aqui em tamanho natural, sem obstáculos, a apenas 8 km de distância horizontal. Em torno dele, outros 28 picos acima de 4.000 metros criam um horizonte impossível de processar de uma só vez.' },
+          { heading: 'O trem de cremalheira', text: 'A Gornergrat Bahn, inaugurada em 1898, é o trem de cremalheira mais antigo da Suíça a ar livre. Parte diretamente de Zermatt (1.604 m) e chega ao cume (3.089 m) em 33 minutos, subindo 1.485 metros de altitude. Durante o percurso, passa por pastagens, florestas de larício, campo de neve e finalmente o panorama aberto do glaciar.' },
+          { heading: 'No topo', text: 'O Kulmhotel Gornergrat — o hotel habitado mais alto da Suíça — funciona tanto como restaurante quanto como pousada. Dormir lá em cima e ver o Matterhorn ao amanhecer, antes de qualquer turista chegar, é uma experiência que ressignifica o que é "ver" uma montanha. O observatório astronômico no cume é o segundo mais alto da Europa.' },
+          { heading: 'Como chegar', text: 'Exclusivamente de trem a partir de Zermatt. A estação Zermatt Bahnhof está a 5 minutos a pé do centro da vila. Trens partem a cada 24 minutos no pico da temporada. Com o Swiss Travel Pass, desconto de 50%. Compre o bilhete antecipado online para evitar filas na estação (especialmente no verão).' },
+          { heading: 'Dica', text: 'Tome o trem das 7h08 — o primeiro — e tenha o Matterhorn para você mesma antes das multidões chegarem. Leve pão, queijo e termos de café e café da manhã no cume sentadas numa pedra, com aquela vista. Baixe depois caminhando até Riffelberg (30 minutos de trilha fácil) — a perspectiva do Matterhorn refletido no Lago Riffelsee em julho é uma das fotografias mais reproduzidas da Suíça.' }
+        ],
+        quiz: [
+          { q: "A que altitude fica o Gornergrat?", opts: ["2.089 m","2.489 m","3.089 m","3.489 m"], correct: 2, feedback: "O Gornergrat fica a 3.089 metros de altitude, acima de Zermatt no cantão do Valais." },
+          { q: "Em que ano foi inaugurada a Gornergrat Bahn?", opts: ["1868","1882","1898","1912"], correct: 2, feedback: "A Gornergrat Bahn foi inaugurada em 1898 — é o trem de cremalheira mais antigo da Suíça a ar livre." },
+          { q: "Qual é o nome do lago onde o Matterhorn se reflete em julho?", opts: ["Lago Gorner","Lago Riffelsee","Lago Zmuttbach","Lago Stellisee"], correct: 1, feedback: "O Lago Riffelsee reflete o Matterhorn em julho — uma das fotografias mais reproduzidas da Suíça." },
+          { q: "Quantos picos acima de 4.000 m são visíveis do Gornergrat?", opts: ["10","18","29","45"], correct: 2, feedback: "Do Gornergrat são visíveis 29 picos com mais de 4.000 metros, incluindo o Matterhorn e o Monte Rosa." }
+        ]
+      },
+      titlis: {
+        tag: '3.238 m · Neve Eterna',
+        title: 'Titlis',
+        subtitle: 'Glaciar, Cliff Walk e a neve que nunca derrete',
+        img: 'https://picsum.photos/seed/titlis-neve-geleira/1400/800',
+        sections: [
+          { heading: 'A montanha', text: 'O Titlis, acima de Engelberg no cantão de Obwalden, é o glaciar de altitude mais acessível da Suíça central — e o único onde neve permanente existe o ano todo a essa altitude relativa. O glaciar tem mais de 1.000 anos de gelo acumulado em algumas partes. Diferente de Jungfraujoch e Gornergrat, o Titlis fica numa região geograficamente mais isolada, o que dá ao lugar uma qualidade de "fim do mundo" que os outros cumes não têm.' },
+          { heading: 'Cliff Walk', text: 'A grande atração moderna do Titlis é o Cliff Walk: a ponte suspensa mais alta dos Alpes, instalada em 2012 a 3.041 metros de altitude. Com 100 metros de comprimento e apenas 1 metro de largura, é suspensa sobre um abismo de 500 metros. O vento que sopra por baixo é um personagem próprio. Para quem não tem vertigem, é glorioso.' },
+          { heading: 'Gruta de Gelo', text: 'A Gruta de Gelo do Titlis é escavada 15 metros dentro do glaciar e tem temperatura constante de -1,5°C. Os corredores foram esculpidos no gelo azul-esverdeado com figuras decorativas de animais e cristais de gelo natural. Uma das atrações mais originais dos Alpes suíços — e funciona o ano inteiro, independente do clima externo.' },
+          { heading: 'Como chegar', text: 'De Zurique: 1 hora de trem até Engelberg. De Lucerna: 45 minutos de trem. De Engelberg, o telecabine Titlis Express sobe em três estágios até o cume: Trübsee (1.800 m), Stand (2.428 m) e finalmente Titlis, com o famoso Rotair — o primeiro telecabine giratório do mundo, dando 360° durante a subida final.' },
+          { heading: 'Dica', text: 'Combine o Titlis com uma tarde em Engelberg: a vila tem um mosteiro beneditino de 900 anos ainda em funcionamento, com uma queijaria onde os monges produzem o famoso Klosterkas (queijo do mosteiro). A loja do mosteiro vende queijos e licores artesanais que não existem em nenhum outro lugar do mundo. Compre para levar.' }
+        ],
+        quiz: [
+          { q: "Qual é a atração mais nova e emocionante do Titlis?", opts: ["Gruta de Gelo","Cliff Walk","Rotair","Iglu Hotel"], correct: 1, feedback: "O Cliff Walk — a ponte suspensa mais alta dos Alpes, instalada em 2012 — é a grande atração moderna do Titlis." },
+          { q: "A que temperatura fica a Gruta de Gelo do Titlis?", opts: ["-10°C","0°C","-1,5°C","-5°C"], correct: 2, feedback: "A Gruta de Gelo tem temperatura constante de -1,5°C, ano inteiro, independente do clima externo." },
+          { q: "Qual é o nome do telecabine giratório que sobe ao Titlis?", opts: ["Alpenglow","Rotair","Eiger Express","Titlis Flyer"], correct: 1, feedback: "O Rotair — o primeiro telecabine giratório do mundo — faz 360° durante a subida final ao Titlis." },
+          { q: "Em qual cantão fica Engelberg, base para o Titlis?", opts: ["Uri","Obwalden","Nidwalden","Lucerna"], correct: 1, feedback: "Engelberg fica no cantão de Obwalden, no coração da Suíça central." }
+        ]
+      },
+      harderkulm: {
+        tag: '1.322 m · Mirante dos Dois Lagos',
+        title: 'Harder Kulm',
+        subtitle: 'Os dois lagos de Interlaken num único olhar',
+        img: 'https://picsum.photos/seed/harder-kulm-interlaken/1400/800',
+        sections: [
+          { heading: 'A montanha', text: 'O Harder Kulm é a montanha "doméstica" de Interlaken — a que os moradores sobem num impulso, de tarde, apenas para lembrar por que moram ali. Não tem a altitude dramática do Jungfraujoch nem a fama do Matterhorn, mas tem algo raro: a vista simultânea do Lago Thun e do Lago Brienz, com Interlaken no meio e os Alpes como moldura. Poucos pontos na Europa oferecem uma perspectiva geográfica tão didática e tão bela.' },
+          { heading: 'Two Lakes Bridge', text: 'A Two Lakes Bridge — inaugurada em 2015 — é uma estrutura de aço em formato de "X" suspensa sobre o abismo que separa os dois lados da montanha. Cada ponta da ponte aponta para um dos lagos. No centro do X, a sensação de flutuar sobre Interlaken com os dois lagos ao mesmo tempo é estranha, vertiginosa e absolutamente maravilhosa. Ao entardecer, com o sol tingindo o Thun de laranja e o Brienz de rosa, é quase irreal.' },
+          { heading: 'O funicular', text: 'O funicular do Harder Kulm existe desde 1908 e faz o percurso em apenas 8 minutos a partir do centro de Interlaken. É um dos funiculares mais inclinados da Suíça — a inclinação chega a 64% em alguns pontos. A cabine de madeira original foi preservada e restaurada; subir nela já é parte da experiência.' },
+          { heading: 'Gastronomia', text: 'O Bergrestaurant Harder Kulm no topo serve comida suíça clássica com qualidade surpreendente para um restaurante de montanha: fondue, rösti com ovo e queijo local, e Apfelstrudel com natas. A varanda com vista para os dois lagos é o melhor lugar ao ar livre de Interlaken para comer.' },
+          { heading: 'Dica', text: 'Suba à tarde — entre 16h e 18h — para pegar o pôr do sol sobre o Lago Thun. Leve uma garrafa de vinho branco local (compre na loja do funicular, que tem boa seleção) e sente na grama fora do restaurante, voltada para o oeste. Em julho e agosto, o sol se põe exatamente atrás dos Alpes ao fundo do Thun, criando um gradiente de cores que parece filtrado por photoshop — mas é real.' }
+        ],
+        quiz: [
+          { q: "A que altitude fica o Harder Kulm?", opts: ["822 m","1.322 m","2.322 m","3.322 m"], correct: 1, feedback: "O Harder Kulm fica a 1.322 metros de altitude acima de Interlaken." },
+          { q: "Qual é a atração principal do topo do Harder Kulm?", opts: ["Estação de esqui","Two Lakes Bridge","Gruta de gelo","Observatório astronômico"], correct: 1, feedback: "A Two Lakes Bridge — inaugurada em 2015 — oferece vista simultânea do Lago Thun e do Lago Brienz." },
+          { q: "Em quanto tempo o funicular sobe ao Harder Kulm?", opts: ["2 minutos","8 minutos","25 minutos","1 hora"], correct: 1, feedback: "O funicular faz o percurso em apenas 8 minutos a partir do centro de Interlaken." },
+          { q: "Desde quando existe o funicular do Harder Kulm?", opts: ["1868","1908","1945","1972"], correct: 1, feedback: "O funicular do Harder Kulm existe desde 1908 — um dos mais antigos e inclinados da Suíça." }
+        ]
+      }
+    };
+
+    const overlay = document.getElementById('detail-overlay');
+    const detailBack = document.getElementById('detail-back');
+    const detailImg = document.getElementById('detail-hero-img');
+    const detailTag = document.getElementById('detail-tag');
+    const detailTitle = document.getElementById('detail-title');
+    const detailSub = document.getElementById('detail-subtitle');
+    const detailContent = document.getElementById('detail-content');
+
+    function buildQuizHTML(questions, wrapId) {
+      let current = 0, score = 0;
+      const wrap = document.getElementById(wrapId) || (() => { const el = document.createElement('div'); el.id = wrapId; return el; })();
+      function renderQuestion() {
+        if (current >= questions.length) {
+          wrap.innerHTML = `<div class="quiz-result-box"><span class="quiz-score-text">Você acertou ${score} de ${questions.length}! ${score === questions.length ? '🎉 Perfeito!' : score >= questions.length / 2 ? '👏 Muito bem!' : '💪 Continue explorando!'}</span><button class="quiz-restart-btn">Tentar novamente</button></div>`;
+          wrap.querySelector('.quiz-restart-btn').addEventListener('click', () => { current = 0; score = 0; renderQuestion(); });
+          return;
+        }
+        const q = questions[current];
+        wrap.innerHTML = `<div class="quiz-q-wrap"><span class="quiz-q-num">Pergunta ${current + 1} de ${questions.length}</span><p class="quiz-q-text">${q.q}</p></div><div class="quiz-options">${q.opts.map((o, i) => `<button class="quiz-opt" data-idx="${i}">${o}</button>`).join('')}</div><p class="quiz-feedback"></p>`;
+        wrap.querySelectorAll('.quiz-opt').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const chosen = +this.dataset.idx;
+            wrap.querySelectorAll('.quiz-opt').forEach(b => { b.disabled = true; if (+b.dataset.idx === q.correct) b.classList.add('correct'); else if (+b.dataset.idx === chosen) b.classList.add('wrong'); });
+            wrap.querySelector('.quiz-feedback').textContent = q.feedback;
+            if (chosen === q.correct) score++;
+            setTimeout(() => { current++; renderQuestion(); }, 1800);
+          });
+        });
+      }
+      renderQuestion();
+      return wrap;
+    }
+
+    function openDetail(slug) {
+      const d = PLACES[slug];
+      if (!d) return;
+      detailImg.src = d.img; detailImg.alt = d.title;
+      detailTag.textContent = d.tag; detailTitle.textContent = d.title; detailSub.textContent = d.subtitle;
+      const sectionsHTML = d.sections.map((s, i) => {
+        const imgUrl = `https://picsum.photos/seed/${slug}-s${i}/600/420`;
+        const imgTag = `<img class="detail-section-img" src="${imgUrl}" alt="${s.heading}" loading="lazy" />`;
+        const prose  = `<div class="detail-section-prose"><h2 class="detail-section-heading">${s.heading}</h2><p class="detail-section-text">${s.text}</p></div>`;
+        const inner  = i % 2 === 0 ? `${imgTag}${prose}` : `${prose}${imgTag}`;
+        return `<div class="detail-section"><div class="detail-section-inner">${inner}</div></div>`;
+      }).join('');
+      detailContent.innerHTML = sectionsHTML + `<div class="detail-quiz"><h2 class="detail-quiz-title">✦ Quiz — teste seus conhecimentos</h2><div id="card-quiz-body"></div></div>`;
+      buildQuizHTML(d.quiz, 'card-quiz-body');
+      overlay.classList.add('open'); overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; overlay.scrollTo(0, 0);
+    }
+
+    function closeDetail() {
+      overlay.classList.remove('open'); overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-place]').forEach(card => card.addEventListener('click', () => openDetail(card.dataset.place)));
+    detailBack.addEventListener('click', closeDetail);
+  </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz da Suíça — Suíça Para Ela</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">Suíça <span>—</span> Para Ela</a>
+    <ul class="nav-links">
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <span class="mobile-menu-logo">Suíça <span>—</span> Para Ela</span>
+    <button class="mobile-close" id="mobile-close" aria-label="Fechar menu">✕</button>
+    <a href="lugares.html" class="mobile-link">Lugares</a>
+    <a href="restaurantes.html" class="mobile-link">Restaurantes</a>
+    <a href="hoteis.html" class="mobile-link">Hotéis</a>
+    <a href="montanhas.html" class="mobile-link">Montanhas</a>
+    <a href="curiosidades.html" class="mobile-link">Curiosidades</a>
+    <a href="guia.html" class="mobile-link">Guia</a>
+    <a href="quiz.html" class="mobile-link">Quiz</a>
+  </div>
+
+  <section class="sub-hero">
+    <div class="sub-hero-bg" id="sub-hero-bg" style="background-image: url('https://picsum.photos/seed/interlaken-lagos/1800/900');"></div>
+    <div class="sub-hero-overlay"></div>
+    <div class="sub-hero-content">
+      <span class="sub-hero-eyebrow">Suíça — Para Ela</span>
+      <h1 class="sub-hero-title">Quiz da Suíça</h1>
+      <p class="sub-hero-subtitle">Você prestou atenção?</p>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Você prestou atenção?</span>
+        <h2 class="section-title">Quiz Geral<br />sobre a Suíça</h2>
+        <p class="section-subtitle">10 perguntas para testar tudo que você aprendeu neste guia. Boa sorte!</p>
+      </div>
+      <div class="general-quiz-wrap fade-in" id="general-quiz-wrap">
+        <div id="general-quiz-body"></div>
+        <div id="general-quiz-result" hidden>
+          <div class="quiz-result-box">
+            <span id="general-score-text" class="quiz-score-text"></span>
+            <button id="general-restart" class="quiz-restart-btn">Jogar novamente</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer-logo">Suíça <span>—</span> Para Ela</span>
+    <span class="footer-tagline">Um guia curado com muito carinho</span>
+    <ul class="footer-links">
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <div class="footer-divider"></div>
+    <p class="footer-copy">Feito com <span class="footer-heart">♥</span> para uma pessoa especial · Fotos via Unsplash</p>
+  </footer>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const nav = document.getElementById('nav');
+    const progressBar = document.getElementById('scroll-progress');
+    function updateScrollUI() {
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 60);
+      if (progressBar) { const docH = document.documentElement.scrollHeight - window.innerHeight; progressBar.style.width = (docH > 0 ? Math.min(100, (y / docH) * 100) : 0) + '%'; }
+    }
+    updateScrollUI();
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('mobile-close');
+    const openMenu  = () => { menu.classList.add('open'); toggle.classList.add('active'); toggle.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; };
+    const closeMenu = () => { menu.classList.remove('open'); toggle.classList.remove('active'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
+    toggle.addEventListener('click', () => menu.classList.contains('open') ? closeMenu() : openMenu());
+    closeBtn.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in, .reveal').forEach(el => revealObserver.observe(el));
+    const subHeroBg = document.getElementById('sub-hero-bg');
+    let latestY = 0, rafPending = false;
+    window.addEventListener('scroll', () => {
+      latestY = window.scrollY; updateScrollUI();
+      if (!rafPending) { rafPending = true; requestAnimationFrame(() => { if (!prefersReducedMotion && subHeroBg) subHeroBg.style.transform = `translate3d(0, ${latestY * 0.25}px, 0)`; rafPending = false; }); }
+    }, { passive: true });
+
+    const GENERAL_QUIZ = [
+      { q: "Qual é a moeda oficial da Suíça?", opts: ["Euro","Franco Suíço","Coroa Suíça","Libra"], correct: 1, feedback: "A Suíça usa o Franco Suíço (CHF). O país nunca adotou o Euro, apesar de estar geograficamente no coração da Europa." },
+      { q: "Quantos cantões tem a Suíça?", opts: ["20","23","26","30"], correct: 2, feedback: "A Suíça tem 26 cantões, cada um com sua própria constituição, parlamento e governo." },
+      { q: "Quais são os idiomas oficiais da Suíça?", opts: ["Alemão e Francês","Alemão, Francês e Italiano","Alemão, Francês, Italiano e Romanche","Alemão, Inglês e Francês"], correct: 2, feedback: "A Suíça tem 4 idiomas oficiais: alemão (63%), francês (23%), italiano (8%) e romanche (menos de 1%)." },
+      { q: "Qual é a altitude do Jungfraujoch, o ponto ferroviário mais alto da Europa?", opts: ["2.500 m","3.000 m","3.454 m","4.158 m"], correct: 2, feedback: "O Jungfraujoch fica a 3.454 metros de altitude e tem estação ferroviária desde 1912." },
+      { q: "O que é o Swiss Travel Pass?", opts: ["Um passaporte especial para turistas","Um passe de transporte ilimitado em trens, ônibus e barcos","Um seguro viagem obrigatório","Um cartão de crédito suíço"], correct: 1, feedback: "O Swiss Travel Pass dá acesso ilimitado à rede de transporte público suíça — trens, ônibus e barcos — por 3 a 15 dias." },
+      { q: "Em que cidade fica o famoso Château de Chillon?", opts: ["Genebra","Berna","Zurique","Montreux"], correct: 3, feedback: "O Château de Chillon fica às margens do Lago Léman, perto de Montreux, e foi imortalizado por Lord Byron no poema 'O Prisioneiro de Chillon'." },
+      { q: "Qual é o pico mais icônico de Zermatt?", opts: ["Eiger","Jungfrau","Matterhorn","Mont Blanc"], correct: 2, feedback: "O Matterhorn (4.478 m) é a montanha em forma de pirâmide símbolo da Suíça e um dos picos mais fotografados do mundo, em Zermatt." },
+      { q: "O que é único sobre Zermatt em relação ao transporte?", opts: ["Tem o maior aeroporto dos Alpes","É completamente sem carros a motor","Só se acessa de helicóptero no inverno","Tem teleférico 24 horas"], correct: 1, feedback: "Zermatt é uma das raras cidades europeias totalmente sem carros a combustão — apenas veículos elétricos circulam. Carros ficam estacionados em Täsch." },
+      { q: "Qual festival internacional acontece em Montreux todo mês de julho?", opts: ["Festival de Cinema","Festival de Jazz","Festival de Ópera","Festival de Queijo"], correct: 1, feedback: "O Montreux Jazz Festival, fundado em 1967 por Claude Nobs, é um dos maiores e mais prestigiados festivais de música do mundo." },
+      { q: "Qual glaciar é visível do Jungfraujoch e é o maior dos Alpes?", opts: ["Glaciar do Ródano","Glaciar Mer de Glace","Glaciar Aletsch","Glaciar Gorner"], correct: 2, feedback: "O Glaciar Aletsch tem 23 km de extensão e 900 metros de profundidade em alguns pontos — é o maior glaciar dos Alpes e Patrimônio Mundial da UNESCO." }
+    ];
+
+    (function initGeneralQuiz() {
+      const body    = document.getElementById('general-quiz-body');
+      const result  = document.getElementById('general-quiz-result');
+      const scoreEl = document.getElementById('general-score-text');
+      const restart = document.getElementById('general-restart');
+      if (!body) return;
+
+      let current = 0, score = 0;
+
+      function render() {
+        result.hidden = true;
+        if (current >= GENERAL_QUIZ.length) {
+          body.innerHTML = '';
+          scoreEl.textContent = `Você acertou ${score} de ${GENERAL_QUIZ.length}! ${score === GENERAL_QUIZ.length ? '🎉 Perfeito!' : score >= 7 ? '👏 Excelente!' : score >= 5 ? '😊 Muito bem!' : '💪 Continue explorando!'}`;
+          result.hidden = false;
+          return;
+        }
+        const q = GENERAL_QUIZ[current];
+        body.innerHTML = `<div class="quiz-q-wrap">
+          <span class="quiz-q-num">Pergunta ${current + 1} de ${GENERAL_QUIZ.length}</span>
+          <p class="quiz-q-text">${q.q}</p>
+        </div>
+        <div class="quiz-options">
+          ${q.opts.map((o, i) => `<button class="quiz-opt" data-idx="${i}">${o}</button>`).join('')}
+        </div>
+        <p class="quiz-feedback"></p>`;
+        body.querySelectorAll('.quiz-opt').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const chosen = +this.dataset.idx;
+            body.querySelectorAll('.quiz-opt').forEach(b => {
+              b.disabled = true;
+              if (+b.dataset.idx === q.correct) b.classList.add('correct');
+              else if (+b.dataset.idx === chosen) b.classList.add('wrong');
+            });
+            body.querySelector('.quiz-feedback').textContent = q.feedback;
+            if (chosen === q.correct) score++;
+            setTimeout(() => { current++; render(); }, 1800);
+          });
+        });
+      }
+
+      render();
+      restart.addEventListener('click', () => { current = 0; score = 0; render(); });
+    })();
+  </script>
+</body>
+</html>

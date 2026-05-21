@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurantes Chiques — Suíça Para Ela</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">Suíça <span>—</span> Para Ela</a>
+    <ul class="nav-links">
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <span class="mobile-menu-logo">Suíça <span>—</span> Para Ela</span>
+    <button class="mobile-close" id="mobile-close" aria-label="Fechar menu">✕</button>
+    <a href="lugares.html" class="mobile-link">Lugares</a>
+    <a href="restaurantes.html" class="mobile-link">Restaurantes</a>
+    <a href="hoteis.html" class="mobile-link">Hotéis</a>
+    <a href="montanhas.html" class="mobile-link">Montanhas</a>
+    <a href="curiosidades.html" class="mobile-link">Curiosidades</a>
+    <a href="guia.html" class="mobile-link">Guia</a>
+    <a href="quiz.html" class="mobile-link">Quiz</a>
+  </div>
+
+  <!-- Sub-hero -->
+  <section class="sub-hero">
+    <div class="sub-hero-bg" id="sub-hero-bg" style="background-image: url('https://picsum.photos/seed/restaurant-memories/1800/900');"></div>
+    <div class="sub-hero-overlay"></div>
+    <div class="sub-hero-content">
+      <span class="sub-hero-eyebrow">Suíça — Para Ela</span>
+      <h1 class="sub-hero-title">Restaurantes Chiques</h1>
+      <p class="sub-hero-subtitle">Gastronomia de alto nível na Suíça</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Gastronomia de alto nível</span>
+        <h2 class="section-title">Restaurantes<br />Chiques</h2>
+        <p class="section-subtitle">A cozinha suíça vai muito além do fondue. Estes endereços combinam ingredientes impecáveis com vistas que fazem parte do prato.</p>
+      </div>
+
+      <div class="restaurant-list">
+        <article class="restaurant-card fade-in fade-in-delay-1" data-place="memories">
+          <div class="restaurant-img">
+            <img src="https://picsum.photos/seed/restaurant-memories/400/300" alt="Prato elegante do Memories" loading="lazy" />
+          </div>
+          <div class="restaurant-body">
+            <div class="restaurant-location">Bad Ragaz · 2 Estrelas Michelin</div>
+            <h3 class="restaurant-name">Memories</h3>
+            <p class="restaurant-desc">Do chef Sven Wassmer. Uma das experiências gastronômicas mais memoráveis da Suíça, com menus-degustação que narram as estações dos Alpes de forma poética.</p>
+            <div class="restaurant-meta">
+              <span>Alta Cozinha</span>
+              <span>Menu Degustação</span>
+              <span>Reserva Obrigatória</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="restaurant-card fade-in fade-in-delay-2" data-place="chesery">
+          <div class="restaurant-img">
+            <img src="https://picsum.photos/seed/restaurant-chesery/400/300" alt="Interior refinado do Chesery em Gstaad" loading="lazy" />
+          </div>
+          <div class="restaurant-body">
+            <div class="restaurant-location">Gstaad · 1 Estrela Michelin</div>
+            <h3 class="restaurant-name">Chesery</h3>
+            <p class="restaurant-desc">Elegância rústica no coração de Gstaad. Ambiente de chalé de luxo, lareira, e uma carta de vinhos excepcional. O ponto de encontro da jet set alpina.</p>
+            <div class="restaurant-meta">
+              <span>Cozinha Francesa</span>
+              <span>Vista Alpina</span>
+              <span>Ambiente Íntimo</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="restaurant-card fade-in fade-in-delay-3" data-place="pizgloria">
+          <div class="restaurant-img">
+            <img src="https://picsum.photos/seed/piz-gloria-alps/400/300" alt="Vista panorâmica dos Alpes do Piz Gloria" loading="lazy" />
+          </div>
+          <div class="restaurant-body">
+            <div class="restaurant-location">Schilthorn · 2.970 m de altitude</div>
+            <h3 class="restaurant-name">Piz Gloria</h3>
+            <p class="restaurant-desc">O restaurante giratório mais alto da Suíça. Cenário do James Bond "No seu Serviço Secreto", com panorama de 360° sobre 200 picos alpinos. Jantar com as estrelas.</p>
+            <div class="restaurant-meta">
+              <span>Girante 360°</span>
+              <span>James Bond</span>
+              <span>Vista Única</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="restaurant-card fade-in fade-in-delay-4" data-place="cafedusoleil">
+          <div class="restaurant-img">
+            <img src="https://picsum.photos/seed/cafe-du-soleil-fondue/400/300" alt="Fondue tradicional do Café du Soleil" loading="lazy" />
+          </div>
+          <div class="restaurant-body">
+            <div class="restaurant-location">Genebra · desde 1849</div>
+            <h3 class="restaurant-name">Café du Soleil</h3>
+            <p class="restaurant-desc">O fondue mais famoso de Genebra. Estabelecimento histórico onde a receita tradicional é guardada como joia. A Suíça na sua forma mais autêntica e aquecedora.</p>
+            <div class="restaurant-meta">
+              <span>Fondue Clássico</span>
+              <span>Histórico</span>
+              <span>Autêntico</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer-logo">Suíça <span>—</span> Para Ela</span>
+    <span class="footer-tagline">Um guia curado com muito carinho</span>
+    <ul class="footer-links">
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <div class="footer-divider"></div>
+    <p class="footer-copy">Feito com <span class="footer-heart">♥</span> para uma pessoa especial · Fotos via Unsplash</p>
+  </footer>
+
+  <!-- Detail Overlay -->
+  <div id="detail-overlay" class="detail-overlay" aria-hidden="true">
+    <button class="detail-back" id="detail-back">← Voltar</button>
+    <div class="detail-hero">
+      <img id="detail-hero-img" src="" alt="" loading="eager" />
+      <div class="detail-hero-overlay"></div>
+      <div class="detail-hero-content">
+        <span id="detail-tag" class="detail-tag"></span>
+        <h1 id="detail-title" class="detail-title"></h1>
+        <p id="detail-subtitle" class="detail-subtitle"></p>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div id="detail-content" class="detail-content"></div>
+    </div>
+  </div>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const nav = document.getElementById('nav');
+    const progressBar = document.getElementById('scroll-progress');
+    function updateScrollUI() {
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 60);
+      if (progressBar) { const docH = document.documentElement.scrollHeight - window.innerHeight; progressBar.style.width = (docH > 0 ? Math.min(100, (y / docH) * 100) : 0) + '%'; }
+    }
+    updateScrollUI();
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('mobile-close');
+    const openMenu  = () => { menu.classList.add('open'); toggle.classList.add('active'); toggle.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; };
+    const closeMenu = () => { menu.classList.remove('open'); toggle.classList.remove('active'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
+    toggle.addEventListener('click', () => menu.classList.contains('open') ? closeMenu() : openMenu());
+    closeBtn.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); closeDetail(); } });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in, .reveal').forEach(el => revealObserver.observe(el));
+    const subHeroBg = document.getElementById('sub-hero-bg');
+    let latestY = 0, rafPending = false;
+    window.addEventListener('scroll', () => {
+      latestY = window.scrollY; updateScrollUI();
+      if (!rafPending) { rafPending = true; requestAnimationFrame(() => { if (!prefersReducedMotion && subHeroBg) subHeroBg.style.transform = `translate3d(0, ${latestY * 0.25}px, 0)`; rafPending = false; }); }
+    }, { passive: true });
+
+    const PLACES = {
+      memories: {
+        tag: 'Bad Ragaz · 2 Estrelas Michelin',
+        title: 'Memories',
+        subtitle: 'A poesia dos Alpes num prato',
+        img: 'https://picsum.photos/seed/restaurant-memories/1400/800',
+        sections: [
+          { heading: 'Sobre o restaurante', text: 'Memories é a obra-prima do chef Sven Wassmer, um dos cozinheiros mais talentosos de sua geração. Instalado dentro do Grand Resort Bad Ragaz — um complexo termal de luxo nos Alpes do leste suíço — o restaurante conquistou 2 estrelas Michelin e 19 pontos Gault&Millau, tornando-se um dos endereços gastronômicos mais celebrados da Suíça.' },
+          { heading: 'A filosofia da cozinha', text: 'Wassmer trabalha com uma filosofia radical de territorialidade: cada prato narra uma estação dos Alpes. Ingredientes hiperlocais — ervas colhidas nas montanhas ao redor, trutas dos rios do cantão, queijos de fazendas vizinhas — são transformados em composições de precisão cirúrgica. O menu-degustação (8 a 12 tempos) muda integralmente a cada estação.' },
+          { heading: 'O que esperar', text: 'Uma experiência de 3 a 4 horas à mesa. O serviço é refinado mas nunca rígido. A carta de vinhos tem foco em rótulos suíços raros — peça ajuda ao sommelier, que conhece cada garrafa pessoalmente. Reserve pelo menos 3 meses antes; nas datas especiais (Natal, Réveillon, Páscoa), 6 meses.' },
+          { heading: 'Informações práticas', text: 'Endereço: Grand Resort Bad Ragaz, Hans Albrecht Strasse 1, 7310 Bad Ragaz. De Zurique: 1h15 de trem. Código de vestimenta: smart elegant (sem tênis ou jeans). Preço médio do menu-degustação com harmonização de vinhos: CHF 380–520 por pessoa. Fecha segundas e terças.' },
+          { heading: 'Dica', text: 'Reserve para o jantar de sexta ou sábado, quando Wassmer costuma estar presente na cozinha. Chegue cedo e explore o spa termal do Grand Resort — as águas de Bad Ragaz são famosas desde o século XIII — antes do jantar. É uma noite completa, não apenas uma refeição.' }
+        ],
+        quiz: [
+          { q: "Quantas estrelas Michelin tem o Memories?", opts: ["1","2","3","Nenhuma"], correct: 1, feedback: "O Memories tem 2 estrelas Michelin e 19 pontos Gault&Millau." },
+          { q: "Quem é o chef do Memories?", opts: ["René Redzepi","Sven Wassmer","Daniel Humm","Anton Mosimann"], correct: 1, feedback: "O chef Sven Wassmer comanda o Memories, com uma cozinha que narra as estações dos Alpes." },
+          { q: "Em qual resort de luxo fica o Memories?", opts: ["The Alpina Gstaad","Grand Resort Bad Ragaz","Badrutt's Palace","The Omnia"], correct: 1, feedback: "O Memories fica dentro do Grand Resort Bad Ragaz, complexo termal de luxo no leste da Suíça." },
+          { q: "Com quantos meses de antecedência reservar o Memories em datas especiais?", opts: ["1 mês","3 meses","6 meses","1 semana"], correct: 2, feedback: "Para datas como Natal e Réveillon, recomenda-se reservar com 6 meses de antecedência." }
+        ]
+      },
+      chesery: {
+        tag: 'Gstaad · 1 Estrela Michelin',
+        title: 'Chesery',
+        subtitle: 'Elegância rústica no coração de Gstaad',
+        img: 'https://picsum.photos/seed/restaurant-chesery/1400/800',
+        sections: [
+          { heading: 'Sobre o restaurante', text: 'O Chesery é, ao mesmo tempo, uma lenda e um segredo. Instalado num chalé de madeira escura do século XVIII no centro de Gstaad, o restaurante existe desde 1973 e conquistou geração após geração da jet set alpina — de celebridades hollywoodianas a realezas europeias. A estrela Michelin confirma o que os frequentadores já sabem: aqui, a cozinha é tão boa quanto o ambiente é incomparável.' },
+          { heading: 'A cozinha', text: 'O chef Robert Speth comanda uma cozinha de influência clássica francesa com ingredientes alpinos de primeira. Fondues de trufas, carré de cordeiro do Valais, foie gras com redução de kirsch. A carta muda com as estações — no inverno, pratos mais robustos e reconfortantes; no verão, leveza mediterrânea com toques suíços.' },
+          { heading: 'O ambiente', text: 'A lareira central, as vigas de madeira centenária, os candelabros — tudo cria uma atmosfera de chalé de família aristocrática que recebeu seus convidados para jantar. Nos fins de semana de inverno, o piano bar ao lado anima a noite até tarde. O Chesery é o único lugar em Gstaad onde você come bem E dança até a 1h.' },
+          { heading: 'Informações práticas', text: 'Endereço: Lauenenstrasse, 3780 Gstaad. Aberto para jantar a partir das 19h (fechado segunda e terça na baixa temporada). Código de vestimenta: smart casual no jantar, mais formal nas noites de piano. Reserva essencial com 4 a 8 semanas de antecedência. Preço médio: CHF 180–280 por pessoa.' },
+          { heading: 'Dica', text: 'Peça mesa perto da lareira — há apenas 4 mesas privilegiadas nessa posição. Mencione ao fazer a reserva que é uma ocasião especial; a equipe prepara detalhes surpresa (flores, carta personalizada). Depois do jantar, caminhe pelo Promenade de Gstaad sob as estrelas — a vila à noite de inverno é cinematográfica.' }
+        ],
+        quiz: [
+          { q: "Desde quando existe o Chesery?", opts: ["1945","1958","1973","1989"], correct: 2, feedback: "O Chesery existe desde 1973 e há décadas é o ponto de encontro da jet set alpina de Gstaad." },
+          { q: "Quantas estrelas Michelin tem o Chesery?", opts: ["Nenhuma","1","2","3"], correct: 1, feedback: "O Chesery tem 1 estrela Michelin." },
+          { q: "O que torna o Chesery único à noite nos fins de semana de inverno?", opts: ["Menu especial de ski","Piano bar até tarde","Show de fondue ao vivo","Jantar na neve"], correct: 1, feedback: "O piano bar ao lado do Chesery anima a noite até tarde nos fins de semana de inverno." },
+          { q: "Em que cantão fica Gstaad?", opts: ["Valais","Vaud","Berna","Friburgo"], correct: 2, feedback: "Gstaad fica no cantão de Berna, no Oberland Bernês, apesar de ser geograficamente próxima de Friburgo." }
+        ]
+      },
+      pizgloria: {
+        tag: 'Schilthorn · 2.970 m de altitude',
+        title: 'Piz Gloria',
+        subtitle: 'O restaurante giratório de James Bond',
+        img: 'https://picsum.photos/seed/piz-gloria-alps/1400/800',
+        sections: [
+          { heading: 'História e James Bond', text: 'O Piz Gloria ganhou fama mundial em 1969, quando foi cenário do filme "007 — A Serviço Secreto de Sua Majestade", com George Lazenby como Bond. As cenas do laboratório de Blofeld foram filmadas aqui, no cume do Schilthorn a 2.970 metros. Curiosamente, o complexo estava em construção quando a produção de Bond chegou: o dinheiro do filme financiou parte das obras. Hoje, uma exposição permanente celebra o legado 007.' },
+          { heading: 'A experiência gastronômica', text: 'O restaurante giratório completa uma volta de 360° em 55 minutos — tempo suficiente para, numa rotação, ver o Eiger, o Mönch, o Jungfrau, as planícies suíças, os Alpes franceses e até o Monte Blanc em dias claros. Mais de 200 picos acima de 4.000 metros no horizonte. A comida é boa (não Michelin, mas honesta) — opt pelo Bircher Muesli no café da manhã: dicen que foi inventado ali.' },
+          { heading: 'O que fazer além do jantar', text: 'Chegue pela manhã para o Thrill Walk — uma passarela suspensa na rocha com seção de vidro transparente sobre o abismo. Visite a exposição Bond World 007. No inverno, esquie pela rota "007 Run" de 16 km descendo até Lauterbrunnen. Leve um casaco pesado — mesmo no verão, a 2.970 m a temperatura ronda os 5°C.' },
+          { heading: 'Como chegar', text: 'De Interlaken, tome o trem até Lauterbrunnen (25 min), depois bondinho até Grütschalp, trem até Mürren e finalmente o teleférico do Schilthorn. Total: cerca de 2h de viagem com as baldeações. Alternativamente, de Stechelberg (vale) sobe teleférico direto em 30 minutos. Com Swiss Travel Pass, parte do trajeto é gratuita.' },
+          { heading: 'Dica', text: 'Compre o ingresso "Breakfast at Piz Gloria" — inclui o teleférico de subida + café da manhã no restaurante giratório + descida. É mais barato que pagar separado e o café da manhã com aquela vista é simplesmente irreal. Vá num dia com previsão de bom tempo — o site do Schilthorn tem webcam ao vivo para verificar.' }
+        ],
+        quiz: [
+          { q: "Em qual filme de James Bond o Piz Gloria aparece?", opts: ["007 contra GoldenEye","007 — A Serviço Secreto de Sua Majestade","Cassino Royale","Spectre"], correct: 1, feedback: "O Piz Gloria foi cenário do filme '007 — A Serviço Secreto de Sua Majestade' (1969), com George Lazenby." },
+          { q: "A quantos metros de altitude fica o Piz Gloria?", opts: ["1.970 m","2.970 m","3.970 m","4.970 m"], correct: 1, feedback: "O Piz Gloria fica no cume do Schilthorn, a 2.970 metros de altitude." },
+          { q: "Quanto tempo leva uma rotação completa do restaurante giratório?", opts: ["15 minutos","30 minutos","55 minutos","90 minutos"], correct: 2, feedback: "O restaurante giratório do Piz Gloria completa uma volta de 360° em 55 minutos." },
+          { q: "Qual é o percurso que parte do Schilthorn até Lauterbrunnen no inverno?", opts: ["Rota Alpina","007 Run","Schilthorn Express","Bond Trail"], correct: 1, feedback: "A '007 Run' é uma pista de 16 km descendo do Schilthorn até Lauterbrunnen, em homenagem ao filme de James Bond." }
+        ]
+      },
+      cafedusoleil: {
+        tag: 'Genebra · Desde 1849',
+        title: 'Café du Soleil',
+        subtitle: 'O fondue mais famoso de Genebra',
+        img: 'https://picsum.photos/seed/cafe-du-soleil-fondue/1400/800',
+        sections: [
+          { heading: 'História', text: 'Fundado em 1849 no bairro Grand-Pré de Genebra, o Café du Soleil é um dos estabelecimentos mais antigos da cidade. Por quase dois séculos, manteve a mesma receita de fondue: Gruyère AOC e Vacherin fribourgeois em proporções secretas, aromatizado com vinho branco do Valais e kirsch. A família que o gerencia preservou a tradição com rigor quase religioso.' },
+          { heading: 'O fondue', text: 'A especialidade da casa é o Moitié-Moitié — metade Gruyère, metade Vacherin — considerado pela maioria dos suíços como o fondue "verdadeiro". O caquelon (panela de cerâmica) chega à mesa borbulhando sobre chama viva. O ritual exige: pão em cubo mergulhado em espiral, nunca reto. Quem deixar o pão cair paga uma rodada de vinho. Brinde sempre com o vinho branco local — nunca com água (os suíços acreditam que water + queijo = pedra no estômago).' },
+          { heading: 'O que mais pedir', text: 'Além do fondue, a raclette é igualmente sensacional — queijo derretido raspado sobre batatas cozidas com picles e cebola. Os vin chaud (vinho quente com especiarias) são perfeitos no inverno. Para sobremesa, a tarte au vin cuit é uma joia local da confeitaria genevoise.' },
+          { heading: 'Informações práticas', text: 'Endereço: Place du Petit-Saconnex 6, 1202 Genebra. Aberto todos os dias para almoço e jantar. Sem reserva? Chegue antes das 12h ou das 19h para garantir mesa. Preço médio: CHF 30–45 por pessoa (o fondue em si custa em torno de CHF 28). Ambiente casual, sem código de vestimenta.' },
+          { heading: 'Dica', text: 'Peça para sentar no salão principal da casa, não no espaço externo — a atmosfera de bistrot histórico, com mesas de madeira escura e garrafas nas prateleiras, é parte essencial da experiência. Depois do jantar, caminhe até o Parc des Bastions (10 minutos a pé) para ver o Muro da Reforma iluminado à noite.' }
+        ],
+        quiz: [
+          { q: "Desde quando existe o Café du Soleil?", opts: ["1749","1849","1899","1949"], correct: 1, feedback: "O Café du Soleil foi fundado em 1849 e mantém a mesma receita de fondue por quase dois séculos." },
+          { q: "Qual é a especialidade do Café du Soleil?", opts: ["Raclette","Rösti","Moitié-Moitié","Fondue de chocolate"], correct: 2, feedback: "O Moitié-Moitié — metade Gruyère, metade Vacherin — é considerado o fondue 'verdadeiro' pelos suíços." },
+          { q: "Em qual cidade fica o Café du Soleil?", opts: ["Berna","Zurique","Genebra","Lausanne"], correct: 2, feedback: "O Café du Soleil fica no bairro Grand-Pré de Genebra." },
+          { q: "Qual bebida acompanha tradicionalmente o fondue suíço?", opts: ["Cerveja","Água gelada","Vinho branco","Suco de uva"], correct: 2, feedback: "O fondue suíço acompanha vinho branco — nunca água gelada, pois os suíços acreditam que dificulta a digestão do queijo." }
+        ]
+      }
+    };
+
+    const overlay = document.getElementById('detail-overlay');
+    const detailBack = document.getElementById('detail-back');
+    const detailImg = document.getElementById('detail-hero-img');
+    const detailTag = document.getElementById('detail-tag');
+    const detailTitle = document.getElementById('detail-title');
+    const detailSub = document.getElementById('detail-subtitle');
+    const detailContent = document.getElementById('detail-content');
+
+    function buildQuizHTML(questions, wrapId) {
+      let current = 0, score = 0;
+      const wrap = document.getElementById(wrapId) || (() => { const el = document.createElement('div'); el.id = wrapId; return el; })();
+      function renderQuestion() {
+        if (current >= questions.length) {
+          wrap.innerHTML = `<div class="quiz-result-box"><span class="quiz-score-text">Você acertou ${score} de ${questions.length}! ${score === questions.length ? '🎉 Perfeito!' : score >= questions.length / 2 ? '👏 Muito bem!' : '💪 Continue explorando!'}</span><button class="quiz-restart-btn">Tentar novamente</button></div>`;
+          wrap.querySelector('.quiz-restart-btn').addEventListener('click', () => { current = 0; score = 0; renderQuestion(); });
+          return;
+        }
+        const q = questions[current];
+        wrap.innerHTML = `<div class="quiz-q-wrap"><span class="quiz-q-num">Pergunta ${current + 1} de ${questions.length}</span><p class="quiz-q-text">${q.q}</p></div><div class="quiz-options">${q.opts.map((o, i) => `<button class="quiz-opt" data-idx="${i}">${o}</button>`).join('')}</div><p class="quiz-feedback"></p>`;
+        wrap.querySelectorAll('.quiz-opt').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const chosen = +this.dataset.idx;
+            wrap.querySelectorAll('.quiz-opt').forEach(b => { b.disabled = true; if (+b.dataset.idx === q.correct) b.classList.add('correct'); else if (+b.dataset.idx === chosen) b.classList.add('wrong'); });
+            wrap.querySelector('.quiz-feedback').textContent = q.feedback;
+            if (chosen === q.correct) score++;
+            setTimeout(() => { current++; renderQuestion(); }, 1800);
+          });
+        });
+      }
+      renderQuestion();
+      return wrap;
+    }
+
+    function openDetail(slug) {
+      const d = PLACES[slug];
+      if (!d) return;
+      detailImg.src = d.img; detailImg.alt = d.title;
+      detailTag.textContent = d.tag;
+      detailTitle.textContent = d.title;
+      detailSub.textContent = d.subtitle;
+      const sectionsHTML = d.sections.map((s, i) => {
+        const imgUrl = `https://picsum.photos/seed/${slug}-s${i}/600/420`;
+        const imgTag = `<img class="detail-section-img" src="${imgUrl}" alt="${s.heading}" loading="lazy" />`;
+        const prose  = `<div class="detail-section-prose"><h2 class="detail-section-heading">${s.heading}</h2><p class="detail-section-text">${s.text}</p></div>`;
+        const inner  = i % 2 === 0 ? `${imgTag}${prose}` : `${prose}${imgTag}`;
+        return `<div class="detail-section"><div class="detail-section-inner">${inner}</div></div>`;
+      }).join('');
+      detailContent.innerHTML = sectionsHTML + `<div class="detail-quiz"><h2 class="detail-quiz-title">✦ Quiz — teste seus conhecimentos</h2><div id="card-quiz-body"></div></div>`;
+      buildQuizHTML(d.quiz, 'card-quiz-body');
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      overlay.scrollTo(0, 0);
+    }
+
+    function closeDetail() {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-place]').forEach(card => card.addEventListener('click', () => openDetail(card.dataset.place)));
+    detailBack.addEventListener('click', closeDetail);
+  </script>
+</body>
+</html>
