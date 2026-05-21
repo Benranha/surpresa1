@@ -7,1654 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ─── Reset & Base ─────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --cream:   #f7f3ec;
-      --cream2:  #ede7da;
-      --forest:  #1a2e1e;
-      --forest2: #243d29;
-      --gold:    #b8924a;
-      --gold2:   #d4a85a;
-      --text:    #2c2c2c;
-      --muted:   #7a7060;
-      --white:   #ffffff;
-      --shadow:  0 8px 40px rgba(0,0,0,.12);
-      --shadow-hover: 0 20px 60px rgba(0,0,0,.22);
-      --radius:  4px;
-      --transition: .4s cubic-bezier(.25,.46,.45,.94);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Jost', sans-serif;
-      font-weight: 300;
-      background: var(--cream);
-      color: var(--text);
-      overflow-x: hidden;
-      line-height: 1.7;
-    }
-
-    img { display: block; width: 100%; object-fit: cover; }
-
-    a { color: inherit; text-decoration: none; }
-
-    /* ─── Typography ────────────────────────────────────── */
-    h1, h2, h3, h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 400;
-      line-height: 1.15;
-    }
-
-    .section-label {
-      font-family: 'Jost', sans-serif;
-      font-size: .65rem;
-      font-weight: 500;
-      letter-spacing: .25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 300;
-      margin-bottom: 1.5rem;
-    }
-
-    .section-subtitle {
-      font-size: 1rem;
-      font-weight: 300;
-      color: var(--muted);
-      max-width: 52ch;
-      line-height: 1.8;
-    }
-
-    /* ─── Navigation ────────────────────────────────────── */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem 3rem;
-      background: rgba(247, 243, 236, .7);
-      backdrop-filter: blur(18px) saturate(1.4);
-      -webkit-backdrop-filter: blur(18px) saturate(1.4);
-      border-bottom: 1px solid rgba(184,146,74,.15);
-      transition: padding var(--transition), background var(--transition);
-    }
-
-    .nav.scrolled {
-      padding: .9rem 3rem;
-      background: rgba(247, 243, 236, .92);
-    }
-
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      font-style: italic;
-      color: var(--forest);
-      letter-spacing: .02em;
-    }
-
-    .nav-logo span { color: var(--gold); }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: .72rem;
-      font-weight: 500;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--forest);
-      position: relative;
-      padding-bottom: 2px;
-      transition: color var(--transition);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--gold);
-      transition: width var(--transition);
-    }
-
-    .nav-links a:hover { color: var(--gold); }
-    .nav-links a:hover::after { width: 100%; }
-
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 8px;
-      background: none;
-      border: none;
-      position: relative;
-      width: 40px;
-      height: 40px;
-      align-items: center;
-      justify-content: center;
-      z-index: 101;
-    }
-
-    .nav-toggle span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--forest);
-      transform-origin: center;
-      transition: transform .35s cubic-bezier(.65,.05,.36,1),
-                  opacity .25s ease,
-                  background .3s ease;
-    }
-
-    .nav-toggle.active span {
-      background: var(--gold);
-    }
-
-    .nav-toggle.active span:nth-child(1) {
-      transform: translateY(6.5px) rotate(45deg);
-    }
-    .nav-toggle.active span:nth-child(2) {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-    .nav-toggle.active span:nth-child(3) {
-      transform: translateY(-6.5px) rotate(-45deg);
-    }
-
-    /* Scroll progress bar */
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold), var(--gold2));
-      z-index: 200;
-      transition: width .08s linear;
-      box-shadow: 0 0 12px rgba(184,146,74,.4);
-    }
-
-    /* ─── Hero ──────────────────────────────────────────── */
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 600px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: -10%;
-      background-image: url('https://picsum.photos/seed/swiss-alps-hero/1800/900');
-      background-size: cover;
-      background-position: center calc(50% + var(--scrollY, 0px));
-      animation: kenburns 20s ease-in-out infinite alternate;
-    }
-
-    @keyframes kenburns {
-      from { transform: scale(1)   translate(0, 0); }
-      to   { transform: scale(1.08) translate(-2%, -1%); }
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        160deg,
-        rgba(26, 46, 30, .55) 0%,
-        rgba(26, 46, 30, .35) 40%,
-        rgba(10, 10, 10, .6)  100%
-      );
-    }
-
-    .hero-content {
-      position: relative;
-      text-align: center;
-      color: var(--white);
-      padding: 0 2rem;
-      max-width: 860px;
-    }
-
-    .hero-eyebrow {
-      font-family: 'Jost', sans-serif;
-      font-size: .68rem;
-      font-weight: 500;
-      letter-spacing: .35em;
-      text-transform: uppercase;
-      color: var(--gold2);
-      display: block;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp .9s .3s forwards;
-    }
-
-    .hero-title {
-      font-size: clamp(3rem, 9vw, 7rem);
-      font-weight: 300;
-      letter-spacing: -.01em;
-      line-height: 1.05;
-      margin-bottom: .5rem;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 1s .5s forwards;
-    }
-
-    .hero-title em {
-      font-style: italic;
-      color: var(--gold2);
-    }
-
-    .hero-subtitle {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-      font-weight: 300;
-      font-style: italic;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s .7s forwards;
-      margin-bottom: 2.5rem;
-      color: rgba(255,255,255,.85);
-    }
-
-    .hero-cta {
-      display: inline-block;
-      padding: .85rem 2.5rem;
-      border: 1px solid var(--gold2);
-      color: var(--white);
-      font-family: 'Jost', sans-serif;
-      font-size: .72rem;
-      font-weight: 500;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      transition: background var(--transition), color var(--transition);
-      opacity: 0;
-      animation: fadeUp 1s .9s forwards;
-    }
-
-    .hero-cta:hover {
-      background: var(--gold);
-      border-color: var(--gold);
-    }
-
-    .hero-scroll {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: .5rem;
-      color: rgba(255,255,255,.6);
-      font-size: .6rem;
-      font-weight: 500;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      animation: fadeUp 1s 1.2s both;
-    }
-
-    .hero-scroll-line {
-      width: 1px;
-      height: 50px;
-      background: linear-gradient(to bottom, transparent, rgba(255,255,255,.5));
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: .4; transform: scaleY(1); }
-      50%       { opacity: 1;  transform: scaleY(1.1); }
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ─── Intro Strip ───────────────────────────────────── */
-    .intro-strip {
-      background: var(--forest);
-      color: var(--white);
-      display: flex;
-      justify-content: center;
-      gap: 0;
-      overflow: hidden;
-    }
-
-    .intro-item {
-      flex: 1;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      border-right: 1px solid rgba(255,255,255,.08);
-      position: relative;
-    }
-
-    .intro-item:last-child { border-right: none; }
-
-    .intro-item-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem;
-      font-weight: 300;
-      color: var(--gold);
-      display: block;
-      line-height: 1;
-    }
-
-    .intro-item-label {
-      font-size: .7rem;
-      font-weight: 400;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.55);
-      margin-top: .4rem;
-      display: block;
-    }
-
-    /* ─── Section Wrapper ───────────────────────────────── */
-    .section {
-      padding: 7rem 2rem;
-    }
-
-    .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      margin-bottom: 4rem;
-    }
-
-    .section-header.centered { text-align: center; }
-    .section-header.centered .section-subtitle { margin: 0 auto; }
-
-    /* ─── Cards Grid ────────────────────────────────────── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: var(--white);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .card-img {
-      height: 240px;
-      overflow: hidden;
-    }
-
-    .card-img img {
-      height: 100%;
-      transition: transform .7s ease;
-    }
-
-    .card:hover .card-img img {
-      transform: scale(1.07);
-    }
-
-    .card-body {
-      padding: 1.75rem;
-    }
-
-    .card-tag {
-      font-size: .6rem;
-      font-weight: 500;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: block;
-      margin-bottom: .6rem;
-    }
-
-    .card-title {
-      font-size: 1.45rem;
-      font-weight: 400;
-      margin-bottom: .75rem;
-      color: var(--forest);
-    }
-
-    .card-text {
-      font-size: .9rem;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .card-detail {
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-      margin-top: 1.2rem;
-      padding-top: 1.2rem;
-      border-top: 1px solid var(--cream2);
-      font-size: .75rem;
-      color: var(--muted);
-    }
-
-    .card-detail-icon { color: var(--gold); font-size: .9rem; }
-
-    /* ─── Lugares Românticos (dark section) ─────────────── */
-    .section--dark {
-      background: var(--forest);
-      color: var(--white);
-    }
-
-    .section--dark .section-title { color: var(--white); }
-    .section--dark .section-subtitle { color: rgba(255,255,255,.6); }
-    .section--dark .card {
-      background: var(--forest2);
-      color: var(--white);
-      border: 1px solid rgba(255,255,255,.07);
-    }
-    .section--dark .card-title { color: var(--white); }
-    .section--dark .card-text  { color: rgba(255,255,255,.55); }
-    .section--dark .card-detail { border-color: rgba(255,255,255,.1); color: rgba(255,255,255,.4); }
-
-    /* ─── Feature Layout (2 col) ────────────────────────── */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .feature-grid.reverse { direction: rtl; }
-    .feature-grid.reverse > * { direction: ltr; }
-
-    .feature-img {
-      border-radius: var(--radius);
-      overflow: hidden;
-      height: 480px;
-      box-shadow: var(--shadow);
-    }
-
-    .feature-img img { height: 100%; }
-
-    .feature-content { padding: 1rem 0; }
-
-    .feature-content .section-title {
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      margin-top: .5rem;
-    }
-
-    .feature-stars {
-      display: flex;
-      gap: .25rem;
-      margin-top: 1.5rem;
-    }
-
-    .star { color: var(--gold); font-size: .85rem; }
-
-    .feature-badge {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: .5rem 1.2rem;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-size: .65rem;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      border-radius: 2px;
-    }
-
-    /* ─── Restaurantes ──────────────────────────────────── */
-    .restaurant-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-    }
-
-    .restaurant-card {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 0;
-      background: var(--white);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .restaurant-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .restaurant-img {
-      height: 100%;
-      min-height: 220px;
-      overflow: hidden;
-    }
-
-    .restaurant-img img { height: 100%; }
-
-    .restaurant-card:hover .restaurant-img img {
-      transform: scale(1.07);
-      transition: transform .7s ease;
-    }
-
-    .restaurant-body {
-      padding: 2rem;
-    }
-
-    .restaurant-name {
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin-bottom: .4rem;
-    }
-
-    .restaurant-location {
-      font-size: .7rem;
-      font-weight: 500;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: .8rem;
-    }
-
-    .restaurant-desc {
-      font-size: .88rem;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .restaurant-meta {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1.2rem;
-      flex-wrap: wrap;
-    }
-
-    .restaurant-meta span {
-      font-size: .68rem;
-      font-weight: 500;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: .3rem .8rem;
-      background: var(--cream2);
-      color: var(--forest);
-      border-radius: 2px;
-    }
-
-    /* ─── Hotéis ────────────────────────────────────────── */
-    .hotels-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-
-    .hotel-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .hotel-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .hotel-card:nth-child(4),
-    .hotel-card:nth-child(5) {
-      grid-column: span 1;
-    }
-
-    .hotels-grid-bottom {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .hotel-img {
-      height: 260px;
-      overflow: hidden;
-    }
-
-    .hotel-img img {
-      height: 100%;
-      transition: transform .7s ease;
-    }
-
-    .hotel-card:hover .hotel-img img { transform: scale(1.07); }
-
-    .hotel-body { padding: 1.75rem; }
-
-    .hotel-name {
-      font-size: 1.4rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin-bottom: .3rem;
-    }
-
-    .hotel-location {
-      font-size: .68rem;
-      font-weight: 500;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: block;
-      margin-bottom: .8rem;
-    }
-
-    .hotel-desc {
-      font-size: .87rem;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .hotel-stars { display: flex; gap: 3px; margin-top: 1rem; }
-    .hotel-stars .star { font-size: .7rem; }
-
-    /* ─── Montanhas ─────────────────────────────────────── */
-    .mountains-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2.5rem;
-    }
-
-    .mountain-card {
-      position: relative;
-      border-radius: var(--radius);
-      overflow: hidden;
-      height: 380px;
-      cursor: default;
-      box-shadow: var(--shadow);
-    }
-
-    .mountain-card img {
-      height: 100%;
-      transition: transform .9s ease;
-    }
-
-    .mountain-card:hover img { transform: scale(1.07); }
-
-    .mountain-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(26,46,30,.9) 0%, transparent 55%);
-      transition: background var(--transition);
-    }
-
-    .mountain-card:hover .mountain-overlay {
-      background: linear-gradient(to top, rgba(26,46,30,.95) 0%, rgba(26,46,30,.2) 60%);
-    }
-
-    .mountain-content {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 2rem;
-      color: var(--white);
-    }
-
-    .mountain-altitude {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      font-style: italic;
-      color: var(--gold2);
-      display: block;
-      margin-bottom: .4rem;
-    }
-
-    .mountain-name {
-      font-size: 1.9rem;
-      font-weight: 300;
-      margin-bottom: .5rem;
-    }
-
-    .mountain-desc {
-      font-size: .85rem;
-      color: rgba(255,255,255,.65);
-      line-height: 1.7;
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height .5s ease, opacity .5s ease;
-    }
-
-    .mountain-card:hover .mountain-desc {
-      max-height: 100px;
-      opacity: 1;
-    }
-
-    /* ─── Curiosidades ──────────────────────────────────── */
-    .facts-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-
-    .fact-card {
-      padding: 2.5rem 2rem;
-      background: var(--cream2);
-      border-radius: var(--radius);
-      border-left: 3px solid var(--gold);
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .fact-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow);
-    }
-
-    .fact-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem;
-      font-weight: 300;
-      color: var(--gold);
-      line-height: 1;
-      display: block;
-      margin-bottom: .75rem;
-    }
-
-    .fact-title {
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin-bottom: .6rem;
-    }
-
-    .fact-text {
-      font-size: .87rem;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    /* ─── Quote Section ─────────────────────────────────── */
-    .quote-section {
-      position: relative;
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .quote-bg {
-      position: absolute;
-      inset: -8%;
-      background-image: url('https://picsum.photos/seed/swiss-valley-quote/1800/900');
-      background-size: cover;
-      background-position: center calc(30% + var(--scrollY, 0px));
-      animation: kenburns2 18s ease-in-out infinite alternate;
-    }
-
-    @keyframes kenburns2 {
-      from { transform: scale(1)    translate(0, 0); }
-      to   { transform: scale(1.06) translate(1%, -1%); }
-    }
-
-    .quote-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(26,46,30,.75), rgba(10,10,10,.65));
-    }
-
-    .quote-content {
-      position: relative;
-      text-align: center;
-      color: var(--white);
-      padding: 5rem 2rem;
-      max-width: 800px;
-    }
-
-    .quote-mark {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 8rem;
-      color: var(--gold);
-      line-height: .5;
-      display: block;
-      margin-bottom: 1rem;
-      opacity: .6;
-    }
-
-    .quote-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.5;
-      margin-bottom: 2rem;
-    }
-
-    .quote-author {
-      font-size: .7rem;
-      font-weight: 500;
-      letter-spacing: .25em;
-      text-transform: uppercase;
-      color: var(--gold2);
-      display: block;
-      margin-bottom: 2.5rem;
-    }
-
-    .quote-tip-box {
-      display: inline-block;
-      padding: 1.5rem 2.5rem;
-      border: 1px solid rgba(184,146,74,.5);
-      background: rgba(26,46,30,.5);
-      backdrop-filter: blur(8px);
-      max-width: 580px;
-    }
-
-    .quote-tip-label {
-      font-size: .62rem;
-      font-weight: 500;
-      letter-spacing: .25em;
-      text-transform: uppercase;
-      color: var(--gold2);
-      display: block;
-      margin-bottom: .6rem;
-    }
-
-    .quote-tip-text {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,.85);
-      line-height: 1.65;
-    }
-
-    /* ─── Footer ─────────────────────────────────────────── */
-    .footer {
-      background: var(--forest);
-      color: rgba(255,255,255,.5);
-      text-align: center;
-      padding: 4rem 2rem 3rem;
-    }
-
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
-      font-weight: 300;
-      font-style: italic;
-      color: var(--white);
-      display: block;
-      margin-bottom: .5rem;
-    }
-
-    .footer-logo span { color: var(--gold); }
-
-    .footer-tagline {
-      font-size: .8rem;
-      letter-spacing: .12em;
-      color: rgba(255,255,255,.4);
-      margin-bottom: 2.5rem;
-      display: block;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 2.5rem;
-      list-style: none;
-      margin-bottom: 2.5rem;
-    }
-
-    .footer-links a {
-      font-size: .68rem;
-      font-weight: 500;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.4);
-      transition: color .3s;
-    }
-
-    .footer-links a:hover { color: var(--gold); }
-
-    .footer-divider {
-      width: 40px;
-      height: 1px;
-      background: rgba(184,146,74,.4);
-      margin: 0 auto 2rem;
-    }
-
-    .footer-copy {
-      font-size: .72rem;
-      color: rgba(255,255,255,.25);
-    }
-
-    .footer-heart { color: var(--gold); }
-
-    /* ─── Fade-in animation (IntersectionObserver) ──────── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(35px);
-      transition: opacity .8s cubic-bezier(.22,.61,.36,1),
-                  transform .9s cubic-bezier(.22,.61,.36,1);
-      will-change: opacity, transform;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .fade-in-delay-1 { transition-delay: .08s; }
-    .fade-in-delay-2 { transition-delay: .16s; }
-    .fade-in-delay-3 { transition-delay: .24s; }
-    .fade-in-delay-4 { transition-delay: .32s; }
-    .fade-in-delay-5 { transition-delay: .40s; }
-
-    /* ─── Scroll reveal variants ─────────────────────────── */
-    .reveal-left,
-    .reveal-right,
-    .reveal-scale,
-    .reveal-clip {
-      opacity: 0;
-      transition: opacity .9s cubic-bezier(.22,.61,.36,1),
-                  transform 1s cubic-bezier(.22,.61,.36,1),
-                  clip-path 1.1s cubic-bezier(.65,.05,.36,1);
-      will-change: opacity, transform;
-    }
-    .reveal-left  { transform: translateX(-50px); }
-    .reveal-right { transform: translateX(50px); }
-    .reveal-scale { transform: scale(.92); }
-    .reveal-clip  {
-      clip-path: inset(0 100% 0 0);
-      opacity: 1;
-    }
-
-    .reveal-left.visible,
-    .reveal-right.visible,
-    .reveal-scale.visible {
-      opacity: 1;
-      transform: none;
-    }
-    .reveal-clip.visible {
-      clip-path: inset(0 0 0 0);
-    }
-
-    /* ─── Parallax images ────────────────────────────────── */
-    .parallax-img-wrap {
-      overflow: hidden;
-    }
-    .parallax-img {
-      will-change: transform;
-      transition: transform .15s linear;
-    }
-
-    /* ─── Hero parallax helper ───────────────────────────── */
-    .hero-bg,
-    .quote-bg {
-      will-change: transform;
-    }
-
-    /* ─── Animated section divider ───────────────────────── */
-    .section-divider {
-      width: 40px;
-      height: 1px;
-      background: var(--gold);
-      margin: 0 0 1.5rem;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform .9s cubic-bezier(.22,.61,.36,1) .15s;
-    }
-    .section-header.centered .section-divider { margin-left: auto; margin-right: auto; transform-origin: center; }
-    .section-header.visible .section-divider,
-    .section-header.fade-in.visible .section-divider {
-      transform: scaleX(1);
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .hero-bg, .quote-bg { animation: none !important; }
-      .parallax-img { transform: none !important; }
-      .fade-in, .reveal-left, .reveal-right, .reveal-scale, .reveal-clip {
-        transition: opacity .3s ease !important;
-        transform: none !important;
-        clip-path: none !important;
-      }
-    }
-
-    /* ─── Mobile Menu ───────────────────────────────────── */
-    .mobile-menu {
-      display: flex;
-      position: fixed;
-      inset: 0;
-      z-index: 110;
-      background:
-        radial-gradient(ellipse at top right, rgba(184,146,74,.18), transparent 55%),
-        radial-gradient(ellipse at bottom left, rgba(36,61,41,.6), transparent 55%),
-        linear-gradient(160deg, var(--forest) 0%, #0e1812 100%);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.75rem;
-      padding: 5rem 1.5rem 2rem;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transform: scale(1.04);
-      transition: opacity .45s cubic-bezier(.25,.46,.45,.94),
-                  transform .55s cubic-bezier(.25,.46,.45,.94),
-                  visibility 0s linear .45s;
-    }
-
-    .mobile-menu.open {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transform: scale(1);
-      transition: opacity .45s cubic-bezier(.25,.46,.45,.94),
-                  transform .55s cubic-bezier(.25,.46,.45,.94),
-                  visibility 0s linear 0s;
-    }
-
-    .mobile-menu::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1px;
-      height: 0;
-      background: linear-gradient(to bottom, transparent, rgba(184,146,74,.3), transparent);
-      transform: translate(-50%, -50%);
-      transition: height .7s cubic-bezier(.25,.46,.45,.94) .15s;
-    }
-
-    .mobile-menu.open::before { height: 70%; }
-
-    .mobile-menu-logo {
-      position: absolute;
-      top: 1.5rem;
-      left: 1.5rem;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      font-style: italic;
-      color: var(--cream);
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: opacity .5s ease .3s, transform .5s ease .3s;
-    }
-    .mobile-menu-logo span { color: var(--gold); }
-    .mobile-menu.open .mobile-menu-logo { opacity: 1; transform: translateY(0); }
-
-    .mobile-menu a {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.7rem, 7vw, 2.4rem);
-      font-weight: 300;
-      color: var(--white);
-      letter-spacing: .03em;
-      position: relative;
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .5s cubic-bezier(.25,.46,.45,.94),
-                  transform .55s cubic-bezier(.25,.46,.45,.94),
-                  color .25s ease;
-      padding: .15rem 1rem;
-    }
-
-    .mobile-menu a::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      width: 0;
-      height: 1px;
-      background: var(--gold);
-      transform: translateY(-50%);
-      transition: width .35s cubic-bezier(.25,.46,.45,.94);
-    }
-
-    .mobile-menu a:hover,
-    .mobile-menu a:active { color: var(--gold2); }
-    .mobile-menu a:hover::before { width: .7rem; }
-
-    .mobile-menu.open a {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .mobile-menu.open a:nth-of-type(1) { transition-delay: .15s; }
-    .mobile-menu.open a:nth-of-type(2) { transition-delay: .21s; }
-    .mobile-menu.open a:nth-of-type(3) { transition-delay: .27s; }
-    .mobile-menu.open a:nth-of-type(4) { transition-delay: .33s; }
-    .mobile-menu.open a:nth-of-type(5) { transition-delay: .39s; }
-    .mobile-menu.open a:nth-of-type(6) { transition-delay: .45s; }
-    .mobile-menu.open a:nth-of-type(7) { transition-delay: .51s; }
-
-    .mobile-close {
-      position: absolute;
-      top: 1.1rem;
-      right: 1.25rem;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      color: rgba(255,255,255,.7);
-      cursor: pointer;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(184,146,74,.25);
-      border-radius: 50%;
-      line-height: 1;
-      transition: transform .3s ease, color .3s ease, border-color .3s ease;
-    }
-
-    .mobile-close:hover,
-    .mobile-close:active {
-      transform: rotate(90deg);
-      color: var(--gold);
-      border-color: var(--gold);
-    }
-
-    /* ─── Responsive ─────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .nav-toggle { display: flex; }
-      .nav { padding: 1rem 1.25rem; }
-      .nav.scrolled { padding: .75rem 1.25rem; }
-      .nav-logo { font-size: 1.15rem; }
-
-      .section { padding: 4.5rem 1.25rem; }
-      .section-title { font-size: clamp(1.75rem, 6vw, 2.4rem); }
-      .section-header { margin-bottom: 2.75rem; }
-      .section-subtitle { font-size: .92rem; }
-
-      .hero-content { padding: 0 1.5rem; }
-
-      .feature-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .feature-grid.reverse { direction: ltr; }
-      .feature-img { height: 300px; }
-
-      .restaurant-list { grid-template-columns: 1fr; gap: 1.5rem; }
-      .restaurant-card { grid-template-columns: 1fr; }
-      .restaurant-img { min-height: 200px; height: 200px; }
-      .restaurant-body { padding: 1.5rem 1.4rem; }
-
-      .hotels-grid { grid-template-columns: 1fr 1fr; gap: 1.4rem; }
-      .hotels-grid-bottom { grid-template-columns: 1fr; gap: 1.4rem; }
-      .hotel-body { padding: 1.4rem 1.3rem; }
-      .hotel-img { height: 210px; }
-
-      .mountains-grid { grid-template-columns: 1fr; gap: 1.4rem; }
-      .mountain-card { height: 320px; }
-      .mountain-content { padding: 1.5rem 1.4rem; }
-      .mountain-name { font-size: 1.6rem; }
-      .mountain-desc { max-height: 100px; opacity: 1; }
-
-      .facts-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-      .fact-card { padding: 2rem 1.4rem; }
-      .fact-number { font-size: 2.8rem; }
-
-      .cards-grid { gap: 1.5rem; }
-      .card-body { padding: 1.4rem 1.3rem; }
-
-      .quote-content { padding: 4rem 1.25rem; }
-      .quote-tip-box { padding: 1.25rem 1.4rem; }
-      .quote-tip-text { font-size: .95rem; }
-
-      .general-quiz-wrap { padding: 1.75rem 1.4rem; }
-      .footer-links { gap: 1.25rem; flex-wrap: wrap; padding: 0 1rem; }
-    }
-
-    @media (max-width: 600px) {
-      .nav { padding: .85rem 1rem; }
-      .nav.scrolled { padding: .65rem 1rem; }
-      .nav-logo { font-size: 1.05rem; }
-
-      .section { padding: 3.75rem 1rem; }
-      .section-header { margin-bottom: 2.25rem; }
-      .section-label { font-size: .6rem; }
-
-      .hero { min-height: 560px; }
-      .hero-title { font-size: clamp(2.6rem, 13vw, 3.4rem); }
-      .hero-subtitle { font-size: 1rem; margin-bottom: 2rem; padding: 0 .5rem; }
-      .hero-eyebrow { font-size: .6rem; letter-spacing: .25em; }
-      .hero-cta { padding: .8rem 1.8rem; font-size: .68rem; }
-      .hero-scroll { bottom: 1.5rem; font-size: .55rem; }
-      .hero-scroll-line { height: 38px; }
-
-      .intro-strip { flex-direction: column; }
-      .intro-item {
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,.08);
-        padding: 1.6rem 1rem;
-      }
-      .intro-item:last-child { border-bottom: none; }
-      .intro-item-number { font-size: 2.2rem; }
-
-      .cards-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-      .card-img { height: 210px; }
-      .card-title { font-size: 1.3rem; }
-
-      .hotels-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-      .hotels-grid-bottom { grid-template-columns: 1fr; gap: 1.25rem; margin-top: 1.25rem; }
-      .hotel-img { height: 220px; }
-      .facts-grid { grid-template-columns: 1fr; gap: 1rem; }
-
-      .restaurant-img { height: 180px; min-height: 180px; }
-      .restaurant-name { font-size: 1.3rem; }
-      .restaurant-meta { gap: .5rem; }
-      .restaurant-meta span { font-size: .62rem; padding: .25rem .65rem; }
-
-      .mountain-card { height: 280px; }
-      .mountain-name { font-size: 1.45rem; }
-      .mountain-altitude { font-size: .85rem; }
-      .mountain-desc { font-size: .8rem; }
-
-      .quote-section { min-height: 60vh; }
-      .quote-content { padding: 3.5rem 1rem; }
-      .quote-text { font-size: clamp(1.25rem, 5vw, 1.5rem); }
-      .quote-mark { font-size: 5rem; }
-      .quote-tip-box { padding: 1.1rem 1.2rem; }
-      .quote-tip-text { font-size: .88rem; line-height: 1.6; }
-      .quote-tip-label { font-size: .58rem; }
-
-      .footer { padding: 3rem 1rem 2.25rem; }
-      .footer-logo { font-size: 1.5rem; }
-      .footer-tagline { font-size: .72rem; margin-bottom: 1.75rem; }
-      .footer-links { gap: 1rem .9rem; margin-bottom: 1.75rem; }
-      .footer-links a { font-size: .62rem; }
-
-      .general-quiz-wrap { padding: 1.5rem 1.2rem; }
-      .quiz-q-text { font-size: 1.05rem; }
-      .quiz-opt { font-size: .82rem; padding: .65rem .9rem; }
-      .quiz-result-box { padding: 1.5rem 1rem; }
-      .quiz-score-text { font-size: 1.2rem; }
-
-      .detail-back {
-        top: .9rem;
-        left: .9rem;
-        padding: .5rem 1rem;
-        font-size: .68rem;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .section { padding: 3.25rem .85rem; }
-      .hero-title { font-size: 2.4rem; }
-      .hero-cta { padding: .7rem 1.5rem; }
-      .nav-logo { font-size: .95rem; }
-      .mobile-menu a { font-size: 1.55rem; }
-    }
-
-    /* ─── Guia Prático ──────────────────────────────────── */
-    .guide-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .guide-card {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(184,146,74,.2);
-      border-radius: var(--radius);
-      padding: 2rem 1.75rem;
-      transition: border-color var(--transition), transform var(--transition);
-    }
-
-    .guide-card:hover {
-      border-color: rgba(184,146,74,.5);
-      transform: translateY(-4px);
-    }
-
-    .guide-icon {
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .guide-card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-weight: 400;
-      color: var(--gold2);
-      margin-bottom: .75rem;
-    }
-
-    .guide-card-text {
-      font-size: .9rem;
-      font-weight: 300;
-      color: rgba(247,243,236,.75);
-      line-height: 1.8;
-    }
-
-    .guide-card-text strong {
-      color: var(--gold2);
-      font-weight: 500;
-    }
-
-    @media (max-width: 900px) {
-      .guide-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 600px) {
-      .guide-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ─── Detail Overlay ────────────────────────────────── */
-    .detail-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: var(--cream);
-      transform: translateX(100%);
-      transition: transform .45s cubic-bezier(.25,.46,.45,.94);
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-
-    .detail-overlay.open {
-      transform: translateX(0);
-    }
-
-    .detail-back {
-      position: fixed;
-      top: 1.5rem;
-      left: 1.5rem;
-      z-index: 201;
-      background: var(--forest);
-      color: var(--gold2);
-      border: 1px solid rgba(184,146,74,.4);
-      border-radius: var(--radius);
-      padding: .6rem 1.2rem;
-      font-family: 'Jost', sans-serif;
-      font-size: .75rem;
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background var(--transition), border-color var(--transition);
-    }
-
-    .detail-back:hover {
-      background: var(--forest2);
-      border-color: var(--gold);
-    }
-
-    .detail-hero {
-      position: relative;
-      height: 60vh;
-      min-height: 340px;
-    }
-
-    .detail-hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .detail-hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.1) 55%, transparent 100%);
-    }
-
-    .detail-hero-content {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 3rem;
-      right: 3rem;
-      color: var(--white);
-    }
-
-    .detail-tag {
-      display: inline-block;
-      font-family: 'Jost', sans-serif;
-      font-size: .65rem;
-      font-weight: 500;
-      letter-spacing: .25em;
-      text-transform: uppercase;
-      color: var(--gold2);
-      margin-bottom: .75rem;
-    }
-
-    .detail-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 300;
-      line-height: 1.1;
-      margin-bottom: .5rem;
-    }
-
-    .detail-subtitle {
-      font-size: 1rem;
-      font-weight: 300;
-      opacity: .85;
-      max-width: 55ch;
-    }
-
-    .detail-body {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 3.5rem 2rem 5rem;
-    }
-
-    .detail-section {
-      margin-bottom: 2.5rem;
-      padding-bottom: 2.5rem;
-      border-bottom: 1px solid rgba(184,146,74,.15);
-    }
-
-    .detail-section:last-child {
-      border-bottom: none;
-    }
-
-    .detail-section-heading {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin-bottom: .75rem;
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-    }
-
-    .detail-section-heading::before {
-      content: '✦';
-      color: var(--gold);
-      font-size: .75rem;
-    }
-
-    .detail-section-text {
-      font-size: .97rem;
-      font-weight: 300;
-      color: var(--text);
-      line-height: 1.85;
-    }
-
-    @media (max-width: 600px) {
-      .detail-hero { height: 45vh; }
-      .detail-hero-content { left: 1.5rem; right: 1.5rem; bottom: 1.5rem; }
-      .detail-body { padding: 2rem 1.25rem 4rem; }
-      .detail-back { top: 1rem; left: 1rem; }
-    }
-
-    /* cursor pointer nos cards clicáveis */
-    [data-place] { cursor: pointer; }
-
-    /* ─── Detail Section com Imagem ────────────────────── */
-    .detail-section-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      align-items: center;
-    }
-
-    .detail-section-img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      border-radius: var(--radius);
-      display: block;
-    }
-
-    .detail-section-prose {}
-
-    @media (max-width: 700px) {
-      .detail-section-inner { grid-template-columns: 1fr; }
-      .detail-section-img { height: 200px; }
-    }
-
-    /* ─── Quiz (card e geral) ───────────────────────────── */
-    .detail-quiz {
-      margin-top: 3rem;
-      padding-top: 2.5rem;
-      border-top: 2px solid rgba(184,146,74,.2);
-    }
-
-    .detail-quiz-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin-bottom: 1.75rem;
-    }
-
-    .quiz-q-wrap { margin-bottom: .5rem; }
-
-    .quiz-q-num {
-      font-family: 'Jost', sans-serif;
-      font-size: .65rem;
-      font-weight: 500;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: block;
-      margin-bottom: .5rem;
-    }
-
-    .quiz-q-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin-bottom: 1rem;
-      line-height: 1.4;
-    }
-
-    .quiz-options { display: grid; gap: .55rem; margin-bottom: .75rem; }
-
-    .quiz-opt {
-      padding: .75rem 1.1rem;
-      border: 1px solid rgba(184,146,74,.3);
-      border-radius: var(--radius);
-      cursor: pointer;
-      font-family: 'Jost', sans-serif;
-      font-size: .88rem;
-      font-weight: 300;
-      color: var(--text);
-      background: transparent;
-      text-align: left;
-      transition: background .18s, border-color .18s, color .18s;
-    }
-
-    .quiz-opt:hover:not(:disabled) { background: rgba(184,146,74,.08); border-color: rgba(184,146,74,.5); }
-
-    .quiz-opt.correct {
-      background: #d4edda; border-color: #28a745; color: #155724; font-weight: 500;
-    }
-
-    .quiz-opt.wrong {
-      background: #f8d7da; border-color: #dc3545; color: #721c24;
-    }
-
-    .quiz-opt:disabled { cursor: default; }
-
-    .quiz-feedback {
-      font-family: 'Jost', sans-serif;
-      font-size: .82rem;
-      color: var(--muted);
-      font-style: italic;
-      margin-bottom: 1.5rem;
-      min-height: 1.2em;
-    }
-
-    .quiz-result-box {
-      text-align: center;
-      padding: 2rem;
-      border: 1px solid rgba(184,146,74,.3);
-      border-radius: var(--radius);
-      margin-top: 1rem;
-    }
-
-    .quiz-score-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: var(--forest);
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .quiz-restart-btn {
-      display: inline-block;
-      padding: .7rem 1.6rem;
-      background: var(--forest);
-      color: var(--gold2);
-      border: 1px solid rgba(184,146,74,.4);
-      border-radius: var(--radius);
-      font-family: 'Jost', sans-serif;
-      font-size: .75rem;
-      font-weight: 500;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background var(--transition);
-    }
-
-    .quiz-restart-btn:hover { background: var(--forest2); }
-
-    /* Quiz geral na página */
-    .general-quiz-wrap {
-      max-width: 680px;
-      margin: 2.5rem auto 0;
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(184,146,74,.18);
-      border-radius: var(--radius);
-      padding: 2.5rem;
-    }
-
-    .general-quiz-wrap .quiz-q-text { color: var(--cream); }
-    .general-quiz-wrap .quiz-q-num  { color: var(--gold2); }
-    .general-quiz-wrap .detail-quiz-title { color: var(--cream2); }
-    .general-quiz-wrap .quiz-opt { color: var(--cream); border-color: rgba(184,146,74,.25); }
-    .general-quiz-wrap .quiz-opt:hover:not(:disabled) { background: rgba(184,146,74,.12); }
-    .general-quiz-wrap .quiz-opt.correct { color: #155724; }
-    .general-quiz-wrap .quiz-opt.wrong   { color: #721c24; }
-    .general-quiz-wrap .quiz-feedback    { color: rgba(247,243,236,.6); }
-    .general-quiz-wrap .quiz-score-text  { color: var(--cream); }
-    .general-quiz-wrap .quiz-result-box  { border-color: rgba(184,146,74,.25); }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -1663,15 +16,15 @@
 
   <!-- ═══ NAVIGATION ════════════════════════════════════ -->
   <nav class="nav" id="nav">
-    <a href="#hero" class="nav-logo">Suíça <span>—</span> Para Ela</a>
+    <a href="index.html" class="nav-logo">Suíça <span>—</span> Para Ela</a>
     <ul class="nav-links">
-      <li><a href="#lugares">Lugares</a></li>
-      <li><a href="#restaurantes">Restaurantes</a></li>
-      <li><a href="#hoteis">Hotéis</a></li>
-      <li><a href="#montanhas">Montanhas</a></li>
-      <li><a href="#curiosidades">Curiosidades</a></li>
-      <li><a href="#guia">Guia</a></li>
-      <li><a href="#quiz">Quiz</a></li>
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
     </ul>
     <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1682,484 +35,150 @@
   <div class="mobile-menu" id="mobile-menu">
     <span class="mobile-menu-logo">Suíça <span>—</span> Para Ela</span>
     <button class="mobile-close" id="mobile-close" aria-label="Fechar menu">✕</button>
-    <a href="#lugares" class="mobile-link">Lugares</a>
-    <a href="#restaurantes" class="mobile-link">Restaurantes</a>
-    <a href="#hoteis" class="mobile-link">Hotéis</a>
-    <a href="#montanhas" class="mobile-link">Montanhas</a>
-    <a href="#curiosidades" class="mobile-link">Curiosidades</a>
-    <a href="#guia" class="mobile-link">Guia</a>
-    <a href="#quiz" class="mobile-link">Quiz</a>
+    <a href="lugares.html" class="mobile-link">Lugares</a>
+    <a href="restaurantes.html" class="mobile-link">Restaurantes</a>
+    <a href="hoteis.html" class="mobile-link">Hotéis</a>
+    <a href="montanhas.html" class="mobile-link">Montanhas</a>
+    <a href="curiosidades.html" class="mobile-link">Curiosidades</a>
+    <a href="guia.html" class="mobile-link">Guia</a>
+    <a href="quiz.html" class="mobile-link">Quiz</a>
   </div>
 
   <!-- ═══ HERO ══════════════════════════════════════════ -->
   <section class="hero" id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-overlay" id="hero-overlay"></div>
+    <div class="hero-content" id="hero-content">
       <span class="hero-eyebrow">Um guia curado da Europa mais bela</span>
       <h1 class="hero-title">Suíça<br /><em>Para Ela</em></h1>
       <p class="hero-subtitle">Lugares românticos, charme alpino e montanhas que roubam o fôlego</p>
-      <a href="#lugares" class="hero-cta">Descobrir o guia</a>
+      <a href="#explore" class="hero-cta">Descobrir o guia</a>
     </div>
-    <div class="hero-scroll">
+    <div class="hero-scroll" id="hero-scroll">
       <div class="hero-scroll-line"></div>
       <span>Rolar</span>
     </div>
   </section>
 
   <!-- ═══ INTRO STRIP ═══════════════════════════════════ -->
-  <div class="intro-strip">
-    <div class="intro-item reveal-scale">
-      <span class="intro-item-number">4</span>
+  <div class="intro-strip" id="intro-strip">
+    <div class="intro-item reveal" data-reveal="scale">
+      <span class="intro-item-number" data-count="4" data-suffix="">4</span>
       <span class="intro-item-label">Lugares românticos</span>
     </div>
-    <div class="intro-item reveal-scale fade-in-delay-1">
-      <span class="intro-item-number">4</span>
+    <div class="intro-item reveal" data-reveal="scale" data-reveal-delay="80ms">
+      <span class="intro-item-number" data-count="4" data-suffix="">4</span>
       <span class="intro-item-label">Restaurantes chiques</span>
     </div>
-    <div class="intro-item reveal-scale fade-in-delay-2">
-      <span class="intro-item-number">5</span>
+    <div class="intro-item reveal" data-reveal="scale" data-reveal-delay="160ms">
+      <span class="intro-item-number" data-count="5" data-suffix="">5</span>
       <span class="intro-item-label">Hotéis com charme</span>
     </div>
-    <div class="intro-item reveal-scale fade-in-delay-3">
-      <span class="intro-item-number">4</span>
+    <div class="intro-item reveal" data-reveal="scale" data-reveal-delay="240ms">
+      <span class="intro-item-number" data-count="4" data-suffix="">4</span>
       <span class="intro-item-label">Montanhas icônicas</span>
     </div>
-    <div class="intro-item reveal-scale fade-in-delay-4">
-      <span class="intro-item-number">41.3k</span>
+    <div class="intro-item reveal" data-reveal="scale" data-reveal-delay="320ms">
+      <span class="intro-item-number" data-count-float="41.3" data-suffix="k">41.3k</span>
       <span class="intro-item-label">km² de paraíso</span>
     </div>
   </div>
 
-  <!-- ═══ LUGARES ROMÂNTICOS ════════════════════════════ -->
-  <section class="section section--dark" id="lugares">
+  <!-- ═══ EXPLORE SECTION ═══════════════════════════════ -->
+  <section class="section" id="explore">
     <div class="section-inner">
-      <div class="section-header fade-in">
-        <span class="section-label">Onde o romance floresce</span>
-        <h2 class="section-title">Lugares<br />Românticos</h2>
-        <p class="section-subtitle">Cada uma dessas cidades tem uma alma própria — pedras antigas, lagos espelhados e o silêncio perfeito para se perder de mãos dadas.</p>
+      <div class="section-header centered reveal" data-reveal="fade-up">
+        <span class="section-label">Explore a Suíça</span>
+        <h2 class="section-title">Um guia completo<br />para cada momento</h2>
+        <p class="section-subtitle">Sete capítulos de pura beleza alpina — escolha por onde começar a sonhar.</p>
       </div>
 
-      <div class="cards-grid">
-        <!-- Grindelwald -->
-        <article class="card fade-in fade-in-delay-1" data-place="grindelwald">
-          <div class="card-img">
-            <img
-              src="https://picsum.photos/seed/grindelwald-eiger/800/600"
-              alt="Grindelwald com o Eiger ao fundo"
-              loading="lazy"
-            />
+      <div class="teaser-grid">
+        <!-- Lugares Românticos — spans 4 cols -->
+        <a href="lugares.html" class="teaser-card reveal" data-reveal="fade-up" data-reveal-delay="0ms" style="grid-column: span 4;">
+          <div class="teaser-card-bg" style="background-image: url('https://picsum.photos/seed/swiss-alps-hero/800/500');"></div>
+          <div class="teaser-overlay"></div>
+          <div class="teaser-content">
+            <span class="teaser-tag">Onde o romance floresce</span>
+            <h3 class="teaser-title">Lugares Românticos</h3>
+            <span class="teaser-cta">Ver →</span>
           </div>
-          <div class="card-body">
-            <span class="card-tag">Oberland Bernês</span>
-            <h3 class="card-title">Grindelwald</h3>
-            <p class="card-text">A vila mais dramática dos Alpes. O Eiger ergue-se atrás dos chalés enquanto a neve cobre tudo de branco absoluto. Um cenário que parece pintado.</p>
-            <div class="card-detail">
-              <span class="card-detail-icon">✦</span>
-              <span>Altitude: 1.034 m · Cantão de Berna</span>
-            </div>
-          </div>
-        </article>
+        </a>
 
-        <!-- Montreux -->
-        <article class="card fade-in fade-in-delay-2" data-place="montreux">
-          <div class="card-img">
-            <img
-              src="https://picsum.photos/seed/montreux-lago/800/600"
-              alt="Montreux à beira do Lago Genebra"
-              loading="lazy"
-            />
+        <!-- Restaurantes — spans 2 cols -->
+        <a href="restaurantes.html" class="teaser-card reveal" data-reveal="fade-up" data-reveal-delay="80ms" style="grid-column: span 2;">
+          <div class="teaser-card-bg" style="background-image: url('https://picsum.photos/seed/restaurant-memories/800/500');"></div>
+          <div class="teaser-overlay"></div>
+          <div class="teaser-content">
+            <span class="teaser-tag">Gastronomia de alto nível</span>
+            <h3 class="teaser-title">Restaurantes</h3>
+            <span class="teaser-cta">Ver →</span>
           </div>
-          <div class="card-body">
-            <span class="card-tag">Lago Leman</span>
-            <h3 class="card-title">Montreux</h3>
-            <p class="card-text">A Riviera Suíça. Palmeiras à beira do lago, o Château de Chillon como cenário e um clima surpreendentemente suave. Romântica em todas as estações.</p>
-            <div class="card-detail">
-              <span class="card-detail-icon">✦</span>
-              <span>À beira do Lago Genebra · Cantão de Vaud</span>
-            </div>
-          </div>
-        </article>
+        </a>
 
-        <!-- Lucerna -->
-        <article class="card fade-in fade-in-delay-3" data-place="lucerna">
-          <div class="card-img">
-            <img
-              src="https://picsum.photos/seed/lucerna-ponte/800/600"
-              alt="Ponte da Capela em Lucerna"
-              loading="lazy"
-            />
+        <!-- Hotéis — spans 2 cols -->
+        <a href="hoteis.html" class="teaser-card reveal" data-reveal="fade-up" data-reveal-delay="80ms" style="grid-column: span 2;">
+          <div class="teaser-card-bg" style="background-image: url('https://picsum.photos/seed/badrutts-palace-stmoritz/800/500');"></div>
+          <div class="teaser-overlay"></div>
+          <div class="teaser-content">
+            <span class="teaser-tag">Onde dormir sonhando</span>
+            <h3 class="teaser-title">Hotéis</h3>
+            <span class="teaser-cta">Ver →</span>
           </div>
-          <div class="card-body">
-            <span class="card-tag">Centro da Suíça</span>
-            <h3 class="card-title">Lucerna</h3>
-            <p class="card-text">A Kapellbrücke — a ponte de madeira medieval mais famosa do mundo — reflete nas águas do Rio Reuss. Caminhar aqui ao entardecer é quase irreal.</p>
-            <div class="card-detail">
-              <span class="card-detail-icon">✦</span>
-              <span>Ponte da Capela, séc. XIV · Cantão de Lucerna</span>
-            </div>
-          </div>
-        </article>
+        </a>
 
-        <!-- Interlaken -->
-        <article class="card fade-in fade-in-delay-4" data-place="interlaken">
-          <div class="card-img">
-            <img
-              src="https://picsum.photos/seed/interlaken-lagos/800/600"
-              alt="Vista de Interlaken entre os lagos"
-              loading="lazy"
-            />
+        <!-- Montanhas — spans 2 cols -->
+        <a href="montanhas.html" class="teaser-card reveal" data-reveal="fade-up" data-reveal-delay="160ms" style="grid-column: span 2;">
+          <div class="teaser-card-bg" style="background-image: url('https://picsum.photos/seed/jungfraujoch-topo/800/500');"></div>
+          <div class="teaser-overlay"></div>
+          <div class="teaser-content">
+            <span class="teaser-tag">Onde a terra toca o céu</span>
+            <h3 class="teaser-title">Montanhas</h3>
+            <span class="teaser-cta">Ver →</span>
           </div>
-          <div class="card-body">
-            <span class="card-tag">Entre os Lagos</span>
-            <h3 class="card-title">Interlaken</h3>
-            <p class="card-text">Situada entre o Lago Thun e o Lago Brienz, com o trio de picos Eiger, Mönch e Jungfrau no horizonte. A porta de entrada para o coração dos Alpes.</p>
-            <div class="card-detail">
-              <span class="card-detail-icon">✦</span>
-              <span>Lagos Thun &amp; Brienz · Cantão de Berna</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
+        </a>
 
-  <!-- ═══ RESTAURANTES ══════════════════════════════════ -->
-  <section class="section" id="restaurantes">
-    <div class="section-inner">
-      <div class="section-header fade-in">
-        <span class="section-label">Gastronomia de alto nível</span>
-        <h2 class="section-title">Restaurantes<br />Chiques</h2>
-        <p class="section-subtitle">A cozinha suíça vai muito além do fondue. Estes endereços combinam ingredientes impecáveis com vistas que fazem parte do prato.</p>
-      </div>
-
-      <div class="restaurant-list">
-        <!-- Memories -->
-        <article class="restaurant-card fade-in fade-in-delay-1" data-place="memories">
-          <div class="restaurant-img">
-            <img
-              src="https://picsum.photos/seed/restaurant-memories/400/300"
-              alt="Prato elegante do Memories"
-              loading="lazy"
-            />
+        <!-- Curiosidades — spans 2 cols -->
+        <a href="curiosidades.html" class="teaser-card reveal" data-reveal="fade-up" data-reveal-delay="240ms" style="grid-column: span 2;">
+          <div class="teaser-card-bg" style="background-image: url('https://picsum.photos/seed/swiss-valley-quote/800/500');"></div>
+          <div class="teaser-overlay"></div>
+          <div class="teaser-content">
+            <span class="teaser-tag">Fatos que encantam</span>
+            <h3 class="teaser-title">Curiosidades</h3>
+            <span class="teaser-cta">Ver →</span>
           </div>
-          <div class="restaurant-body">
-            <div class="restaurant-location">Bad Ragaz · 2 Estrelas Michelin</div>
-            <h3 class="restaurant-name">Memories</h3>
-            <p class="restaurant-desc">Do chef Sven Wassmer. Uma das experiências gastronômicas mais memoráveis da Suíça, com menus-degustação que narram as estações dos Alpes de forma poética.</p>
-            <div class="restaurant-meta">
-              <span>Alta Cozinha</span>
-              <span>Menu Degustação</span>
-              <span>Reserva Obrigatória</span>
-            </div>
-          </div>
-        </article>
+        </a>
 
-        <!-- Chesery -->
-        <article class="restaurant-card fade-in fade-in-delay-2" data-place="chesery">
-          <div class="restaurant-img">
-            <img
-              src="https://picsum.photos/seed/restaurant-chesery/400/300"
-              alt="Interior refinado do Chesery em Gstaad"
-              loading="lazy"
-            />
+        <!-- Guia Prático — spans 3 cols -->
+        <a href="guia.html" class="teaser-card reveal" data-reveal="fade-up" data-reveal-delay="160ms" style="grid-column: span 3;">
+          <div class="teaser-card-bg" style="background-image: url('https://picsum.photos/seed/lucerna-ponte/800/500');"></div>
+          <div class="teaser-overlay"></div>
+          <div class="teaser-content">
+            <span class="teaser-tag">Tudo que você precisa saber</span>
+            <h3 class="teaser-title">Guia Prático</h3>
+            <span class="teaser-cta">Ver →</span>
           </div>
-          <div class="restaurant-body">
-            <div class="restaurant-location">Gstaad · 1 Estrela Michelin</div>
-            <h3 class="restaurant-name">Chesery</h3>
-            <p class="restaurant-desc">Elegância rústica no coração de Gstaad. Ambiente de chalé de luxo, lareira, e uma carta de vinhos excepcional. O ponto de encontro da jet set alpina.</p>
-            <div class="restaurant-meta">
-              <span>Cozinha Francesa</span>
-              <span>Vista Alpina</span>
-              <span>Ambiente Íntimo</span>
-            </div>
+        </a>
+
+        <!-- Quiz — spans 3 cols -->
+        <a href="quiz.html" class="teaser-card reveal" data-reveal="fade-up" data-reveal-delay="240ms" style="grid-column: span 3;">
+          <div class="teaser-card-bg" style="background-image: url('https://picsum.photos/seed/interlaken-lagos/800/500');"></div>
+          <div class="teaser-overlay"></div>
+          <div class="teaser-content">
+            <span class="teaser-tag">Você prestou atenção?</span>
+            <h3 class="teaser-title">Quiz da Suíça</h3>
+            <span class="teaser-cta">Jogar →</span>
           </div>
-        </article>
-
-        <!-- Piz Gloria -->
-        <article class="restaurant-card fade-in fade-in-delay-3" data-place="pizgloria">
-          <div class="restaurant-img">
-            <img
-              src="https://picsum.photos/seed/piz-gloria-alps/400/300"
-              alt="Vista panorâmica dos Alpes do Piz Gloria"
-              loading="lazy"
-            />
-          </div>
-          <div class="restaurant-body">
-            <div class="restaurant-location">Schilthorn · 2.970 m de altitude</div>
-            <h3 class="restaurant-name">Piz Gloria</h3>
-            <p class="restaurant-desc">O restaurante giratório mais alto da Suíça. Cenário do James Bond "No seu Serviço Secreto", com panorama de 360° sobre 200 picos alpinos. Jantar com as estrelas.</p>
-            <div class="restaurant-meta">
-              <span>Girante 360°</span>
-              <span>James Bond</span>
-              <span>Vista Única</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Café du Soleil -->
-        <article class="restaurant-card fade-in fade-in-delay-4" data-place="cafedusoleil">
-          <div class="restaurant-img">
-            <img
-              src="https://picsum.photos/seed/cafe-du-soleil-fondue/400/300"
-              alt="Fondue tradicional do Café du Soleil"
-              loading="lazy"
-            />
-          </div>
-          <div class="restaurant-body">
-            <div class="restaurant-location">Genebra · desde 1849</div>
-            <h3 class="restaurant-name">Café du Soleil</h3>
-            <p class="restaurant-desc">O fondue mais famoso de Genebra. Estabelecimento histórico onde a receita tradicional é guardada como joia. A Suíça na sua forma mais autêntica e aquecedora.</p>
-            <div class="restaurant-meta">
-              <span>Fondue Clássico</span>
-              <span>Histórico</span>
-              <span>Autêntico</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ HOTÉIS ════════════════════════════════════════ -->
-  <section class="section section--dark" id="hoteis">
-    <div class="section-inner">
-      <div class="section-header fade-in">
-        <span class="section-label">Onde dormir sonhando acordada</span>
-        <h2 class="section-title">Hotéis com<br />Charme Alpino</h2>
-        <p class="section-subtitle">De palácios Belle Époque a refúgios modernos entre picos nevados — cada um destes hotéis é um destino em si mesmo.</p>
-      </div>
-
-      <!-- Top 3 -->
-      <div class="hotels-grid">
-        <!-- Badrutt's Palace -->
-        <article class="hotel-card fade-in fade-in-delay-1" data-place="badrutts">
-          <div class="hotel-img">
-            <img
-              src="https://picsum.photos/seed/badrutts-palace-stmoritz/800/600"
-              alt="Badrutt's Palace Hotel em St. Moritz"
-              loading="lazy"
-            />
-          </div>
-          <div class="hotel-body">
-            <span class="hotel-location">St. Moritz</span>
-            <h3 class="hotel-name">Badrutt's Palace</h3>
-            <p class="hotel-desc">O ícone de St. Moritz desde 1896. Uma torre medieval que guarda dentro décadas de glamour, celebridades e o melhor ski-in ski-out dos Alpes.</p>
-            <div class="hotel-stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- The Alpina Gstaad -->
-        <article class="hotel-card fade-in fade-in-delay-2" data-place="alpina">
-          <div class="hotel-img">
-            <img
-              src="https://picsum.photos/seed/alpina-gstaad-hotel/800/600"
-              alt="The Alpina Gstaad hotel de luxo"
-              loading="lazy"
-            />
-          </div>
-          <div class="hotel-body">
-            <span class="hotel-location">Gstaad</span>
-            <h3 class="hotel-name">The Alpina Gstaad</h3>
-            <p class="hotel-desc">Ultra-luxo contemporâneo com vista direta para os três picos mais emblemáticos da região. Spa de seis andares e três restaurantes estrelados. O melhor da Suíça num só lugar.</p>
-            <div class="hotel-stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- The Omnia -->
-        <article class="hotel-card fade-in fade-in-delay-3" data-place="omnia">
-          <div class="hotel-img">
-            <img
-              src="https://picsum.photos/seed/omnia-zermatt-hotel/800/600"
-              alt="The Omnia hotel boutique em Zermatt"
-              loading="lazy"
-            />
-          </div>
-          <div class="hotel-body">
-            <span class="hotel-location">Zermatt</span>
-            <h3 class="hotel-name">The Omnia</h3>
-            <p class="hotel-desc">Hotel boutique suspenso sobre Zermatt com o Matterhorn como vizinho permanente. Acessado por elevador na rocha. Um dos endereços mais dramáticos do mundo.</p>
-            <div class="hotel-stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <!-- Bottom 2 -->
-      <div class="hotels-grid-bottom" style="margin-top: 2rem;">
-        <!-- Schweizerhof -->
-        <article class="hotel-card fade-in fade-in-delay-4" data-place="schweizerhof">
-          <div class="hotel-img">
-            <img
-              src="https://picsum.photos/seed/schweizerhof-berna/800/600"
-              alt="Schweizerhof em Berna ou Lucerna"
-              loading="lazy"
-            />
-          </div>
-          <div class="hotel-body">
-            <span class="hotel-location">Berna</span>
-            <h3 class="hotel-name">Schweizerhof</h3>
-            <p class="hotel-desc">No coração da capital suíça, a passos da Old City patrimônio UNESCO. Um clássico da hotelaria helvética com restaurante renomado e quartos que olham para os Alpes Berneses.</p>
-            <div class="hotel-stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- The Cambrian -->
-        <article class="hotel-card fade-in fade-in-delay-5" data-place="cambrian">
-          <div class="hotel-img">
-            <img
-              src="https://picsum.photos/seed/cambrian-adelboden/800/600"
-              alt="The Cambrian em Adelboden"
-              loading="lazy"
-            />
-          </div>
-          <div class="hotel-body">
-            <span class="hotel-location">Adelboden</span>
-            <h3 class="hotel-name">The Cambrian</h3>
-            <p class="hotel-desc">Design escandinavo encontra alma alpina neste boutique hotel de Adelboden. Piscina aquecida com vista para o vale, spa minimalista e gastronomia de mercado. Para quem quer fugir do óbvio.</p>
-            <div class="hotel-stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ MONTANHAS ═════════════════════════════════════ -->
-  <section class="section" id="montanhas">
-    <div class="section-inner">
-      <div class="section-header fade-in">
-        <span class="section-label">Onde a terra toca o céu</span>
-        <h2 class="section-title">As Montanhas<br />que Tiram o Fôlego</h2>
-        <p class="section-subtitle">Cada pico tem sua personalidade. Todos eles deixam uma marca que não sai — mesmo muito depois de voltar para casa.</p>
-      </div>
-
-      <div class="mountains-grid">
-        <!-- Jungfraujoch -->
-        <article class="mountain-card fade-in fade-in-delay-1" data-place="jungfraujoch">
-          <img
-            src="https://picsum.photos/seed/jungfraujoch-topo/900/600"
-            alt="Jungfraujoch - Topo da Europa"
-            loading="lazy"
-          />
-          <div class="mountain-overlay"></div>
-          <div class="mountain-content">
-            <span class="mountain-altitude">3.454 m · Topo da Europa</span>
-            <h3 class="mountain-name">Jungfraujoch</h3>
-            <p class="mountain-desc">O ponto ferroviário mais alto da Europa leva até um plateau de neve eterno. Geleira Aletsch visível, vistas até a França e um frio que faz a vida parecer urgente.</p>
-          </div>
-        </article>
-
-        <!-- Gornergrat -->
-        <article class="mountain-card fade-in fade-in-delay-2" data-place="gornergrat">
-          <img
-            src="https://picsum.photos/seed/gornergrat-matterhorn/900/600"
-            alt="Vista do Matterhorn a partir do Gornergrat"
-            loading="lazy"
-          />
-          <div class="mountain-overlay"></div>
-          <div class="mountain-content">
-            <span class="mountain-altitude">3.089 m · Vista do Matterhorn</span>
-            <h3 class="mountain-name">Gornergrat</h3>
-            <p class="mountain-desc">Frente a frente com o Matterhorn. O trem de cremalheira mais antigo da Suíça leva até um terraço com 29 picos acima de 4.000 m. Visão impossível de esquecer.</p>
-          </div>
-        </article>
-
-        <!-- Titlis -->
-        <article class="mountain-card fade-in fade-in-delay-3" data-place="titlis">
-          <img
-            src="https://picsum.photos/seed/titlis-neve-geleira/900/600"
-            alt="Titlis com neve e gelo eterno"
-            loading="lazy"
-          />
-          <div class="mountain-overlay"></div>
-          <div class="mountain-content">
-            <span class="mountain-altitude">3.238 m · Neve Eterna</span>
-            <h3 class="mountain-name">Titlis</h3>
-            <p class="mountain-desc">Acessível de Engelberg, tem o Cliff Walk — a ponte suspensa mais alta dos Alpes — e uma gruta de gelo de 15 metros esculpida no glaciar. Para corajosas.</p>
-          </div>
-        </article>
-
-        <!-- Harder Kulm -->
-        <article class="mountain-card fade-in fade-in-delay-4" data-place="harderkulm">
-          <img
-            src="https://picsum.photos/seed/harder-kulm-interlaken/900/600"
-            alt="Vista de Interlaken do Harder Kulm"
-            loading="lazy"
-          />
-          <div class="mountain-overlay"></div>
-          <div class="mountain-content">
-            <span class="mountain-altitude">1.322 m · Mirante dos Dois Lagos</span>
-            <h3 class="mountain-name">Harder Kulm</h3>
-            <p class="mountain-desc">Em apenas 10 minutos de funicular, chega-se ao mirante Two Lakes Bridge — com os Lagos Thun e Brienz ao mesmo tempo, emoldurados pelos Alpes. O pôr do sol aqui é uma cerimônia.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ CURIOSIDADES ═══════════════════════════════════ -->
-  <section class="section section--dark" id="curiosidades">
-    <div class="section-inner">
-      <div class="section-header centered fade-in">
-        <span class="section-label">Fatos que encantam</span>
-        <h2 class="section-title">6 Curiosidades<br />sobre a Suíça</h2>
-        <p class="section-subtitle">Um país pequeno que guarda proporções impossíveis de grandeza, precisão e beleza.</p>
-      </div>
-
-      <div class="facts-grid">
-        <div class="fact-card fade-in fade-in-delay-1">
-          <span class="fact-number">01</span>
-          <h4 class="fact-title">26 Cantões, 4 Idiomas</h4>
-          <p class="fact-text">A Suíça é oficialmente quadrilíngue: alemão, francês, italiano e romanche. Cada região tem sabor, arquitetura e alma próprias — quatro países em um.</p>
-        </div>
-
-        <div class="fact-card fade-in fade-in-delay-2">
-          <span class="fact-number">02</span>
-          <h4 class="fact-title">O Chocolate Mais Antigo do Mundo</h4>
-          <p class="fact-text">A Suíça consome mais chocolate per capita do que qualquer outro país: cerca de 10 kg por pessoa por ano. Lindt, Nestlé e Toblerone — todas nasceram aqui.</p>
-        </div>
-
-        <div class="fact-card fade-in fade-in-delay-3">
-          <span class="fact-number">03</span>
-          <h4 class="fact-title">Relógios que Definem o Tempo</h4>
-          <p class="fact-text">A Suíça produz mais de 50% de todos os relógios de luxo do mundo. Rolex, Patek Philippe, Omega — marcas que nasceram nas pequenas oficinas do Jura suíço.</p>
-        </div>
-
-        <div class="fact-card fade-in fade-in-delay-4">
-          <span class="fact-number">04</span>
-          <h4 class="fact-title">200 Anos de Neutralidade</h4>
-          <p class="fact-text">Desde 1815, a Suíça não participa de guerras. É sede da Cruz Vermelha, do CERN e de dezenas de organismos internacionais. A paz como filosofia de estado.</p>
-        </div>
-
-        <div class="fact-card fade-in fade-in-delay-5">
-          <span class="fact-number">05</span>
-          <h4 class="fact-title">57% do País são Alpes</h4>
-          <p class="fact-text">Mais da metade do território suíço é montanha. Há 48 picos acima de 4.000 metros — incluindo o Dufourspitze (4.634 m), o mais alto do país. A natureza vence sempre.</p>
-        </div>
-
-        <div class="fact-card fade-in fade-in-delay-5">
-          <span class="fact-number">06</span>
-          <h4 class="fact-title">Trens que nunca atrasam</h4>
-          <p class="fact-text">O sistema ferroviário suíço é o mais denso do mundo: 5.300 km de trilhos para um país menor que o estado de Santa Catarina. Os trens chegam a 99,7% no horário.</p>
-        </div>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- ═══ QUOTE / MELHOR ÉPOCA ══════════════════════════ -->
-  <section class="quote-section">
-    <div class="quote-bg"></div>
+  <section class="quote-section" id="quote-section">
+    <div class="quote-bg" id="quote-bg"></div>
     <div class="quote-overlay"></div>
-    <div class="quote-content fade-in">
+    <div class="quote-content reveal" data-reveal="fade-up" id="quote-content">
       <span class="quote-mark">"</span>
       <p class="quote-text">A Suíça não é um destino — é um estado de espírito. Um lugar onde o mundo parece ter sido feito com mais cuidado do que o normal.</p>
       <span class="quote-author">— Uma viajante apaixonada pelos Alpes</span>
@@ -2174,88 +193,19 @@
     </div>
   </section>
 
-  <!-- ═══ GUIA PRÁTICO ════════════════════════════════════ -->
-  <section class="section section--dark" id="guia">
-    <div class="section-inner">
-      <div class="section-header fade-in">
-        <span class="section-label">Tudo que você precisa saber</span>
-        <h2 class="section-title">Guia Prático<br />de Viagem</h2>
-        <p class="section-subtitle">Da partida ao retorno — informações essenciais para tornar esta viagem tão especial quanto ela merece ser.</p>
-      </div>
-
-      <div class="guide-grid">
-        <div class="guide-card fade-in fade-in-delay-1">
-          <span class="guide-icon">✈️</span>
-          <h3 class="guide-card-title">Como Chegar</h3>
-          <p class="guide-card-text">Do Brasil, voe para <strong>Zurique (ZRH)</strong> ou <strong>Genebra (GVA)</strong> com conexão em Lisboa, Frankfurt ou Paris. Companhias como LATAM, Iberia e Lufthansa operam voos regulares. Tempo de voo com escala: cerca de <strong>14 a 17 horas</strong>.</p>
-        </div>
-
-        <div class="guide-card fade-in fade-in-delay-2">
-          <span class="guide-icon">🚂</span>
-          <h3 class="guide-card-title">Transporte Interno</h3>
-          <p class="guide-card-text">A Suíça tem a melhor rede ferroviária do mundo. O <strong>Swiss Travel Pass</strong> dá acesso ilimitado a trens, ônibus e barcos por 3, 4, 8 ou 15 dias. Pontualidade suíça: trens atrasam em média menos de 3 minutos. Compre antes de embarcar — sai mais barato.</p>
-        </div>
-
-        <div class="guide-card fade-in fade-in-delay-3">
-          <span class="guide-icon">📅</span>
-          <h3 class="guide-card-title">Melhor Época</h3>
-          <p class="guide-card-text"><strong>Junho a setembro:</strong> montanhas verdes, lagos cristalinos, trilhas abertas e até 25°C. <strong>Dezembro a março:</strong> neve impecável, fondue à lareira, aldeias como presépio. Evite <strong>abril e novembro</strong> — muitos atrativos fecham para manutenção.</p>
-        </div>
-
-        <div class="guide-card fade-in fade-in-delay-4">
-          <span class="guide-icon">💳</span>
-          <h3 class="guide-card-title">Moeda e Custos</h3>
-          <p class="guide-card-text">A moeda é o <strong>Franco Suíço (CHF)</strong>. Orçamento diário médio: CHF 150–250 para refeições + transporte. Hotéis de charme custam de CHF 200 a 800+ por noite. Cartões de crédito são aceitos em quase todo lugar — leve algum dinheiro apenas para mercados locais e gorjetas.</p>
-        </div>
-
-        <div class="guide-card fade-in fade-in-delay-5">
-          <span class="guide-icon">🌍</span>
-          <h3 class="guide-card-title">Idiomas por Região</h3>
-          <p class="guide-card-text"><strong>Alemão</strong> — Zurique, Berna, Lucerna, Interlaken, Grindelwald, Zermatt. <strong>Francês</strong> — Genebra, Montreux, Lausanne, Gstaad. <strong>Italiano</strong> — Ticino, Lugano. O inglês é amplamente falado em todo o país, especialmente nas áreas turísticas.</p>
-        </div>
-
-        <div class="guide-card fade-in fade-in-delay-5">
-          <span class="guide-icon">🎒</span>
-          <h3 class="guide-card-title">Dicas Essenciais</h3>
-          <p class="guide-card-text">Tomadas tipo <strong>J</strong> (adaptador necessário). <strong>Seguro viagem</strong> é essencial — inclua cobertura para esportes de altitude. Reserve restaurantes e hotéis com <strong>3 a 6 meses</strong> de antecedência na alta temporada. A água das fontes públicas é potável — leve uma garrafa reutilizável.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ QUIZ GERAL ══════════════════════════════════════ -->
-  <section class="section section--dark" id="quiz">
-    <div class="section-inner">
-      <div class="section-header fade-in">
-        <span class="section-label">Você prestou atenção?</span>
-        <h2 class="section-title">Quiz Geral<br />sobre a Suíça</h2>
-        <p class="section-subtitle">10 perguntas para testar tudo que você aprendeu neste guia. Boa sorte!</p>
-      </div>
-      <div class="general-quiz-wrap fade-in" id="general-quiz-wrap">
-        <div id="general-quiz-body"></div>
-        <div id="general-quiz-result" hidden>
-          <div class="quiz-result-box">
-            <span id="general-score-text" class="quiz-score-text"></span>
-            <button id="general-restart" class="quiz-restart-btn">Jogar novamente</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ═══ FOOTER ════════════════════════════════════════ -->
   <footer class="footer">
     <span class="footer-logo">Suíça <span>—</span> Para Ela</span>
     <span class="footer-tagline">Um guia curado com muito carinho</span>
 
     <ul class="footer-links">
-      <li><a href="#lugares">Lugares</a></li>
-      <li><a href="#restaurantes">Restaurantes</a></li>
-      <li><a href="#hoteis">Hotéis</a></li>
-      <li><a href="#montanhas">Montanhas</a></li>
-      <li><a href="#curiosidades">Curiosidades</a></li>
-      <li><a href="#guia">Guia</a></li>
-      <li><a href="#quiz">Quiz</a></li>
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
     </ul>
 
     <div class="footer-divider"></div>
@@ -2264,23 +214,6 @@
       Feito com <span class="footer-heart">♥</span> para uma pessoa especial · Fotos via Unsplash
     </p>
   </footer>
-
-  <!-- ═══ DETAIL OVERLAY ══════════════════════════════════ -->
-  <div id="detail-overlay" class="detail-overlay" aria-hidden="true">
-    <button class="detail-back" id="detail-back">← Voltar</button>
-    <div class="detail-hero">
-      <img id="detail-hero-img" src="" alt="" loading="eager" />
-      <div class="detail-hero-overlay"></div>
-      <div class="detail-hero-content">
-        <span id="detail-tag" class="detail-tag"></span>
-        <h1 id="detail-title" class="detail-title"></h1>
-        <p id="detail-subtitle" class="detail-subtitle"></p>
-      </div>
-    </div>
-    <div class="detail-body">
-      <div id="detail-content" class="detail-content"></div>
-    </div>
-  </div>
 
   <script>
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2328,573 +261,133 @@
       if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
     });
 
-    /* ── IntersectionObserver — fade-in & reveals ──── */
-    const revealEls = document.querySelectorAll(
-      '.fade-in, .reveal-left, .reveal-right, .reveal-scale, .reveal-clip'
-    );
+    /* ── IntersectionObserver — reveal ─────────────── */
+    const revealEls = document.querySelectorAll('.reveal, .fade-in, .reveal-left, .reveal-right, .reveal-scale, .reveal-clip');
 
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
+          const el = entry.target;
+          const delay = el.dataset.revealDelay || '0ms';
+          el.style.transitionDelay = delay;
+          el.classList.add('in-view');
+          el.classList.add('visible');
+          revealObserver.unobserve(el);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     revealEls.forEach(el => revealObserver.observe(el));
 
-    /* ── Parallax (scroll-driven, rAF batched) ─────── */
+    /* ── Counter animation ─────────────────────────── */
+    const counterEls = document.querySelectorAll('[data-count], [data-count-float]');
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const numEl = el.querySelector('.intro-item-number') || el;
+        const target = parseFloat(numEl.dataset.count || numEl.dataset.countFloat || '0');
+        const isFloat = !!numEl.dataset.countFloat;
+        const suffix = numEl.dataset.suffix || '';
+        const duration = 1200;
+        const start = performance.now();
+
+        if (prefersReducedMotion) {
+          numEl.textContent = isFloat ? target.toFixed(1) + suffix : target + suffix;
+          return;
+        }
+
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const value = target * eased;
+          numEl.textContent = isFloat ? value.toFixed(1) + suffix : Math.round(value) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.intro-item').forEach(item => counterObserver.observe(item));
+
+    /* ── Parallax rAF batching ──────────────────────── */
+    const heroBg      = document.getElementById('hero-bg');
+    const heroContent = document.getElementById('hero-content');
+    const heroScroll  = document.getElementById('hero-scroll');
+    const heroOverlay = document.getElementById('hero-overlay');
     const heroSection = document.querySelector('.hero');
-    const heroContent = document.querySelector('.hero-content');
-    const heroScroll  = document.querySelector('.hero-scroll');
-    const heroOverlay = document.querySelector('.hero-overlay');
-    const heroBg      = document.querySelector('.hero-bg');
-    const quoteContent = document.querySelector('.quote-content');
-    const quoteBg      = document.querySelector('.quote-bg');
+    const quoteBg     = document.getElementById('quote-bg');
+    const quoteContent= document.getElementById('quote-content');
+    const quoteSection= document.getElementById('quote-section');
 
-    let ticking = false;
-    function runParallax() {
+    let latestY = 0, rafPending = false;
+
+    function frame() {
+      rafPending = false;
+      if (prefersReducedMotion) return;
+
       const vh = window.innerHeight;
-      const y  = window.scrollY;
+      const y  = latestY;
 
-      // Hero: content fades + lifts; bg drifts down (extends kenburns subtly)
-      if (heroSection && heroContent) {
+      // Hero parallax
+      if (heroSection) {
         const hRect = heroSection.getBoundingClientRect();
         if (hRect.bottom > 0 && hRect.top < vh) {
+          // bg moves slower — classic depth parallax
+          if (heroBg) heroBg.style.transform = `translate3d(0, ${y * 0.2}px, 0)`;
+          // content fades + lifts
           const p = Math.max(0, Math.min(1, -hRect.top / heroSection.offsetHeight));
-          heroContent.style.transform = `translate3d(0, ${(p * 80).toFixed(1)}px, 0)`;
-          heroContent.style.opacity = (1 - p * 1.1).toFixed(3);
-          if (heroScroll) heroScroll.style.opacity = (1 - p * 2).toFixed(3);
-          if (heroOverlay) heroOverlay.style.opacity = (1 + p * 0.18).toFixed(3);
-          if (heroBg) heroBg.style.setProperty('--scrollY', (p * 60).toFixed(1) + 'px');
+          if (heroContent) {
+            heroContent.style.transform = `translate3d(0, ${(p * 80).toFixed(1)}px, 0)`;
+            heroContent.style.opacity = Math.max(0, 1 - p * 1.1).toFixed(3);
+          }
+          if (heroScroll) heroScroll.style.opacity = Math.max(0, 1 - p * 2).toFixed(3);
+          if (heroOverlay) heroOverlay.style.opacity = Math.min(1, 1 + p * 0.18).toFixed(3);
         }
       }
 
-      // Quote section parallax
-      if (quoteContent && quoteBg) {
-        const qSection = quoteContent.parentElement;
-        const qRect = qSection.getBoundingClientRect();
+      // Quote section parallax — bg moves opposite to scroll
+      if (quoteSection && quoteBg) {
+        const qRect = quoteSection.getBoundingClientRect();
         if (qRect.bottom > 0 && qRect.top < vh) {
           const center = qRect.top + qRect.height / 2;
-          const p = (center - vh / 2) / vh; // -1..+1 ish
-          quoteContent.style.transform = `translate3d(0, ${(p * 30).toFixed(1)}px, 0)`;
-          quoteBg.style.setProperty('--scrollY', (p * -40).toFixed(1) + 'px');
+          const p = (center - vh / 2) / vh;
+          if (quoteBg) quoteBg.style.transform = `translate3d(0, ${(p * -40).toFixed(1)}px, 0)`;
+          if (quoteContent) quoteContent.style.transform = `translate3d(0, ${(p * 30).toFixed(1)}px, 0)`;
         }
       }
-
-      ticking = false;
     }
 
-    function onScroll() {
+    window.addEventListener('scroll', () => {
+      latestY = window.scrollY;
       updateScrollUI();
-      if (prefersReducedMotion) return;
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(runParallax);
-      }
-    }
+      if (!rafPending) { rafPending = true; requestAnimationFrame(frame); }
+    }, { passive: true });
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    if (!prefersReducedMotion) requestAnimationFrame(runParallax);
+    window.addEventListener('resize', () => {
+      latestY = window.scrollY;
+      if (!rafPending) { rafPending = true; requestAnimationFrame(frame); }
+    }, { passive: true });
 
-    /* ── Smooth scroll for anchors ─────────────────── */
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (!target) return;
-        e.preventDefault();
-        const offset = nav.offsetHeight + 16;
-        const top = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: 'smooth' });
+    if (!prefersReducedMotion) requestAnimationFrame(frame);
+
+    /* ── Mouse tilt on teaser cards ─────────────────── */
+    if (!prefersReducedMotion) {
+      document.querySelectorAll('.teaser-card').forEach(card => {
+        card.addEventListener('pointermove', e => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width  - 0.5;
+          const y = (e.clientY - r.top)  / r.height - 0.5;
+          card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 6}deg)`;
+        });
+        card.addEventListener('pointerleave', () => {
+          card.style.transform = '';
+        });
       });
-    });
-
-    /* ── Detail Overlay ────────────────────────────── */
-    const PLACES = {
-      grindelwald: {
-        tag: 'Oberland Bernês · Cantão de Berna',
-        title: 'Grindelwald',
-        subtitle: 'A vila mais dramática dos Alpes',
-        img: 'https://picsum.photos/seed/grindelwald-eiger/1400/800',
-        sections: [
-          { heading: 'História', text: 'Grindelwald foi descoberta por viajantes britânicos no século XIX, que a chamavam de "A Geleira". Foi um dos primeiros destinos alpinos a receber turistas, muito antes dos resorts modernos. O Eiger — com sua imponente Nordwand (parede norte) de 1.800 metros de rocha vertical — tornou-se o símbolo máximo do alpinismo europeu após décadas de tentativas heroicas e trágicas de escalada a partir dos anos 1930.' },
-          { heading: 'O que fazer', text: 'Tome o funicular até Männlichen para uma vista panorâmica do tridente Eiger-Mönch-Jungfrau. Caminhe o Eiger Trail, que rasga a base da parede norte com trilha de tirar o fôlego. No inverno, esquie nas pistas de First e Kleine Scheidegg. Visite a aldeia em si: chalés com varandas floridas, padarias com pão de centeio e lojas de artesanato genuínas.' },
-          { heading: 'Como chegar', text: 'De Interlaken Ost, tome o trem BOB (Berner Oberland-Bahn) diretamente até Grindelwald — 35 minutos de trajeto. Os trens partem a cada 30 minutos. Com o Swiss Travel Pass, o trajeto é gratuito. De carro, siga pela A8 até Interlaken e depois pela Cantonalstraße — mas o trem é muito mais panorâmico.' },
-          { heading: 'Melhor época', text: 'Julho e agosto para caminhadas com flores alpinas e clima agradável (10–22°C). Dezembro a março para neve impecável e atmosfera natalina nas ruas de chalés. Junho oferece o equilíbrio perfeito: poucos turistas, neve nas alturas, verde nos vales.' },
-          { heading: 'Dica especial', text: 'Acorde cedo — antes das 7h — e caminhe até a base do Eiger. A luz da manhã batendo na parede norte é um espetáculo fotográfico impossível de reproduzir. Evite ir apenas de teleférico: a caminhada até Pfingstegg (40 minutos de trilha fácil) revela ângulos que nenhuma foto de cartão-postal mostra.' }
-        ],
-        quiz: [
-          { q: "Qual é a altitude de Grindelwald?", opts: ["634 m","1.034 m","2.034 m","3.034 m"], correct: 1, feedback: "Grindelwald fica a 1.034 metros de altitude no Oberland Bernês." },
-          { q: "Como se chama a parede norte do Eiger?", opts: ["Ostwand","Südwand","Nordwand","Westwand"], correct: 2, feedback: "A Nordwand do Eiger tem 1.800 metros de rocha vertical — uma das mais temidas do alpinismo." },
-          { q: "Qual trem conecta Interlaken Ost a Grindelwald?", opts: ["RER","TGV","BOB","ICE"], correct: 2, feedback: "O BOB (Berner Oberland-Bahn) faz o trajeto em 35 minutos." },
-          { q: "Para onde leva o funicular Männlichen?", opts: ["Topo do Eiger","Vista panorâmica do trio alpino","Geleira Aletsch","Lago Brienz"], correct: 1, feedback: "O funicular de Männlichen oferece uma das vistas mais completas do trio Eiger-Mönch-Jungfrau." }
-        ]
-      },
-      montreux: {
-        tag: 'Lago Léman · Cantão de Vaud',
-        title: 'Montreux',
-        subtitle: 'A Riviera Suíça à beira do lago',
-        img: 'https://picsum.photos/seed/montreux-lago/1400/800',
-        sections: [
-          { heading: 'História', text: 'Montreux conquistou fama internacional no século XIX quando artistas, escritores e aristocratas europeus a descobriram como refúgio de inverno. Lord Byron escreveu parte do "Prisioneiro de Chillon" inspirado na fortaleza medieval que flutua no lago. No século XX, tornou-se o lar do icônico Montreux Jazz Festival, fundado em 1967 por Claude Nobs, que ainda hoje reúne os maiores nomes da música mundial cada julho.' },
-          { heading: 'O que fazer', text: 'Passeie pela Quai Fleurie — o calçadão à beira do lago com flores tropicais que desafiam o clima alpino. Visite o Château de Chillon, castela medieval perfeitamente conservada na água. Em julho, mergulhe no Montreux Jazz Festival. Suba de trem de cremalheira até Rochers-de-Naye (2.042 m) para vista do Monte Blanc num dia limpo.' },
-          { heading: 'Como chegar', text: 'De Genebra, são 70 minutos de trem direto. De Lausanne, apenas 25 minutos. Trens IC e RE passam frequentemente — com o Swiss Travel Pass, o trajeto é incluído. Há também ferry no verão saindo de Genebra que faz a rota pelo lago em 3h30, com paradas em Lausanne e Vevey — a mais bela maneira de chegar.' },
-          { heading: 'Melhor época', text: 'Julho para o Jazz Festival (reserve hotel com 6+ meses de antecedência). Junho e setembro para clima ameno, menos turistas e lago azul-esmeralda sem multidão. Dezembro tem a magia do Natal com mercados tradicionais e luzes refletidas no lago.' },
-          { heading: 'Dica especial', text: 'Vá até Vevey (15 minutos de trem) e visite o museu Charlie Chaplin, que viveu ali até o fim da vida. Depois, caminhe de volta a Montreux pela margem do lago — 1 hora de caminhada plana com vistas constantes para o lago e os Alpes franceses. Um dos percursos mais belos da Europa.' }
-        ],
-        quiz: [
-          { q: "Em que mês ocorre o famoso festival de Montreux?", opts: ["Março","Julho","Outubro","Dezembro"], correct: 1, feedback: "O Montreux Jazz Festival acontece em julho, desde 1967." },
-          { q: "Qual escritor imortalizou o Château de Chillon?", opts: ["Victor Hugo","Voltaire","Lord Byron","Alexandre Dumas"], correct: 2, feedback: "Lord Byron escreveu 'O Prisioneiro de Chillon' inspirado na fortaleza medieval no lago." },
-          { q: "Quanto tempo dura o trem de Genebra a Montreux?", opts: ["30 minutos","70 minutos","2 horas","3 horas"], correct: 1, feedback: "De Genebra, são aproximadamente 70 minutos de trem direto até Montreux." },
-          { q: "Qual é o apelido da região de Montreux?", opts: ["Riviera Alpina","Riviera Suíça","Costa do Lago","Paraíso do Léman"], correct: 1, feedback: "Montreux é conhecida como a 'Riviera Suíça' pelo seu clima suave e palmeiras à beira do Lago Léman." }
-        ]
-      },
-      lucerna: {
-        tag: 'Centro da Suíça · Cantão de Lucerna',
-        title: 'Lucerna',
-        subtitle: 'Ponte medieval, lago e montanha num só horizonte',
-        img: 'https://picsum.photos/seed/lucerna-ponte/1400/800',
-        sections: [
-          { heading: 'História', text: 'Lucerna foi fundada por monges beneditinos por volta do ano 750 d.C. e cresceu como ponto estratégico de passagem dos Alpes. A Kapellbrücke — Ponte da Capela — foi construída em 1333 como parte das muralhas da cidade, tornando-se a ponte de madeira mais antiga da Europa. Dentro dela há pinturas do século XVII retratando a história suíça. Em 1993, um incêndio destruiu dois terços da ponte; a reconstrução foi concluída com impressionante fidelidade ao original.' },
-          { heading: 'O que fazer', text: 'Atravesse a Kapellbrücke ao entardecer, quando a luz dourada tinge as pinturas. Suba de funicular até o Pilatus (2.132 m) — "a montanha do dragão" — e desça de gondola. Visite o Museu de Transportes, o mais visitado da Suíça. Passeie de barco pelo Lago dos Quatro Cantões. Não perca o Lion Monument, esculpido diretamente na rocha: Mark Twain o chamou de "a escultura mais triste e comovente do mundo".' },
-          { heading: 'Como chegar', text: 'De Zurique: 50 minutos de trem direto (IC, a cada 30 minutos). De Interlaken: 2 horas de trem panorâmico pela rota do Golden Pass, com vistas dos lagos. De Basileia: 1h20. Lucerna tem uma das estações ferroviárias mais bonitas da Suíça, em frente ao lago — chegue e já se encante.' },
-          { heading: 'Melhor época', text: 'Qualquer época funciona — Lucerna é uma das poucas cidades suíças igualmente linda no verão e no inverno. Agosto tem o Festival Internacional de Música, um dos mais respeitados do mundo clássico. Dezembro tem o Mercado de Natal na Franziskanerplatz, com presentes artesanais e glühwein.' },
-          { heading: 'Dica especial', text: 'Reserve jantar no Restaurant Schiffrestaurant Wilhelm Tell — um barco ancorado no lago que serve fondue e raclette com vista para as montanhas. Depois, caminhe pelas ruelas do centro histórico após as 22h, quando os turistas somem e a cidade revela sua alma medieval e silenciosa.' }
-        ],
-        quiz: [
-          { q: "Em que século foi construída a Kapellbrücke?", opts: ["Século X","Século XIV","Século XVI","Século XVIII"], correct: 1, feedback: "A Kapellbrücke foi construída em 1333 — século XIV — como parte das muralhas da cidade de Lucerna." },
-          { q: "O que Mark Twain disse sobre o Lion Monument de Lucerna?", opts: ["'A escultura mais bela da Europa'","'A escultura mais triste e comovente do mundo'","'Um monumento ao valor suíço'","'A obra de arte mais impressionante dos Alpes'"], correct: 1, feedback: "Mark Twain chamou o Lion Monument de 'a escultura mais triste e comovente do mundo'." },
-          { q: "Qual é o lago onde fica Lucerna?", opts: ["Lago Thun","Lago Léman","Lago dos Quatro Cantões","Lago Brienz"], correct: 2, feedback: "Lucerna fica às margens do Vierwaldstättersee — o Lago dos Quatro Cantões." },
-          { q: "Quanto tempo leva o trem de Zurique a Lucerna?", opts: ["20 minutos","50 minutos","1h30","2 horas"], correct: 1, feedback: "De Zurique, o trem IC chega a Lucerna em aproximadamente 50 minutos." }
-        ]
-      },
-      interlaken: {
-        tag: 'Entre os Lagos · Cantão de Berna',
-        title: 'Interlaken',
-        subtitle: 'Entre o Thun e o Brienz, aos pés do trio alpino',
-        img: 'https://picsum.photos/seed/interlaken-lagos/1400/800',
-        sections: [
-          { heading: 'História', text: 'O nome já diz tudo: "entre os lagos". Interlaken nasceu como vilarejo monástico no século XII, na língua de terra que separa o Lago Thun do Lago Brienz. O turismo chegou no início do século XIX, quando viajantes britânicos "descobriram" a rota pelos Alpes. Em 1890, o trem de cremalheira até Grindelwald foi inaugurado, e Interlaken se tornou a capital logística do Oberland Bernês — papel que mantém até hoje.' },
-          { heading: 'O que fazer', text: 'Suba ao Harder Kulm de funicular para a vista dos dois lagos simultâneos. Faça passeio de barco no Lago Thun até o Château de Spiez (castelo medieval à beira d\'água). Tome o trem para Jungfraujoch diretamente de Interlaken Ost. No verão, faça caiaque no Lago Brienz — cor de turquesa intenso. Visite o Höheweg, o boulevard central com vista direta para o Jungfrau.' },
-          { heading: 'Como chegar', text: 'Há duas estações: Interlaken West (trens de Berna e Spiez) e Interlaken Ost (trens para Grindelwald, Lauterbrunnen e Jungfraujoch). De Berna: 55 minutos. De Zurique: 2 horas com uma troca em Berna. De Lucerna: 2 horas pela rota do Golden Pass — belíssima, especialmente a parte por Brienz.' },
-          { heading: 'Melhor época', text: 'Junho a setembro para os dois lagos no auge da cor e caminhadas nas montanhas vizinhas. Inverno (dezembro a março) é mais tranquilo, com neve nas alturas e preços de hotel melhores. Evite agosto nos fins de semana — Interlaken fica extremamente movimentada com turistas asiáticos e grupos.' },
-          { heading: 'Dica especial', text: 'Alugue uma bicicleta em Interlaken e pedale até o vilarejo de Iseltwald (20 km) à beira do Lago Brienz — o mesmo local viralizado pelo K-drama "Crash Landing on You". A ciclovia à beira do lago é plana e asfaltada. Leve piquenique e passe a tarde ali: poucos lugares na Europa têm água tão azul e montanhas tão próximas.' }
-        ],
-        quiz: [
-          { q: "O que significa o nome 'Interlaken'?", opts: ["Entre as montanhas","Entre os lagos","Entre os vales","Entre os rios"], correct: 1, feedback: "Interlaken significa literalmente 'entre os lagos' — ela fica entre o Lago Thun e o Lago Brienz." },
-          { q: "Qual K-drama tornou o Lago Brienz famoso mundialmente?", opts: ["Goblin","Descendants of the Sun","Crash Landing on You","My Love from the Star"], correct: 2, feedback: "O vilarejo de Iseltwald, à beira do Lago Brienz, viralizou após aparecer em 'Crash Landing on You'." },
-          { q: "Quais são os três picos visíveis do Höheweg de Interlaken?", opts: ["Matterhorn, Eiger, Jungfrau","Eiger, Mönch, Jungfrau","Titlis, Mönch, Pilatus","Rigi, Eiger, Titlis"], correct: 1, feedback: "Do centro de Interlaken, vê-se o trio Eiger, Mönch e Jungfrau — os picos mais icônicos do Oberland Bernês." },
-          { q: "De qual estação de Interlaken partem os trens para o Jungfraujoch?", opts: ["Interlaken West","Interlaken Central","Interlaken Ost","Interlaken Berg"], correct: 0, feedback: "Os trens para Grindelwald, Lauterbrunnen e Jungfraujoch partem de Interlaken Ost — a estação leste." }
-        ]
-      },
-      memories: {
-        tag: 'Bad Ragaz · 2 Estrelas Michelin',
-        title: 'Memories',
-        subtitle: 'A poesia dos Alpes num prato',
-        img: 'https://picsum.photos/seed/restaurant-memories/1400/800',
-        sections: [
-          { heading: 'Sobre o restaurante', text: 'Memories é a obra-prima do chef Sven Wassmer, um dos cozinheiros mais talentosos de sua geração. Instalado dentro do Grand Resort Bad Ragaz — um complexo termal de luxo nos Alpes do leste suíço — o restaurante conquistou 2 estrelas Michelin e 19 pontos Gault&Millau, tornando-se um dos endereços gastronômicos mais celebrados da Suíça.' },
-          { heading: 'A filosofia da cozinha', text: 'Wassmer trabalha com uma filosofia radical de territorialidade: cada prato narra uma estação dos Alpes. Ingredientes hiperlocais — ervas colhidas nas montanhas ao redor, trutas dos rios do cantão, queijos de fazendas vizinhas — são transformados em composições de precisão cirúrgica. O menu-degustação (8 a 12 tempos) muda integralmente a cada estação.' },
-          { heading: 'O que esperar', text: 'Uma experiência de 3 a 4 horas à mesa. O serviço é refinado mas nunca rígido. A carta de vinhos tem foco em rótulos suíços raros — peça ajuda ao sommelier, que conhece cada garrafa pessoalmente. Reserve pelo menos 3 meses antes; nas datas especiais (Natal, Réveillon, Páscoa), 6 meses.' },
-          { heading: 'Informações práticas', text: 'Endereço: Grand Resort Bad Ragaz, Hans Albrecht Strasse 1, 7310 Bad Ragaz. De Zurique: 1h15 de trem. Código de vestimenta: smart elegant (sem tênis ou jeans). Preço médio do menu-degustação com harmonização de vinhos: CHF 380–520 por pessoa. Fecha segundas e terças.' },
-          { heading: 'Dica', text: 'Reserve para o jantar de sexta ou sábado, quando Wassmer costuma estar presente na cozinha. Chegue cedo e explore o spa termal do Grand Resort — as águas de Bad Ragaz são famosas desde o século XIII — antes do jantar. É uma noite completa, não apenas uma refeição.' }
-        ],
-        quiz: [
-          { q: "Quantas estrelas Michelin tem o Memories?", opts: ["1","2","3","Nenhuma"], correct: 1, feedback: "O Memories tem 2 estrelas Michelin e 19 pontos Gault&Millau." },
-          { q: "Quem é o chef do Memories?", opts: ["René Redzepi","Sven Wassmer","Daniel Humm","Anton Mosimann"], correct: 1, feedback: "O chef Sven Wassmer comanda o Memories, com uma cozinha que narra as estações dos Alpes." },
-          { q: "Em qual resort de luxo fica o Memories?", opts: ["The Alpina Gstaad","Grand Resort Bad Ragaz","Badrutt's Palace","The Omnia"], correct: 1, feedback: "O Memories fica dentro do Grand Resort Bad Ragaz, complexo termal de luxo no leste da Suíça." },
-          { q: "Com quantos meses de antecedência reservar o Memories em datas especiais?", opts: ["1 mês","3 meses","6 meses","1 semana"], correct: 2, feedback: "Para datas como Natal e Réveillon, recomenda-se reservar com 6 meses de antecedência." }
-        ]
-      },
-      chesery: {
-        tag: 'Gstaad · 1 Estrela Michelin',
-        title: 'Chesery',
-        subtitle: 'Elegância rústica no coração de Gstaad',
-        img: 'https://picsum.photos/seed/restaurant-chesery/1400/800',
-        sections: [
-          { heading: 'Sobre o restaurante', text: 'O Chesery é, ao mesmo tempo, uma lenda e um segredo. Instalado num chalé de madeira escura do século XVIII no centro de Gstaad, o restaurante existe desde 1973 e conquistou geração após geração da jet set alpina — de celebridades hollywoodianas a realezas europeias. A estrela Michelin confirma o que os frequentadores já sabem: aqui, a cozinha é tão boa quanto o ambiente é incomparável.' },
-          { heading: 'A cozinha', text: 'O chef Robert Speth comanda uma cozinha de influência clássica francesa com ingredientes alpinos de primeira. Fondues de trufas, carré de cordeiro do Valais, foie gras com redução de kirsch. A carta muda com as estações — no inverno, pratos mais robustos e reconfortantes; no verão, leveza mediterrânea com toques suíços.' },
-          { heading: 'O ambiente', text: 'A lareira central, as vigas de madeira centenária, os candelabros — tudo cria uma atmosfera de chalé de família aristocrática que recebeu seus convidados para jantar. Nos fins de semana de inverno, o piano bar ao lado anima a noite até tarde. O Chesery é o único lugar em Gstaad onde você come bem E dança até a 1h.' },
-          { heading: 'Informações práticas', text: 'Endereço: Lauenenstrasse, 3780 Gstaad. Aberto para jantar a partir das 19h (fechado segunda e terça na baixa temporada). Código de vestimenta: smart casual no jantar, mais formal nas noites de piano. Reserva essencial com 4 a 8 semanas de antecedência. Preço médio: CHF 180–280 por pessoa.' },
-          { heading: 'Dica', text: 'Peça mesa perto da lareira — há apenas 4 mesas privilegiadas nessa posição. Mencione ao fazer a reserva que é uma ocasião especial; a equipe prepara detalhes surpresa (flores, carta personalizada). Depois do jantar, caminhe pelo Promenade de Gstaad sob as estrelas — a vila à noite de inverno é cinematográfica.' }
-        ],
-        quiz: [
-          { q: "Desde quando existe o Chesery?", opts: ["1945","1958","1973","1989"], correct: 2, feedback: "O Chesery existe desde 1973 e há décadas é o ponto de encontro da jet set alpina de Gstaad." },
-          { q: "Quantas estrelas Michelin tem o Chesery?", opts: ["Nenhuma","1","2","3"], correct: 1, feedback: "O Chesery tem 1 estrela Michelin." },
-          { q: "O que torna o Chesery único à noite nos fins de semana de inverno?", opts: ["Menu especial de ski","Piano bar até tarde","Show de fondue ao vivo","Jantar na neve"], correct: 1, feedback: "O piano bar ao lado do Chesery anima a noite até tarde nos fins de semana de inverno." },
-          { q: "Em que cantão fica Gstaad?", opts: ["Valais","Vaud","Berna","Friburgo"], correct: 2, feedback: "Gstaad fica no cantão de Berna, no Oberland Bernês, apesar de ser geograficamente próxima de Friburgo." }
-        ]
-      },
-      pizgloria: {
-        tag: 'Schilthorn · 2.970 m de altitude',
-        title: 'Piz Gloria',
-        subtitle: 'O restaurante giratório de James Bond',
-        img: 'https://picsum.photos/seed/piz-gloria-alps/1400/800',
-        sections: [
-          { heading: 'História e James Bond', text: 'O Piz Gloria ganhou fama mundial em 1969, quando foi cenário do filme "007 — A Serviço Secreto de Sua Majestade", com George Lazenby como Bond. As cenas do laboratório de Blofeld foram filmadas aqui, no cume do Schilthorn a 2.970 metros. Curiosamente, o complexo estava em construção quando a produção de Bond chegou: o dinheiro do filme financiou parte das obras. Hoje, uma exposição permanente celebra o legado 007.' },
-          { heading: 'A experiência gastronômica', text: 'O restaurante giratório completa uma volta de 360° em 55 minutos — tempo suficiente para, numa rotação, ver o Eiger, o Mönch, o Jungfrau, as planícies suíças, os Alpes franceses e até o Monte Blanc em dias claros. Mais de 200 picos acima de 4.000 metros no horizonte. A comida é boa (não Michelin, mas honesta) — opt pelo Bircher Muesli no café da manhã: dicen que foi inventado ali.' },
-          { heading: 'O que fazer além do jantar', text: 'Chegue pela manhã para o Thrill Walk — uma passarela suspensa na rocha com seção de vidro transparente sobre o abismo. Visite a exposição Bond World 007. No inverno, esquie pela rota "007 Run" de 16 km descendo até Lauterbrunnen. Leve um casaco pesado — mesmo no verão, a 2.970 m a temperatura ronda os 5°C.' },
-          { heading: 'Como chegar', text: 'De Interlaken, tome o trem até Lauterbrunnen (25 min), depois bondinho até Grütschalp, trem até Mürren e finalmente o teleférico do Schilthorn. Total: cerca de 2h de viagem com as baldeações. Alternativamente, de Stechelberg (vale) sobe teleférico direto em 30 minutos. Com Swiss Travel Pass, parte do trajeto é gratuita.' },
-          { heading: 'Dica', text: 'Compre o ingresso "Breakfast at Piz Gloria" — inclui o teleférico de subida + café da manhã no restaurante giratório + descida. É mais barato que pagar separado e o café da manhã com aquela vista é simplesmente irreal. Vá num dia com previsão de bom tempo — o site do Schilthorn tem webcam ao vivo para verificar.' }
-        ],
-        quiz: [
-          { q: "Em qual filme de James Bond o Piz Gloria aparece?", opts: ["007 contra GoldenEye","007 — A Serviço Secreto de Sua Majestade","Cassino Royale","Spectre"], correct: 1, feedback: "O Piz Gloria foi cenário do filme '007 — A Serviço Secreto de Sua Majestade' (1969), com George Lazenby." },
-          { q: "A quantos metros de altitude fica o Piz Gloria?", opts: ["1.970 m","2.970 m","3.970 m","4.970 m"], correct: 1, feedback: "O Piz Gloria fica no cume do Schilthorn, a 2.970 metros de altitude." },
-          { q: "Quanto tempo leva uma rotação completa do restaurante giratório?", opts: ["15 minutos","30 minutos","55 minutos","90 minutos"], correct: 2, feedback: "O restaurante giratório do Piz Gloria completa uma volta de 360° em 55 minutos." },
-          { q: "Qual é o percurso que parte do Schilthorn até Lauterbrunnen no inverno?", opts: ["Rota Alpina","007 Run","Schilthorn Express","Bond Trail"], correct: 1, feedback: "A '007 Run' é uma pista de 16 km descendo do Schilthorn até Lauterbrunnen, em homenagem ao filme de James Bond." }
-        ]
-      },
-      cafedusoleil: {
-        tag: 'Genebra · Desde 1849',
-        title: 'Café du Soleil',
-        subtitle: 'O fondue mais famoso de Genebra',
-        img: 'https://picsum.photos/seed/cafe-du-soleil-fondue/1400/800',
-        sections: [
-          { heading: 'História', text: 'Fundado em 1849 no bairro Grand-Pré de Genebra, o Café du Soleil é um dos estabelecimentos mais antigos da cidade. Por quase dois séculos, manteve a mesma receita de fondue: Gruyère AOC e Vacherin fribourgeois em proporções secretas, aromatizado com vinho branco do Valais e kirsch. A família que o gerencia preservou a tradição com rigor quase religioso.' },
-          { heading: 'O fondue', text: 'A especialidade da casa é o Moitié-Moitié — metade Gruyère, metade Vacherin — considerado pela maioria dos suíços como o fondue "verdadeiro". O caquelon (panela de cerâmica) chega à mesa borbulhando sobre chama viva. O ritual exige: pão em cubo mergulhado em espiral, nunca reto. Quem deixar o pão cair paga uma rodada de vinho. Brinde sempre com o vinho branco local — nunca com água (os suíços acreditam que water + queijo = pedra no estômago).' },
-          { heading: 'O que mais pedir', text: 'Além do fondue, a raclette é igualmente sensacional — queijo derretido raspado sobre batatas cozidas com picles e cebola. Os vin chaud (vinho quente com especiarias) são perfeitos no inverno. Para sobremesa, a tarte au vin cuit é uma joia local da confeitaria genevoise.' },
-          { heading: 'Informações práticas', text: 'Endereço: Place du Petit-Saconnex 6, 1202 Genebra. Aberto todos os dias para almoço e jantar. Sem reserva? Chegue antes das 12h ou das 19h para garantir mesa. Preço médio: CHF 30–45 por pessoa (o fondue em si custa em torno de CHF 28). Ambiente casual, sem código de vestimenta.' },
-          { heading: 'Dica', text: 'Peça para sentar no salão principal da casa, não no espaço externo — a atmosfera de bistrot histórico, com mesas de madeira escura e garrafas nas prateleiras, é parte essencial da experiência. Depois do jantar, caminhe até o Parc des Bastions (10 minutos a pé) para ver o Muro da Reforma iluminado à noite.' }
-        ],
-        quiz: [
-          { q: "Desde quando existe o Café du Soleil?", opts: ["1749","1849","1899","1949"], correct: 1, feedback: "O Café du Soleil foi fundado em 1849 e mantém a mesma receita de fondue por quase dois séculos." },
-          { q: "Qual é a especialidade do Café du Soleil?", opts: ["Raclette","Rösti","Moitié-Moitié","Fondue de chocolate"], correct: 2, feedback: "O Moitié-Moitié — metade Gruyère, metade Vacherin — é considerado o fondue 'verdadeiro' pelos suíços." },
-          { q: "Em qual cidade fica o Café du Soleil?", opts: ["Berna","Zurique","Genebra","Lausanne"], correct: 2, feedback: "O Café du Soleil fica no bairro Grand-Pré de Genebra." },
-          { q: "Qual bebida acompanha tradicionalmente o fondue suíço?", opts: ["Cerveja","Água gelada","Vinho branco","Suco de uva"], correct: 2, feedback: "O fondue suíço acompanha vinho branco — nunca água gelada, pois os suíços acreditam que dificulta a digestão do queijo." }
-        ]
-      },
-      badrutts: {
-        tag: 'St. Moritz · Desde 1896',
-        title: "Badrutt's Palace",
-        subtitle: 'O ícone eterno do glamour alpino',
-        img: 'https://picsum.photos/seed/badrutts-palace-stmoritz/1400/800',
-        sections: [
-          { heading: 'História', text: 'O Badrutt\'s Palace foi fundado em 1896 por Caspar Badrutt, o mesmo homem que "inventou" o turismo de inverno suíço ao apostar com clientes ingleses que voltariam depois do verão — e os manteve encantados. A torre medieval icônica tornou-se símbolo de St. Moritz e, por extensão, de todo o conceito de resort alpino de luxo. Por seus salões passaram Audrey Hepburn, Coco Chanel, Sophia Loren, Alfred Hitchcock e inúmeros reis e princesas.' },
-          { heading: 'O hotel', text: 'São 157 quartos e suítes decoradas em estilo clássico europeu com toques modernos. Cada aposento tem vista para o Lago de St. Moritz ou para os Alpes engadinenses. O spa de 1.800 m² tem piscina aquecida interna e externa. O Roi Soleil Pool Bar, à beira da piscina, é o ponto de encontro da elite da estação de esqui mais exclusiva do mundo.' },
-          { heading: 'Gastronomia', text: 'O hotel tem sete opções de restaurante e bar. O Le Restaurant serve alta cozinha mediterrâneo-alpina com ingredientes sazonais. O King\'s Club é a boate mais famosa dos Alpes — uma instituição de 50 anos que ainda recebe os melhores DJs. O serviço de quarto é 24h, com menu de alta gastronomia disponível a qualquer hora.' },
-          { heading: 'Atividades', text: 'Ski-in ski-out direto para as pistas de Corviglia. Curling no lago gelado no inverno. Polo na neve em janeiro (um dos torneios mais exclusivos do mundo). No verão, golfe, hipismo, vela no lago, trekking nas montanhas engadinenses. O hotel organiza heliesquí e voos de planador sobre os Alpes para hóspedes.' },
-          { heading: 'Dica', text: 'Reserve a suíte com terraço voltada para o lago — o nascer do sol sobre o Lago de St. Moritz congelado no inverno é um dos espetáculos visuais mais raros da Europa. Peça ao concierge para reservar a mesa certa no Acla Restaurant para o almoço pós-ski: vista do lago, fondue de trufas, e a sensação de ter chegado ao topo do mundo.' }
-        ],
-        quiz: [
-          { q: "Em que ano foi fundado o Badrutt's Palace?", opts: ["1856","1896","1912","1928"], correct: 1, feedback: "O Badrutt's Palace foi fundado em 1896 por Caspar Badrutt em St. Moritz." },
-          { q: "Qual resort de esqui abriga o Badrutt's Palace?", opts: ["Gstaad","Zermatt","St. Moritz","Davos"], correct: 2, feedback: "O Badrutt's Palace fica em St. Moritz, no cantão de Graubünden — um dos resorts de esqui mais exclusivos do mundo." },
-          { q: "O que é o King's Club do Badrutt's Palace?", opts: ["Clube de golfe","Spa exclusivo","A boate mais famosa dos Alpes","Restaurante estrelado"], correct: 2, feedback: "O King's Club é uma boate lendária de 50 anos dentro do Badrutt's Palace, que ainda recebe os melhores DJs." },
-          { q: "Qual é o nome do fundador do turismo de inverno em St. Moritz?", opts: ["Johann Badrutt","Caspar Badrutt","Hans Badrutt","Karl Badrutt"], correct: 1, feedback: "Caspar Badrutt 'inventou' o turismo de inverno ao apostar com clientes britânicos que voltariam e ficariam encantados com o inverno alpino." }
-        ]
-      },
-      alpina: {
-        tag: 'Gstaad · Cantão de Berna',
-        title: 'The Alpina Gstaad',
-        subtitle: 'Ultra-luxo contemporâneo com alma alpina',
-        img: 'https://picsum.photos/seed/alpina-gstaad-hotel/1400/800',
-        sections: [
-          { heading: 'O hotel', text: 'Inaugurado em 2012, o Alpina Gstaad rapidamente se tornou o hotel mais cobiçado dos Alpes suíços — não por ser o mais antigo ou o mais tradicional, mas por combinar arquitetura contemporânea com materiais alpinos centenários de forma absolutamente magistral. Madeira de celeiro do século XVIII, pedra local do Oberland, lã de ovelha das fazendas vizinhas — tudo reinterpretado em chave de design de vanguarda.' },
-          { heading: 'Localização e vistas', text: 'O hotel se posiciona com maestria: cada uma das 56 suítes tem vista direta para um dos três picos mais icônicos de Gstaad — Eggli, Wasserngrat ou Wispile. A piscina aquecida exterior, a 1.050 metros de altitude, tem vista de 180° para os Alpes berneses. No inverno, nadar ali sob a neve é uma das experiências mais surreais e memoráveis que a Suíça oferece.' },
-          { heading: 'Six Senses Spa', text: 'O spa de seis andares é operado pela marca Six Senses — a mesma de Maldivas e Bali. Piscina interior, piscina exterior aquecida, sala de gelo, saunas finlandesas, hammam, salas de tratamento e um programa de bem-estar integrativo baseado na tradição alpina. O melhor spa de montanha da Europa, segundo o Condé Nast Traveller.' },
-          { heading: 'Gastronomia', text: 'Três restaurantes: SOMMET (alta cozinha franco-alpina com 1 estrela Michelin), YASSS (comida asiática contemporânea, um dos únicos na região) e La Branche (bistrot informal com raclette e fondue). O bar oferece 150 rótulos de whisky escocês — um dos maiores estoques dos Alpes.' },
-          { heading: 'Dica', text: 'Reserve para uma semana — não um fim de semana. O Alpina foi projetado para estadias longas: cada dia você encontra uma nova dimensão do hotel. Peça ao concierge um "picnic alpino" para ser entregue no topo da Eggli via teleférico: cesta de madeira com queijos, charcuterie, fruta e vinho local, com manta e vista de 360° para os Alpes.' }
-        ],
-        quiz: [
-          { q: "Em que ano foi inaugurado o The Alpina Gstaad?", opts: ["1985","1998","2005","2012"], correct: 3, feedback: "O Alpina Gstaad foi inaugurado em 2012 após uma reforma total de uma propriedade histórica." },
-          { q: "Qual marca internacional opera o spa do Alpina?", opts: ["Mandarin Oriental","ESPA","Six Senses","Aman"], correct: 2, feedback: "O spa de seis andares do Alpina é operado pela Six Senses, mesma marca presente em Maldivas e Bali." },
-          { q: "Quantas suítes tem o Alpina Gstaad?", opts: ["28","42","56","80"], correct: 2, feedback: "O Alpina Gstaad tem 56 suítes, cada uma com vista para um dos picos icônicos de Gstaad." },
-          { q: "Qual restaurante do Alpina tem estrela Michelin?", opts: ["La Branche","YASSS","SOMMET","Alpine Grill"], correct: 2, feedback: "O SOMMET serve alta cozinha franco-alpina e tem 1 estrela Michelin." }
-        ]
-      },
-      omnia: {
-        tag: 'Zermatt · Cantão de Valais',
-        title: 'The Omnia',
-        subtitle: 'Suspenso sobre Zermatt com o Matterhorn como vizinho',
-        img: 'https://picsum.photos/seed/omnia-zermatt-hotel/1400/800',
-        sections: [
-          { heading: 'O conceito', text: 'O Omnia é talvez o hotel mais dramaticamente posicionado dos Alpes: construído numa rocha acima de Zermatt, é acessado exclusivamente por um elevador escavado diretamente na pedra. A chegada já é uma experiência. Lá em cima, 30 suítes e uma vista de fazer parar o coração: o Matterhorn em toda a sua glória piramidal, sem nada entre você e o pico mais icônico do mundo.' },
-          { heading: 'O hotel', text: 'O design é um diálogo entre minimalismo nórdico e materiais alpinos — aço, madeira escura, pedra bruta, peles naturais. Não há TV nos quartos (intencionalmente): a janela de parede inteira com o Matterhorn é o único entertainment que a casa oferece e promete. A biblioteca tem uma seleção curada de livros sobre alpinismo, arte e filosofia.' },
-          { heading: 'Gastronomia', text: 'O restaurante do Omnia tem uma das ementas mais criativas de Zermatt: fusion contemporânea com ingredientes valaisanos. O café da manhã — com pão artesanal, queijo local, ovos de fazenda e vista do Matterhorn emergindo das nuvens — foi eleito pela Condé Nast "o melhor café da manhã da Suíça".' },
-          { heading: 'Zermatt sem carros', text: 'Zermatt é uma das raras cidades europeias totalmente sem carros a motor — apenas veículos elétricos e carruagens. Isso cria um silêncio e uma qualidade de ar impossíveis em qualquer outro resort alpino. Chegue de trem (obrigatório — carros ficam em Täsch), e descubra que andar a pé aqui é um prazer raro.' },
-          { heading: 'Dica', text: 'Reserve a suíte com banheira frente ao Matterhorn — existe exatamente uma dessas. Tome banho de manhã, na escuridão, com apenas a janela iluminada pela luz nascente no pico. Não divulgamos mais detalhes: precisa ser vivido. Suba também ao Gornergrat no amanhecer (primeiro trem às 6h) e volte para o café da manhã no Omnia — essa sequência não tem preço.' }
-        ],
-        quiz: [
-          { q: "Como o Omnia é acessado em Zermatt?", opts: ["Teleférico","Elevador na rocha","Funicular","A pé por escadaria"], correct: 1, feedback: "O Omnia é acessado exclusivamente por um elevador escavado diretamente na rocha — a chegada já é uma experiência." },
-          { q: "O que torna Zermatt única no transporte?", opts: ["Maior aeroporto alpino","Sem carros a combustão","Metrô subterrâneo","Trem de levitação magnética"], correct: 1, feedback: "Zermatt é totalmente sem carros a motor — apenas veículos elétricos circulam. Carros ficam em Täsch." },
-          { q: "Qual pico é o vizinho permanente do Omnia?", opts: ["Eiger","Jungfrau","Matterhorn","Titlis"], correct: 2, feedback: "O Omnia tem o Matterhorn como vizinho permanente, visível das suítes e do restaurante." },
-          { q: "Por que o Omnia não tem TVs nos quartos?", opts: ["Econômica","Intencional — a vista é o entertainment","Regulamento local","Interferência de sinal"], correct: 1, feedback: "A ausência de TVs é intencional: a janela de parede inteira com o Matterhorn é o único entretenimento que o Omnia promete." }
-        ]
-      },
-      schweizerhof: {
-        tag: 'Berna · Capital da Suíça',
-        title: 'Schweizerhof',
-        subtitle: 'Clássico do centro histórico de Berna',
-        img: 'https://picsum.photos/seed/schweizerhof-berna/1400/800',
-        sections: [
-          { heading: 'O hotel', text: 'O Schweizerhof Bern existe desde 1859 e foi o primeiro grande hotel de luxo da capital suíça. Está a 100 metros da Estação Central e a dois minutos a pé das arcadas históricas de Berna — patrimônio UNESCO. Por seus salões passaram Churchill, Dürrenmatt, Jean-Paul Sartre e incontáveis chefes de Estado que vieram negociar na capital diplomática da Suíça.' },
-          { heading: 'O ambiente', text: 'Os 99 quartos e suítes mantêm uma elegância Belle Époque bem preservada, com tetos altos, molduras douradas e mobiliário clássico — sem cair no pastiche museológico. O lobby com sua cúpula de vidro é um dos espaços mais bonitos da cidade. Das suítes superiores, janelas voltadas para os Alpes Berneses oferecem vista direta para o Eiger e o Jungfrau nos dias claros.' },
-          { heading: 'Gastronomia', text: 'O Jack\'s Brasserie no térreo é uma referência histórica de Berna — um bistrô clássico de 150 anos que serve desde Wiener Schnitzel até tártaro de bife, com vinho da Borgonha e cerveja local. O bar do hotel tem a melhor carta de whisky da cidade e é o ponto de encontro da classe política local à noite.' },
-          { heading: 'Por que Berna', text: 'Berna é a capital mais esquecida pelos turistas — e por isso a mais autêntica. A Altstadt (cidade velha) medieval tem 6 km de arcadas cobertas, única no mundo. O Museu de Arte é um dos melhores da Suíça. A vista da Nydeggbrücke para os telhados vermelhos e o Aare verde-esmeralda vale a viagem por si só.' },
-          { heading: 'Dica', text: 'Peça ao concierge um "Bern by Night" — um roteiro personalizado pelos melhores bares, restaurantes e mirantes noturnos da cidade que nenhum guia turístico lista. O hotel tem parceria com a maioria dos estabelecimentos e garante mesa sem fila. Não deixe de subir ao terraço do Parliament Building ao anoitecer — entrada livre, vistas épicas.' }
-        ],
-        quiz: [
-          { q: "Desde quando existe o Schweizerhof Bern?", opts: ["1799","1859","1903","1931"], correct: 1, feedback: "O Schweizerhof Bern existe desde 1859 e foi o primeiro grande hotel de luxo da capital suíça." },
-          { q: "Qual é o restaurante histórico no térreo do Schweizerhof?", opts: ["Bernese Grill","Jack's Brasserie","Le Palais","Zum Rathaus"], correct: 1, feedback: "O Jack's Brasserie é uma referência histórica de Berna — um bistrô clássico de 150 anos no térreo do hotel." },
-          { q: "O que é o centro histórico de Berna (Altstadt)?", opts: ["Um bairro moderno","Patrimônio Mundial UNESCO com 6 km de arcadas","O maior castelo medieval da Suíça","Um complexo de museus"], correct: 1, feedback: "A Altstadt de Berna é Patrimônio Mundial UNESCO e tem 6 km de arcadas cobertas — única no mundo." },
-          { q: "A quantos metros fica o Schweizerhof da Estação Central de Berna?", opts: ["500 metros","100 metros","1 km","2 km"], correct: 1, feedback: "O Schweizerhof fica a apenas 100 metros da Estação Central de Berna, com acesso fácil a toda a cidade." }
-        ]
-      },
-      cambrian: {
-        tag: 'Adelboden · Cantão de Berna',
-        title: 'The Cambrian',
-        subtitle: 'Design escandinavo encontra alma alpina',
-        img: 'https://picsum.photos/seed/cambrian-adelboden/1400/800',
-        sections: [
-          { heading: 'O hotel', text: 'O Cambrian é a prova de que um hotel pode ser radicalmente moderno sem trair o espírito do lugar. Inaugurado em 2011 após uma reforma total de uma propriedade histórica de Adelboden, tem uma arquitetura de linhas escandinavas limpas — madeira clara, vidro generoso, volumes simples — que paradoxalmente se encaixa melhor na paisagem alpina do que muitos chalés tradicionais.' },
-          { heading: 'A piscina e o spa', text: 'A piscina aquecida exterior do Cambrian é considerada uma das mais belas da Suíça: retangular, com borda infinita sobre o vale, rodeada de neve no inverno. O spa minimalista usa produtos naturais alpinos e tem uma sauna panorâmica com janela aberta para o circo montanhoso de Adelboden — uma das configurações visuais mais impressionantes de qualquer hotel suíço.' },
-          { heading: 'Gastronomia', text: 'O restaurante do Cambrian serve "mountain market cuisine" — ingredientes de mercados locais transformados com técnica contemporânea. O cardápio muda semanalmente conforme o que os agricultores vizinhos têm disponível. Pequeno-almoço é um festim: pão rústico, queijos do Simmental, frutas silvestres, ovos de campo. Simples e perfeito.' },
-          { heading: 'Adelboden', text: 'O vilarejo de Adelboden é um dos segredos mais bem guardados do Oberland Bernês. Sem a fama de Gstaad ou Grindelwald, tem preços mais acessíveis, pistas de esqui excelentes (100+ km) e uma autenticidade que os resorts mais famosos perderam. No verão, as trilhas pelo Engstligenalp são entre as mais belas da Suíça.' },
-          { heading: 'Dica', text: 'Reserve para ficar pelo menos 3 noites — Adelboden precisa de tempo para revelar seus segredos. Peça ao hotel um guia local (não um guia turístico: um morador) para uma caminhada pelo platô de Engstligenalp. A paisagem no final de julho, com flores alpinas cobrindo o plateau a 1.964 metros, é um dos espetáculos naturais mais raros da Europa.' }
-        ],
-        quiz: [
-          { q: "Em que cantão fica Adelboden?", opts: ["Valais","Vaud","Berna","Obwalden"], correct: 2, feedback: "Adelboden fica no cantão de Berna, no Oberland Bernês — uma região de extraordinária beleza alpina." },
-          { q: "Qual é o diferencial arquitetônico do Cambrian?", opts: ["Estilo barroco","Design escandinavo contemporâneo","Arquitetura medieval","Chalé tradicional"], correct: 1, feedback: "O Cambrian combina design escandinavo moderno com materiais alpinos centenários de forma magistral." },
-          { q: "Qual é a altitude do platô de Engstligenalp, perto de Adelboden?", opts: ["1.200 m","1.600 m","1.964 m","2.400 m"], correct: 2, feedback: "O platô de Engstligenalp fica a 1.964 metros de altitude e é famoso pelas flores alpinas em julho." },
-          { q: "Quantos km de pistas de esqui tem Adelboden?", opts: ["30 km","60 km","100 km","200 km"], correct: 2, feedback: "Adelboden tem mais de 100 km de pistas de esqui, com qualidade comparável a resorts mais famosos por uma fração do preço." }
-        ]
-      },
-      jungfraujoch: {
-        tag: '3.454 m · Topo da Europa',
-        title: 'Jungfraujoch',
-        subtitle: 'O ponto ferroviário mais alto da Europa',
-        img: 'https://picsum.photos/seed/jungfraujoch-topo/1400/800',
-        sections: [
-          { heading: 'A montanha', text: 'O Jungfraujoch não é o pico mais alto da Suíça, mas é certamente o mais famoso. Localizado entre o Mönch e o Jungfrau, a 3.454 metros, está no coração do maior glaciar dos Alpes — o Aletsch, com 23 km de extensão e 900 metros de profundidade. De lá de cima, em dias claros, pode-se ver a Floresta Negra alemã e o Vosges francês. A sensação de estar sobre a "espinha" da Europa é física e inconfundível.' },
-          { heading: 'A ferrovia', text: 'A linha ferroviária Jungfrau foi inaugurada em 1912, após 16 anos de construção. É considerada uma das maiores obras de engenharia do século XX: a maioria do trajeto é em túnel escavado dentro do Eiger e do Mönch, com estações intermediárias (Eigerwand e Eismeer) que têm janelas abertas diretamente na rocha para vistas do glaciar. A viagem de Kleine Scheidegg até o topo leva 35 minutos.' },
-          { heading: 'O que há no topo', text: 'O complexo Jungfraujoch Top of Europe inclui o restaurante panorâmico Crystal com vista de 360°, a Gruta de Gelo (um labirinto esculpido dentro do glaciar Aletsch), o observatório meteorológico Sphinx (acessível por elevador externo), a estação de investigação científica e uma exposição sobre a história da construção da ferrovia.' },
-          { heading: 'Como chegar', text: 'De Interlaken Ost: tome o trem Berner Oberland-Bahn até Grindelwald ou Lauterbrunnen (35 min), depois para Kleine Scheidegg, e finalmente o Jungfrau Railway até o topo. Total: 2h a 2h30 com baldeações. Alternativamente, de Grindelwald direto pelo Eiger Express (gondola) até Eigergletscher e depois trem. O Eiger Express é mais rápido e mais novo.' },
-          { heading: 'Dica', text: 'Vá num dia com previsão de sol verificada no site do Jungfraujoch (eles têm webcam ao vivo). Se nublar no topo, não verá absolutamente nada — e o ingresso custa em torno de CHF 220. Leve óculos escuros de qualidade: a radiação UV a 3.454 m com neve refletindo é intensa. E leve casaco pesado mesmo no verão — lá em cima a temperatura ronda os -5°C.' }
-        ],
-        quiz: [
-          { q: "A que altitude fica o Jungfraujoch?", opts: ["2.500 m","3.000 m","3.454 m","4.158 m"], correct: 2, feedback: "O Jungfraujoch fica a 3.454 metros — o ponto ferroviário mais alto da Europa." },
-          { q: "Em que ano foi inaugurada a linha ferroviária do Jungfraujoch?", opts: ["1880","1912","1935","1960"], correct: 1, feedback: "A ferrovia do Jungfrau foi inaugurada em 1912, após 16 anos de construção dentro do Eiger e do Mönch." },
-          { q: "Qual glaciar é visível do Jungfraujoch?", opts: ["Glaciar Gorner","Glaciar Trient","Glaciar Aletsch","Glaciar Rhône"], correct: 2, feedback: "O Glaciar Aletsch — o maior dos Alpes com 23 km — é claramente visível do Jungfraujoch." },
-          { q: "Por onde passa parte do trajeto da ferrovia do Jungfrau?", opts: ["Sobre pontes suspensas","Dentro de túneis no Eiger e Mönch","Por vales florestados","Por planaltos abertos"], correct: 1, feedback: "A maior parte do trajeto é em túnel escavado dentro do Eiger e do Mönch, com estações de janela na rocha." }
-        ]
-      },
-      gornergrat: {
-        tag: '3.089 m · Vista do Matterhorn',
-        title: 'Gornergrat',
-        subtitle: 'Frente a frente com o pico mais icônico do mundo',
-        img: 'https://picsum.photos/seed/gornergrat-matterhorn/1400/800',
-        sections: [
-          { heading: 'A montanha', text: 'O Gornergrat não compete em altitude com o Jungfraujoch, mas tem algo que o supera em impacto visual: a vista do Matterhorn. O pico piramidal mais fotografado da Terra aparece aqui em tamanho natural, sem obstáculos, a apenas 8 km de distância horizontal. Em torno dele, outros 28 picos acima de 4.000 metros criam um horizonte impossível de processar de uma só vez.' },
-          { heading: 'O trem de cremalheira', text: 'A Gornergrat Bahn, inaugurada em 1898, é o trem de cremalheira mais antigo da Suíça a ar livre. Parte diretamente de Zermatt (1.604 m) e chega ao cume (3.089 m) em 33 minutos, subindo 1.485 metros de altitude. Durante o percurso, passa por pastagens, florestas de larício, campo de neve e finalmente o panorama aberto do glaciar. Em dias claros, é uma das viagens de trem mais belas do mundo.' },
-          { heading: 'No topo', text: 'O Kulmhotel Gornergrat — o hotel habitado mais alto da Suíça — funciona tanto como restaurante quanto como pousada. Dormir lá em cima e ver o Matterhorn ao amanhecer, antes de qualquer turista chegar, é uma experiência que ressignifica o que é "ver" uma montanha. O observatório astronômico no cume é o segundo mais alto da Europa.' },
-          { heading: 'Como chegar', text: 'Exclusivamente de trem a partir de Zermatt. A estação Zermatt Bahnhof está a 5 minutos a pé do centro da vila. Trens partem a cada 24 minutos no pico da temporada. Com o Swiss Travel Pass, desconto de 50%. Compre o bilhete antecipado online para evitar filas na estação (especialmente no verão).' },
-          { heading: 'Dica', text: 'Tome o trem das 7h08 — o primeiro — e tenha o Matterhorn para você mesma antes das multidões chegarem. Leve pão, queijo e termos de café e café da manhã no cume sentadas numa pedra, com aquela vista. Baixe depois caminhando até Riffelberg (30 minutos de trilha fácil) — a perspectiva do Matterhorn refletido no Lago Riffelsee em julho é uma das fotografias mais reproduzidas da Suíça.' }
-        ],
-        quiz: [
-          { q: "A que altitude fica o Gornergrat?", opts: ["2.089 m","2.489 m","3.089 m","3.489 m"], correct: 2, feedback: "O Gornergrat fica a 3.089 metros de altitude, acima de Zermatt no cantão do Valais." },
-          { q: "Em que ano foi inaugurada a Gornergrat Bahn?", opts: ["1868","1882","1898","1912"], correct: 2, feedback: "A Gornergrat Bahn foi inaugurada em 1898 — é o trem de cremalheira mais antigo da Suíça a ar livre." },
-          { q: "Qual é o nome do lago onde o Matterhorn se reflete em julho?", opts: ["Lago Gorner","Lago Riffelsee","Lago Zmuttbach","Lago Stellisee"], correct: 1, feedback: "O Lago Riffelsee reflete o Matterhorn em julho — uma das fotografias mais reproduzidas da Suíça." },
-          { q: "Quantos picos acima de 4.000 m são visíveis do Gornergrat?", opts: ["10","18","29","45"], correct: 2, feedback: "Do Gornergrat são visíveis 29 picos com mais de 4.000 metros, incluindo o Matterhorn e o Monte Rosa." }
-        ]
-      },
-      titlis: {
-        tag: '3.238 m · Neve Eterna',
-        title: 'Titlis',
-        subtitle: 'Glaciar, Cliff Walk e a neve que nunca derrete',
-        img: 'https://picsum.photos/seed/titlis-neve-geleira/1400/800',
-        sections: [
-          { heading: 'A montanha', text: 'O Titlis, acima de Engelberg no cantão de Obwalden, é o glaciar de altitude mais acessível da Suíça central — e o único onde neve permanente existe o ano todo a essa altitude relativa. O glaciar tem mais de 1.000 anos de gelo acumulado em algumas partes. Diferente de Jungfraujoch e Gornergrat, o Titlis fica numa região geograficamente mais isolada, o que dá ao lugar uma qualidade de "fim do mundo" que os outros cumes não têm.' },
-          { heading: 'Cliff Walk', text: 'A grande atração moderna do Titlis é o Cliff Walk: a ponte suspensa mais alta dos Alpes, instalada em 2012 a 3.041 metros de altitude. Com 100 metros de comprimento e apenas 1 metro de largura, é suspensa sobre um abismo de 500 metros. O vento que sopra por baixo é um personagem próprio. Para quem não tem vertigem, é glorioso. Para quem tem — é melhor admirar da plataforma ao lado.' },
-          { heading: 'Gruta de Gelo', text: 'A Gruta de Gelo do Titlis é escavada 15 metros dentro do glaciar e tem temperatura constante de -1,5°C. Os corredores foram esculpidos no gelo azul-esverdeado com figuras decorativas de animais e cristais de gelo natural. Uma das atrações mais originais dos Alpes suíços — e funciona o ano inteiro, independente do clima externo.' },
-          { heading: 'Como chegar', text: 'De Zurique: 1 hora de trem até Engelberg. De Lucerna: 45 minutos de trem. De Engelberg, o telecabine Titlis Express sobe em três estágios até o cume: Trübsee (1.800 m), Stand (2.428 m) e finalmente Titlis, com o famoso Rotair — o primeiro telecabine giratório do mundo, dando 360° durante a subida final.' },
-          { heading: 'Dica', text: 'Combine o Titlis com uma tarde em Engelberg: a vila tem um mosteiro beneditino de 900 anos ainda em funcionamento, com uma qeijaria onde os monges produzem o famoso Klosterkas (queijo do mosteiro). A loja do mosteiro vende queijos e licores artesanais que não existem em nenhum outro lugar do mundo. Compre para levar.' }
-        ],
-        quiz: [
-          { q: "Qual é a atração mais nova e emocionante do Titlis?", opts: ["Gruta de Gelo","Cliff Walk","Rotair","Iglu Hotel"], correct: 1, feedback: "O Cliff Walk — a ponte suspensa mais alta dos Alpes, instalada em 2012 — é a grande atração moderna do Titlis." },
-          { q: "A que temperatura fica a Gruta de Gelo do Titlis?", opts: ["-10°C","0°C","-1,5°C","-5°C"], correct: 2, feedback: "A Gruta de Gelo tem temperatura constante de -1,5°C, ano inteiro, independente do clima externo." },
-          { q: "Qual é o nome do telecabine giratório que sobe ao Titlis?", opts: ["Alpenglow","Rotair","Eiger Express","Titlis Flyer"], correct: 1, feedback: "O Rotair — o primeiro telecabine giratório do mundo — faz 360° durante a subida final ao Titlis." },
-          { q: "Em qual cantão fica Engelberg, base para o Titlis?", opts: ["Uri","Obwalden","Nidwalden","Lucerna"], correct: 1, feedback: "Engelberg fica no cantão de Obwalden, no coração da Suíça central." }
-        ]
-      },
-      harderkulm: {
-        tag: '1.322 m · Mirante dos Dois Lagos',
-        title: 'Harder Kulm',
-        subtitle: 'Os dois lagos de Interlaken num único olhar',
-        img: 'https://picsum.photos/seed/harder-kulm-interlaken/1400/800',
-        sections: [
-          { heading: 'A montanha', text: 'O Harder Kulm é a montanha "doméstica" de Interlaken — a que os moradores sobem num impulso, de tarde, apenas para lembrar por que moram ali. Não tem a altitude dramática do Jungfraujoch nem a fama do Matterhorn, mas tem algo raro: a vista simultânea do Lago Thun e do Lago Brienz, com Interlaken no meio e os Alpes como moldura. Poucos pontos na Europa oferecem uma perspectiva geográfica tão didática e tão bela.' },
-          { heading: 'Two Lakes Bridge', text: 'A Two Lakes Bridge — inaugurada em 2015 — é uma estrutura de aço em formato de "X" suspensa sobre o abismo que separa os dois lados da montanha. Cada ponta da ponte aponta para um dos lagos. No centro do X, a sensação de flutuar sobre Interlaken com os dois lagos ao mesmo tempo é estranha, vertiginosa e absolutamente maravilhosa. Ao entardecer, com o sol tingindo o Thun de laranja e o Brienz de rosa, é quase irreal.' },
-          { heading: 'O funicular', text: 'O funicular do Harder Kulm existe desde 1908 e faz o percurso em apenas 8 minutos a partir do centro de Interlaken. É um dos funiculares mais inclinados da Suíça — a inclinação chega a 64% em alguns pontos. A cabine de madeira original foi preservada e restaurada; subir nela já é parte da experiência.' },
-          { heading: 'Gastronomia', text: 'O Bergrestaurant Harder Kulm no topo serve comida suíça clássica com qualidade surpreendente para um restaurante de montanha: fondue, rösti com ovo e queijo local, e Apfelstrudel com natas. A varanda com vista para os dois lagos é o melhor lugar ao ar livre de Interlaken para comer.' },
-          { heading: 'Dica', text: 'Suba à tarde — entre 16h e 18h — para pegar o pôr do sol sobre o Lago Thun. Leve uma garrafa de vinho branco local (compre na loja do funicular, que tem boa seleção) e sente na grama fora do restaurante, voltada para o oeste. Em julho e agosto, o sol se põe exatamente atrás dos Alpes ao fundo do Thun, criando um gradiente de cores que parece filtrado por photoshop — mas é real.' }
-        ],
-        quiz: [
-          { q: "A que altitude fica o Harder Kulm?", opts: ["822 m","1.322 m","2.322 m","3.322 m"], correct: 1, feedback: "O Harder Kulm fica a 1.322 metros de altitude acima de Interlaken." },
-          { q: "Qual é a atração principal do topo do Harder Kulm?", opts: ["Estação de esqui","Two Lakes Bridge","Gruta de gelo","Observatório astronômico"], correct: 1, feedback: "A Two Lakes Bridge — inaugurada em 2015 — oferece vista simultânea do Lago Thun e do Lago Brienz." },
-          { q: "Em quanto tempo o funicular sobe ao Harder Kulm?", opts: ["2 minutos","8 minutos","25 minutos","1 hora"], correct: 1, feedback: "O funicular faz o percurso em apenas 8 minutos a partir do centro de Interlaken." },
-          { q: "Desde quando existe o funicular do Harder Kulm?", opts: ["1868","1908","1945","1972"], correct: 1, feedback: "O funicular do Harder Kulm existe desde 1908 — um dos mais antigos e inclinados da Suíça." }
-        ]
-      }
-    };
-
-    /* ── Detail overlay logic ──────────────────────── */
-    const overlay      = document.getElementById('detail-overlay');
-    const detailBack   = document.getElementById('detail-back');
-    const detailImg    = document.getElementById('detail-hero-img');
-    const detailTag    = document.getElementById('detail-tag');
-    const detailTitle  = document.getElementById('detail-title');
-    const detailSub    = document.getElementById('detail-subtitle');
-    const detailContent = document.getElementById('detail-content');
-
-    function buildQuizHTML(questions, wrapId) {
-      let current = 0, score = 0;
-      const wrap = document.getElementById(wrapId) || (() => {
-        const el = document.createElement('div');
-        el.id = wrapId;
-        return el;
-      })();
-
-      function renderQuestion() {
-        if (current >= questions.length) {
-          wrap.innerHTML = `<div class="quiz-result-box">
-            <span class="quiz-score-text">Você acertou ${score} de ${questions.length}! ${score === questions.length ? '🎉 Perfeito!' : score >= questions.length / 2 ? '👏 Muito bem!' : '💪 Continue explorando!'}</span>
-            <button class="quiz-restart-btn">Tentar novamente</button>
-          </div>`;
-          wrap.querySelector('.quiz-restart-btn').addEventListener('click', () => { current = 0; score = 0; renderQuestion(); });
-          return;
-        }
-        const q = questions[current];
-        wrap.innerHTML = `<div class="quiz-q-wrap">
-          <span class="quiz-q-num">Pergunta ${current + 1} de ${questions.length}</span>
-          <p class="quiz-q-text">${q.q}</p>
-        </div>
-        <div class="quiz-options">
-          ${q.opts.map((o, i) => `<button class="quiz-opt" data-idx="${i}">${o}</button>`).join('')}
-        </div>
-        <p class="quiz-feedback"></p>`;
-        wrap.querySelectorAll('.quiz-opt').forEach(btn => {
-          btn.addEventListener('click', function() {
-            const chosen = +this.dataset.idx;
-            wrap.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
-            wrap.querySelectorAll('.quiz-opt').forEach(b => {
-              if (+b.dataset.idx === q.correct) b.classList.add('correct');
-              else if (+b.dataset.idx === chosen) b.classList.add('wrong');
-            });
-            wrap.querySelector('.quiz-feedback').textContent = q.feedback;
-            if (chosen === q.correct) score++;
-            setTimeout(() => { current++; renderQuestion(); }, 1800);
-          });
-        });
-      }
-      renderQuestion();
-      return wrap;
     }
-
-    function openDetail(slug) {
-      const d = PLACES[slug];
-      if (!d) return;
-      detailImg.src = d.img;
-      detailImg.alt = d.title;
-      detailTag.textContent = d.tag;
-      detailTitle.textContent = d.title;
-      detailSub.textContent = d.subtitle;
-
-      const sectionsHTML = d.sections.map((s, i) => {
-        const imgUrl = `https://picsum.photos/seed/${slug}-s${i}/600/420`;
-        const imgTag = `<img class="detail-section-img" src="${imgUrl}" alt="${s.heading}" loading="lazy" />`;
-        const prose  = `<div class="detail-section-prose">
-          <h2 class="detail-section-heading">${s.heading}</h2>
-          <p class="detail-section-text">${s.text}</p>
-        </div>`;
-        const inner  = i % 2 === 0 ? `${imgTag}${prose}` : `${prose}${imgTag}`;
-        return `<div class="detail-section"><div class="detail-section-inner">${inner}</div></div>`;
-      }).join('');
-
-      detailContent.innerHTML = sectionsHTML + `<div class="detail-quiz">
-        <h2 class="detail-quiz-title">✦ Quiz — teste seus conhecimentos</h2>
-        <div id="card-quiz-body"></div>
-      </div>`;
-
-      buildQuizHTML(d.quiz, 'card-quiz-body');
-
-      overlay.classList.add('open');
-      overlay.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      overlay.scrollTo(0, 0);
-    }
-
-    function closeDetail() {
-      overlay.classList.remove('open');
-      overlay.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    document.querySelectorAll('[data-place]').forEach(card => {
-      card.addEventListener('click', () => openDetail(card.dataset.place));
-    });
-
-    detailBack.addEventListener('click', closeDetail);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
-
-    /* ── Quiz Geral ────────────────────────────────── */
-    const GENERAL_QUIZ = [
-      { q: "Qual é a moeda oficial da Suíça?", opts: ["Euro","Franco Suíço","Coroa Suíça","Libra"], correct: 1, feedback: "A Suíça usa o Franco Suíço (CHF). O país nunca adotou o Euro, apesar de estar geograficamente no coração da Europa." },
-      { q: "Quantos cantões tem a Suíça?", opts: ["20","23","26","30"], correct: 2, feedback: "A Suíça tem 26 cantões, cada um com sua própria constituição, parlamento e governo." },
-      { q: "Quais são os idiomas oficiais da Suíça?", opts: ["Alemão e Francês","Alemão, Francês e Italiano","Alemão, Francês, Italiano e Romanche","Alemão, Inglês e Francês"], correct: 2, feedback: "A Suíça tem 4 idiomas oficiais: alemão (63%), francês (23%), italiano (8%) e romanche (menos de 1%)." },
-      { q: "Qual é a altitude do Jungfraujoch, o ponto ferroviário mais alto da Europa?", opts: ["2.500 m","3.000 m","3.454 m","4.158 m"], correct: 2, feedback: "O Jungfraujoch fica a 3.454 metros de altitude e tem estação ferroviária desde 1912." },
-      { q: "O que é o Swiss Travel Pass?", opts: ["Um passaporte especial para turistas","Um passe de transporte ilimitado em trens, ônibus e barcos","Um seguro viagem obrigatório","Um cartão de crédito suíço"], correct: 1, feedback: "O Swiss Travel Pass dá acesso ilimitado à rede de transporte público suíça — trens, ônibus e barcos — por 3 a 15 dias." },
-      { q: "Em que cidade fica o famoso Château de Chillon?", opts: ["Genebra","Berna","Zurique","Montreux"], correct: 3, feedback: "O Château de Chillon fica às margens do Lago Léman, perto de Montreux, e foi imortalizado por Lord Byron no poema 'O Prisioneiro de Chillon'." },
-      { q: "Qual é o pico mais icônico de Zermatt?", opts: ["Eiger","Jungfrau","Matterhorn","Mont Blanc"], correct: 2, feedback: "O Matterhorn (4.478 m) é a montanha em forma de pirâmide símbolo da Suíça e um dos picos mais fotografados do mundo, em Zermatt." },
-      { q: "O que é único sobre Zermatt em relação ao transporte?", opts: ["Tem o maior aeroporto dos Alpes","É completamente sem carros a motor","Só se acessa de helicóptero no inverno","Tem teleférico 24 horas"], correct: 1, feedback: "Zermatt é uma das raras cidades europeias totalmente sem carros a combustão — apenas veículos elétricos circulam. Carros ficam estacionados em Täsch." },
-      { q: "Qual festival internacional acontece em Montreux todo mês de julho?", opts: ["Festival de Cinema","Festival de Jazz","Festival de Ópera","Festival de Queijo"], correct: 1, feedback: "O Montreux Jazz Festival, fundado em 1967 por Claude Nobs, é um dos maiores e mais prestigiados festivais de música do mundo." },
-      { q: "Qual glaciar é visível do Jungfraujoch e é o maior dos Alpes?", opts: ["Glaciar do Ródano","Glaciar Mer de Glace","Glaciar Aletsch","Glaciar Gorner"], correct: 2, feedback: "O Glaciar Aletsch tem 23 km de extensão e 900 metros de profundidade em alguns pontos — é o maior glaciar dos Alpes e Patrimônio Mundial da UNESCO." }
-    ];
-
-    (function initGeneralQuiz() {
-      const body    = document.getElementById('general-quiz-body');
-      const result  = document.getElementById('general-quiz-result');
-      const scoreEl = document.getElementById('general-score-text');
-      const restart = document.getElementById('general-restart');
-      if (!body) return;
-
-      let current = 0, score = 0;
-
-      function render() {
-        result.hidden = true;
-        if (current >= GENERAL_QUIZ.length) {
-          body.innerHTML = '';
-          scoreEl.textContent = `Você acertou ${score} de ${GENERAL_QUIZ.length}! ${score === GENERAL_QUIZ.length ? '🎉 Perfeito!' : score >= 7 ? '👏 Excelente!' : score >= 5 ? '😊 Muito bem!' : '💪 Continue explorando!'}`;
-          result.hidden = false;
-          return;
-        }
-        const q = GENERAL_QUIZ[current];
-        body.innerHTML = `<div class="quiz-q-wrap">
-          <span class="quiz-q-num">Pergunta ${current + 1} de ${GENERAL_QUIZ.length}</span>
-          <p class="quiz-q-text">${q.q}</p>
-        </div>
-        <div class="quiz-options">
-          ${q.opts.map((o, i) => `<button class="quiz-opt" data-idx="${i}">${o}</button>`).join('')}
-        </div>
-        <p class="quiz-feedback"></p>`;
-        body.querySelectorAll('.quiz-opt').forEach(btn => {
-          btn.addEventListener('click', function() {
-            const chosen = +this.dataset.idx;
-            body.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
-            body.querySelectorAll('.quiz-opt').forEach(b => {
-              if (+b.dataset.idx === q.correct) b.classList.add('correct');
-              else if (+b.dataset.idx === chosen) b.classList.add('wrong');
-            });
-            body.querySelector('.quiz-feedback').textContent = q.feedback;
-            if (chosen === q.correct) score++;
-            setTimeout(() => { current++; render(); }, 1800);
-          });
-        });
-      }
-
-      render();
-      restart.addEventListener('click', () => { current = 0; score = 0; render(); });
-    })();
   </script>
 </body>
 </html>

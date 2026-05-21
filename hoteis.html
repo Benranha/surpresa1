@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hotéis com Charme Alpino — Suíça Para Ela</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">Suíça <span>—</span> Para Ela</a>
+    <ul class="nav-links">
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <span class="mobile-menu-logo">Suíça <span>—</span> Para Ela</span>
+    <button class="mobile-close" id="mobile-close" aria-label="Fechar menu">✕</button>
+    <a href="lugares.html" class="mobile-link">Lugares</a>
+    <a href="restaurantes.html" class="mobile-link">Restaurantes</a>
+    <a href="hoteis.html" class="mobile-link">Hotéis</a>
+    <a href="montanhas.html" class="mobile-link">Montanhas</a>
+    <a href="curiosidades.html" class="mobile-link">Curiosidades</a>
+    <a href="guia.html" class="mobile-link">Guia</a>
+    <a href="quiz.html" class="mobile-link">Quiz</a>
+  </div>
+
+  <section class="sub-hero">
+    <div class="sub-hero-bg" id="sub-hero-bg" style="background-image: url('https://picsum.photos/seed/badrutts-palace-stmoritz/1800/900');"></div>
+    <div class="sub-hero-overlay"></div>
+    <div class="sub-hero-content">
+      <span class="sub-hero-eyebrow">Suíça — Para Ela</span>
+      <h1 class="sub-hero-title">Hotéis com Charme Alpino</h1>
+      <p class="sub-hero-subtitle">Onde dormir sonhando acordada</p>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Onde dormir sonhando acordada</span>
+        <h2 class="section-title">Hotéis com<br />Charme Alpino</h2>
+        <p class="section-subtitle">De palácios Belle Époque a refúgios modernos entre picos nevados — cada um destes hotéis é um destino em si mesmo.</p>
+      </div>
+
+      <div class="hotels-grid">
+        <article class="hotel-card fade-in fade-in-delay-1" data-place="badrutts">
+          <div class="hotel-img">
+            <img src="https://picsum.photos/seed/badrutts-palace-stmoritz/800/600" alt="Badrutt's Palace Hotel em St. Moritz" loading="lazy" />
+          </div>
+          <div class="hotel-body">
+            <span class="hotel-location">St. Moritz</span>
+            <h3 class="hotel-name">Badrutt's Palace</h3>
+            <p class="hotel-desc">O ícone de St. Moritz desde 1896. Uma torre medieval que guarda dentro décadas de glamour, celebridades e o melhor ski-in ski-out dos Alpes.</p>
+            <div class="hotel-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="hotel-card fade-in fade-in-delay-2" data-place="alpina">
+          <div class="hotel-img">
+            <img src="https://picsum.photos/seed/alpina-gstaad-hotel/800/600" alt="The Alpina Gstaad hotel de luxo" loading="lazy" />
+          </div>
+          <div class="hotel-body">
+            <span class="hotel-location">Gstaad</span>
+            <h3 class="hotel-name">The Alpina Gstaad</h3>
+            <p class="hotel-desc">Ultra-luxo contemporâneo com vista direta para os três picos mais emblemáticos da região. Spa de seis andares e três restaurantes estrelados. O melhor da Suíça num só lugar.</p>
+            <div class="hotel-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="hotel-card fade-in fade-in-delay-3" data-place="omnia">
+          <div class="hotel-img">
+            <img src="https://picsum.photos/seed/omnia-zermatt-hotel/800/600" alt="The Omnia hotel boutique em Zermatt" loading="lazy" />
+          </div>
+          <div class="hotel-body">
+            <span class="hotel-location">Zermatt</span>
+            <h3 class="hotel-name">The Omnia</h3>
+            <p class="hotel-desc">Hotel boutique suspenso sobre Zermatt com o Matterhorn como vizinho permanente. Acessado por elevador na rocha. Um dos endereços mais dramáticos do mundo.</p>
+            <div class="hotel-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="hotels-grid-bottom" style="margin-top: 2rem;">
+        <article class="hotel-card fade-in fade-in-delay-4" data-place="schweizerhof">
+          <div class="hotel-img">
+            <img src="https://picsum.photos/seed/schweizerhof-berna/800/600" alt="Schweizerhof em Berna" loading="lazy" />
+          </div>
+          <div class="hotel-body">
+            <span class="hotel-location">Berna</span>
+            <h3 class="hotel-name">Schweizerhof</h3>
+            <p class="hotel-desc">No coração da capital suíça, a passos da Old City patrimônio UNESCO. Um clássico da hotelaria helvética com restaurante renomado e quartos que olham para os Alpes Berneses.</p>
+            <div class="hotel-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="hotel-card fade-in fade-in-delay-5" data-place="cambrian">
+          <div class="hotel-img">
+            <img src="https://picsum.photos/seed/cambrian-adelboden/800/600" alt="The Cambrian em Adelboden" loading="lazy" />
+          </div>
+          <div class="hotel-body">
+            <span class="hotel-location">Adelboden</span>
+            <h3 class="hotel-name">The Cambrian</h3>
+            <p class="hotel-desc">Design escandinavo encontra alma alpina neste boutique hotel de Adelboden. Piscina aquecida com vista para o vale, spa minimalista e gastronomia de mercado. Para quem quer fugir do óbvio.</p>
+            <div class="hotel-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer-logo">Suíça <span>—</span> Para Ela</span>
+    <span class="footer-tagline">Um guia curado com muito carinho</span>
+    <ul class="footer-links">
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <div class="footer-divider"></div>
+    <p class="footer-copy">Feito com <span class="footer-heart">♥</span> para uma pessoa especial · Fotos via Unsplash</p>
+  </footer>
+
+  <div id="detail-overlay" class="detail-overlay" aria-hidden="true">
+    <button class="detail-back" id="detail-back">← Voltar</button>
+    <div class="detail-hero">
+      <img id="detail-hero-img" src="" alt="" loading="eager" />
+      <div class="detail-hero-overlay"></div>
+      <div class="detail-hero-content">
+        <span id="detail-tag" class="detail-tag"></span>
+        <h1 id="detail-title" class="detail-title"></h1>
+        <p id="detail-subtitle" class="detail-subtitle"></p>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div id="detail-content" class="detail-content"></div>
+    </div>
+  </div>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const nav = document.getElementById('nav');
+    const progressBar = document.getElementById('scroll-progress');
+    function updateScrollUI() {
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 60);
+      if (progressBar) { const docH = document.documentElement.scrollHeight - window.innerHeight; progressBar.style.width = (docH > 0 ? Math.min(100, (y / docH) * 100) : 0) + '%'; }
+    }
+    updateScrollUI();
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('mobile-close');
+    const openMenu  = () => { menu.classList.add('open'); toggle.classList.add('active'); toggle.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; };
+    const closeMenu = () => { menu.classList.remove('open'); toggle.classList.remove('active'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
+    toggle.addEventListener('click', () => menu.classList.contains('open') ? closeMenu() : openMenu());
+    closeBtn.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); closeDetail(); } });
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in, .reveal').forEach(el => revealObserver.observe(el));
+    const subHeroBg = document.getElementById('sub-hero-bg');
+    let latestY = 0, rafPending = false;
+    window.addEventListener('scroll', () => {
+      latestY = window.scrollY; updateScrollUI();
+      if (!rafPending) { rafPending = true; requestAnimationFrame(() => { if (!prefersReducedMotion && subHeroBg) subHeroBg.style.transform = `translate3d(0, ${latestY * 0.25}px, 0)`; rafPending = false; }); }
+    }, { passive: true });
+
+    const PLACES = {
+      badrutts: {
+        tag: 'St. Moritz · Desde 1896',
+        title: "Badrutt's Palace",
+        subtitle: 'O ícone eterno do glamour alpino',
+        img: 'https://picsum.photos/seed/badrutts-palace-stmoritz/1400/800',
+        sections: [
+          { heading: 'História', text: 'O Badrutt\'s Palace foi fundado em 1896 por Caspar Badrutt, o mesmo homem que "inventou" o turismo de inverno suíço ao apostar com clientes ingleses que voltariam depois do verão — e os manteve encantados. A torre medieval icônica tornou-se símbolo de St. Moritz e, por extensão, de todo o conceito de resort alpino de luxo. Por seus salões passaram Audrey Hepburn, Coco Chanel, Sophia Loren, Alfred Hitchcock e inúmeros reis e princesas.' },
+          { heading: 'O hotel', text: 'São 157 quartos e suítes decoradas em estilo clássico europeu com toques modernos. Cada aposento tem vista para o Lago de St. Moritz ou para os Alpes engadinenses. O spa de 1.800 m² tem piscina aquecida interna e externa. O Roi Soleil Pool Bar, à beira da piscina, é o ponto de encontro da elite da estação de esqui mais exclusiva do mundo.' },
+          { heading: 'Gastronomia', text: 'O hotel tem sete opções de restaurante e bar. O Le Restaurant serve alta cozinha mediterrâneo-alpina com ingredientes sazonais. O King\'s Club é a boate mais famosa dos Alpes — uma instituição de 50 anos que ainda recebe os melhores DJs. O serviço de quarto é 24h, com menu de alta gastronomia disponível a qualquer hora.' },
+          { heading: 'Atividades', text: 'Ski-in ski-out direto para as pistas de Corviglia. Curling no lago gelado no inverno. Polo na neve em janeiro (um dos torneios mais exclusivos do mundo). No verão, golfe, hipismo, vela no lago, trekking nas montanhas engadinenses. O hotel organiza heliesquí e voos de planador sobre os Alpes para hóspedes.' },
+          { heading: 'Dica', text: 'Reserve a suíte com terraço voltada para o lago — o nascer do sol sobre o Lago de St. Moritz congelado no inverno é um dos espetáculos visuais mais raros da Europa. Peça ao concierge para reservar a mesa certa no Acla Restaurant para o almoço pós-ski: vista do lago, fondue de trufas, e a sensação de ter chegado ao topo do mundo.' }
+        ],
+        quiz: [
+          { q: "Em que ano foi fundado o Badrutt's Palace?", opts: ["1856","1896","1912","1928"], correct: 1, feedback: "O Badrutt's Palace foi fundado em 1896 por Caspar Badrutt em St. Moritz." },
+          { q: "Qual resort de esqui abriga o Badrutt's Palace?", opts: ["Gstaad","Zermatt","St. Moritz","Davos"], correct: 2, feedback: "O Badrutt's Palace fica em St. Moritz, no cantão de Graubünden." },
+          { q: "O que é o King's Club do Badrutt's Palace?", opts: ["Clube de golfe","Spa exclusivo","A boate mais famosa dos Alpes","Restaurante estrelado"], correct: 2, feedback: "O King's Club é uma boate lendária de 50 anos dentro do Badrutt's Palace." },
+          { q: "Qual é o nome do fundador do turismo de inverno em St. Moritz?", opts: ["Johann Badrutt","Caspar Badrutt","Hans Badrutt","Karl Badrutt"], correct: 1, feedback: "Caspar Badrutt 'inventou' o turismo de inverno ao apostar com clientes britânicos." }
+        ]
+      },
+      alpina: {
+        tag: 'Gstaad · Cantão de Berna',
+        title: 'The Alpina Gstaad',
+        subtitle: 'Ultra-luxo contemporâneo com alma alpina',
+        img: 'https://picsum.photos/seed/alpina-gstaad-hotel/1400/800',
+        sections: [
+          { heading: 'O hotel', text: 'Inaugurado em 2012, o Alpina Gstaad rapidamente se tornou o hotel mais cobiçado dos Alpes suíços — não por ser o mais antigo ou o mais tradicional, mas por combinar arquitetura contemporânea com materiais alpinos centenários de forma absolutamente magistral. Madeira de celeiro do século XVIII, pedra local do Oberland, lã de ovelha das fazendas vizinhas — tudo reinterpretado em chave de design de vanguarda.' },
+          { heading: 'Localização e vistas', text: 'O hotel se posiciona com maestria: cada uma das 56 suítes tem vista direta para um dos três picos mais icônicos de Gstaad — Eggli, Wasserngrat ou Wispile. A piscina aquecida exterior, a 1.050 metros de altitude, tem vista de 180° para os Alpes berneses. No inverno, nadar ali sob a neve é uma das experiências mais surreais e memoráveis que a Suíça oferece.' },
+          { heading: 'Six Senses Spa', text: 'O spa de seis andares é operado pela marca Six Senses — a mesma de Maldivas e Bali. Piscina interior, piscina exterior aquecida, sala de gelo, saunas finlandesas, hammam, salas de tratamento e um programa de bem-estar integrativo baseado na tradição alpina. O melhor spa de montanha da Europa, segundo o Condé Nast Traveller.' },
+          { heading: 'Gastronomia', text: 'Três restaurantes: SOMMET (alta cozinha franco-alpina com 1 estrela Michelin), YASSS (comida asiática contemporânea, um dos únicos na região) e La Branche (bistrot informal com raclette e fondue). O bar oferece 150 rótulos de whisky escocês — um dos maiores estoques dos Alpes.' },
+          { heading: 'Dica', text: 'Reserve para uma semana — não um fim de semana. O Alpina foi projetado para estadias longas: cada dia você encontra uma nova dimensão do hotel. Peça ao concierge um "picnic alpino" para ser entregue no topo da Eggli via teleférico: cesta de madeira com queijos, charcuterie, fruta e vinho local, com manta e vista de 360° para os Alpes.' }
+        ],
+        quiz: [
+          { q: "Em que ano foi inaugurado o The Alpina Gstaad?", opts: ["1985","1998","2005","2012"], correct: 3, feedback: "O Alpina Gstaad foi inaugurado em 2012." },
+          { q: "Qual marca internacional opera o spa do Alpina?", opts: ["Mandarin Oriental","ESPA","Six Senses","Aman"], correct: 2, feedback: "O spa de seis andares do Alpina é operado pela Six Senses, mesma marca presente em Maldivas e Bali." },
+          { q: "Quantas suítes tem o Alpina Gstaad?", opts: ["28","42","56","80"], correct: 2, feedback: "O Alpina Gstaad tem 56 suítes, cada uma com vista para um dos picos icônicos de Gstaad." },
+          { q: "Qual restaurante do Alpina tem estrela Michelin?", opts: ["La Branche","YASSS","SOMMET","Alpine Grill"], correct: 2, feedback: "O SOMMET serve alta cozinha franco-alpina e tem 1 estrela Michelin." }
+        ]
+      },
+      omnia: {
+        tag: 'Zermatt · Cantão de Valais',
+        title: 'The Omnia',
+        subtitle: 'Suspenso sobre Zermatt com o Matterhorn como vizinho',
+        img: 'https://picsum.photos/seed/omnia-zermatt-hotel/1400/800',
+        sections: [
+          { heading: 'O conceito', text: 'O Omnia é talvez o hotel mais dramaticamente posicionado dos Alpes: construído numa rocha acima de Zermatt, é acessado exclusivamente por um elevador escavado diretamente na pedra. A chegada já é uma experiência. Lá em cima, 30 suítes e uma vista de fazer parar o coração: o Matterhorn em toda a sua glória piramidal, sem nada entre você e o pico mais icônico do mundo.' },
+          { heading: 'O hotel', text: 'O design é um diálogo entre minimalismo nórdico e materiais alpinos — aço, madeira escura, pedra bruta, peles naturais. Não há TV nos quartos (intencionalmente): a janela de parede inteira com o Matterhorn é o único entertainment que a casa oferece e promete. A biblioteca tem uma seleção curada de livros sobre alpinismo, arte e filosofia.' },
+          { heading: 'Gastronomia', text: 'O restaurante do Omnia tem uma das ementas mais criativas de Zermatt: fusion contemporânea com ingredientes valaisanos. O café da manhã — com pão artesanal, queijo local, ovos de fazenda e vista do Matterhorn emergindo das nuvens — foi eleito pela Condé Nast "o melhor café da manhã da Suíça".' },
+          { heading: 'Zermatt sem carros', text: 'Zermatt é uma das raras cidades europeias totalmente sem carros a motor — apenas veículos elétricos e carruagens. Isso cria um silêncio e uma qualidade de ar impossíveis em qualquer outro resort alpino. Chegue de trem (obrigatório — carros ficam em Täsch), e descubra que andar a pé aqui é um prazer raro.' },
+          { heading: 'Dica', text: 'Reserve a suíte com banheira frente ao Matterhorn — existe exatamente uma dessas. Tome banho de manhã, na escuridão, com apenas a janela iluminada pela luz nascente no pico. Suba também ao Gornergrat no amanhecer (primeiro trem às 6h) e volte para o café da manhã no Omnia — essa sequência não tem preço.' }
+        ],
+        quiz: [
+          { q: "Como o Omnia é acessado em Zermatt?", opts: ["Teleférico","Elevador na rocha","Funicular","A pé por escadaria"], correct: 1, feedback: "O Omnia é acessado exclusivamente por um elevador escavado diretamente na rocha." },
+          { q: "O que torna Zermatt única no transporte?", opts: ["Maior aeroporto alpino","Sem carros a combustão","Metrô subterrâneo","Trem de levitação magnética"], correct: 1, feedback: "Zermatt é totalmente sem carros a motor — apenas veículos elétricos circulam." },
+          { q: "Qual pico é o vizinho permanente do Omnia?", opts: ["Eiger","Jungfrau","Matterhorn","Titlis"], correct: 2, feedback: "O Omnia tem o Matterhorn como vizinho permanente, visível das suítes e do restaurante." },
+          { q: "Por que o Omnia não tem TVs nos quartos?", opts: ["Econômica","Intencional — a vista é o entertainment","Regulamento local","Interferência de sinal"], correct: 1, feedback: "A ausência de TVs é intencional: a janela com o Matterhorn é o único entretenimento que o Omnia promete." }
+        ]
+      },
+      schweizerhof: {
+        tag: 'Berna · Capital da Suíça',
+        title: 'Schweizerhof',
+        subtitle: 'Clássico do centro histórico de Berna',
+        img: 'https://picsum.photos/seed/schweizerhof-berna/1400/800',
+        sections: [
+          { heading: 'O hotel', text: 'O Schweizerhof Bern existe desde 1859 e foi o primeiro grande hotel de luxo da capital suíça. Está a 100 metros da Estação Central e a dois minutos a pé das arcadas históricas de Berna — patrimônio UNESCO. Por seus salões passaram Churchill, Dürrenmatt, Jean-Paul Sartre e incontáveis chefes de Estado.' },
+          { heading: 'O ambiente', text: 'Os 99 quartos e suítes mantêm uma elegância Belle Époque bem preservada, com tetos altos, molduras douradas e mobiliário clássico. O lobby com sua cúpula de vidro é um dos espaços mais bonitos da cidade. Das suítes superiores, janelas voltadas para os Alpes Berneses oferecem vista direta para o Eiger e o Jungfrau nos dias claros.' },
+          { heading: 'Gastronomia', text: 'O Jack\'s Brasserie no térreo é uma referência histórica de Berna — um bistrô clássico de 150 anos que serve desde Wiener Schnitzel até tártaro de bife, com vinho da Borgonha e cerveja local. O bar do hotel tem a melhor carta de whisky da cidade e é o ponto de encontro da classe política local à noite.' },
+          { heading: 'Por que Berna', text: 'Berna é a capital mais esquecida pelos turistas — e por isso a mais autêntica. A Altstadt (cidade velha) medieval tem 6 km de arcadas cobertas, única no mundo. O Museu de Arte é um dos melhores da Suíça. A vista da Nydeggbrücke para os telhados vermelhos e o Aare verde-esmeralda vale a viagem por si só.' },
+          { heading: 'Dica', text: 'Peça ao concierge um "Bern by Night" — um roteiro personalizado pelos melhores bares, restaurantes e mirantes noturnos da cidade que nenhum guia turístico lista. O hotel tem parceria com a maioria dos estabelecimentos e garante mesa sem fila. Não deixe de subir ao terraço do Parliament Building ao anoitecer.' }
+        ],
+        quiz: [
+          { q: "Desde quando existe o Schweizerhof Bern?", opts: ["1799","1859","1903","1931"], correct: 1, feedback: "O Schweizerhof Bern existe desde 1859 e foi o primeiro grande hotel de luxo da capital suíça." },
+          { q: "Qual é o restaurante histórico no térreo do Schweizerhof?", opts: ["Bernese Grill","Jack's Brasserie","Le Palais","Zum Rathaus"], correct: 1, feedback: "O Jack's Brasserie é uma referência histórica de Berna — um bistrô clássico de 150 anos." },
+          { q: "O que é o centro histórico de Berna (Altstadt)?", opts: ["Um bairro moderno","Patrimônio Mundial UNESCO com 6 km de arcadas","O maior castelo medieval da Suíça","Um complexo de museus"], correct: 1, feedback: "A Altstadt de Berna é Patrimônio Mundial UNESCO e tem 6 km de arcadas cobertas — única no mundo." },
+          { q: "A quantos metros fica o Schweizerhof da Estação Central de Berna?", opts: ["500 metros","100 metros","1 km","2 km"], correct: 1, feedback: "O Schweizerhof fica a apenas 100 metros da Estação Central de Berna." }
+        ]
+      },
+      cambrian: {
+        tag: 'Adelboden · Cantão de Berna',
+        title: 'The Cambrian',
+        subtitle: 'Design escandinavo encontra alma alpina',
+        img: 'https://picsum.photos/seed/cambrian-adelboden/1400/800',
+        sections: [
+          { heading: 'O hotel', text: 'O Cambrian é a prova de que um hotel pode ser radicalmente moderno sem trair o espírito do lugar. Inaugurado em 2011 após uma reforma total de uma propriedade histórica de Adelboden, tem uma arquitetura de linhas escandinavas limpas — madeira clara, vidro generoso, volumes simples — que paradoxalmente se encaixa melhor na paisagem alpina do que muitos chalés tradicionais.' },
+          { heading: 'A piscina e o spa', text: 'A piscina aquecida exterior do Cambrian é considerada uma das mais belas da Suíça: retangular, com borda infinita sobre o vale, rodeada de neve no inverno. O spa minimalista usa produtos naturais alpinos e tem uma sauna panorâmica com janela aberta para o circo montanhoso de Adelboden.' },
+          { heading: 'Gastronomia', text: 'O restaurante do Cambrian serve "mountain market cuisine" — ingredientes de mercados locais transformados com técnica contemporânea. O cardápio muda semanalmente conforme o que os agricultores vizinhos têm disponível. Pequeno-almoço é um festim: pão rústico, queijos do Simmental, frutas silvestres, ovos de campo.' },
+          { heading: 'Adelboden', text: 'O vilarejo de Adelboden é um dos segredos mais bem guardados do Oberland Bernês. Sem a fama de Gstaad ou Grindelwald, tem preços mais acessíveis, pistas de esqui excelentes (100+ km) e uma autenticidade que os resorts mais famosos perderam. No verão, as trilhas pelo Engstligenalp são entre as mais belas da Suíça.' },
+          { heading: 'Dica', text: 'Reserve para ficar pelo menos 3 noites — Adelboden precisa de tempo para revelar seus segredos. Peça ao hotel um guia local para uma caminhada pelo platô de Engstligenalp. A paisagem no final de julho, com flores alpinas cobrindo o plateau a 1.964 metros, é um dos espetáculos naturais mais raros da Europa.' }
+        ],
+        quiz: [
+          { q: "Em que cantão fica Adelboden?", opts: ["Valais","Vaud","Berna","Obwalden"], correct: 2, feedback: "Adelboden fica no cantão de Berna, no Oberland Bernês." },
+          { q: "Qual é o diferencial arquitetônico do Cambrian?", opts: ["Estilo barroco","Design escandinavo contemporâneo","Arquitetura medieval","Chalé tradicional"], correct: 1, feedback: "O Cambrian combina design escandinavo moderno com materiais alpinos centenários." },
+          { q: "Qual é a altitude do platô de Engstligenalp, perto de Adelboden?", opts: ["1.200 m","1.600 m","1.964 m","2.400 m"], correct: 2, feedback: "O platô de Engstligenalp fica a 1.964 metros de altitude e é famoso pelas flores alpinas em julho." },
+          { q: "Quantos km de pistas de esqui tem Adelboden?", opts: ["30 km","60 km","100 km","200 km"], correct: 2, feedback: "Adelboden tem mais de 100 km de pistas de esqui." }
+        ]
+      }
+    };
+
+    const overlay = document.getElementById('detail-overlay');
+    const detailBack = document.getElementById('detail-back');
+    const detailImg = document.getElementById('detail-hero-img');
+    const detailTag = document.getElementById('detail-tag');
+    const detailTitle = document.getElementById('detail-title');
+    const detailSub = document.getElementById('detail-subtitle');
+    const detailContent = document.getElementById('detail-content');
+
+    function buildQuizHTML(questions, wrapId) {
+      let current = 0, score = 0;
+      const wrap = document.getElementById(wrapId) || (() => { const el = document.createElement('div'); el.id = wrapId; return el; })();
+      function renderQuestion() {
+        if (current >= questions.length) {
+          wrap.innerHTML = `<div class="quiz-result-box"><span class="quiz-score-text">Você acertou ${score} de ${questions.length}! ${score === questions.length ? '🎉 Perfeito!' : score >= questions.length / 2 ? '👏 Muito bem!' : '💪 Continue explorando!'}</span><button class="quiz-restart-btn">Tentar novamente</button></div>`;
+          wrap.querySelector('.quiz-restart-btn').addEventListener('click', () => { current = 0; score = 0; renderQuestion(); });
+          return;
+        }
+        const q = questions[current];
+        wrap.innerHTML = `<div class="quiz-q-wrap"><span class="quiz-q-num">Pergunta ${current + 1} de ${questions.length}</span><p class="quiz-q-text">${q.q}</p></div><div class="quiz-options">${q.opts.map((o, i) => `<button class="quiz-opt" data-idx="${i}">${o}</button>`).join('')}</div><p class="quiz-feedback"></p>`;
+        wrap.querySelectorAll('.quiz-opt').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const chosen = +this.dataset.idx;
+            wrap.querySelectorAll('.quiz-opt').forEach(b => { b.disabled = true; if (+b.dataset.idx === q.correct) b.classList.add('correct'); else if (+b.dataset.idx === chosen) b.classList.add('wrong'); });
+            wrap.querySelector('.quiz-feedback').textContent = q.feedback;
+            if (chosen === q.correct) score++;
+            setTimeout(() => { current++; renderQuestion(); }, 1800);
+          });
+        });
+      }
+      renderQuestion();
+      return wrap;
+    }
+
+    function openDetail(slug) {
+      const d = PLACES[slug];
+      if (!d) return;
+      detailImg.src = d.img; detailImg.alt = d.title;
+      detailTag.textContent = d.tag; detailTitle.textContent = d.title; detailSub.textContent = d.subtitle;
+      const sectionsHTML = d.sections.map((s, i) => {
+        const imgUrl = `https://picsum.photos/seed/${slug}-s${i}/600/420`;
+        const imgTag = `<img class="detail-section-img" src="${imgUrl}" alt="${s.heading}" loading="lazy" />`;
+        const prose  = `<div class="detail-section-prose"><h2 class="detail-section-heading">${s.heading}</h2><p class="detail-section-text">${s.text}</p></div>`;
+        const inner  = i % 2 === 0 ? `${imgTag}${prose}` : `${prose}${imgTag}`;
+        return `<div class="detail-section"><div class="detail-section-inner">${inner}</div></div>`;
+      }).join('');
+      detailContent.innerHTML = sectionsHTML + `<div class="detail-quiz"><h2 class="detail-quiz-title">✦ Quiz — teste seus conhecimentos</h2><div id="card-quiz-body"></div></div>`;
+      buildQuizHTML(d.quiz, 'card-quiz-body');
+      overlay.classList.add('open'); overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; overlay.scrollTo(0, 0);
+    }
+
+    function closeDetail() {
+      overlay.classList.remove('open'); overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-place]').forEach(card => card.addEventListener('click', () => openDetail(card.dataset.place)));
+    detailBack.addEventListener('click', closeDetail);
+  </script>
+</body>
+</html>

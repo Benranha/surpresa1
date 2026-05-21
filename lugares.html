@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lugares Românticos — Suíça Para Ela</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">Suíça <span>—</span> Para Ela</a>
+    <ul class="nav-links">
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <span class="mobile-menu-logo">Suíça <span>—</span> Para Ela</span>
+    <button class="mobile-close" id="mobile-close" aria-label="Fechar menu">✕</button>
+    <a href="lugares.html" class="mobile-link">Lugares</a>
+    <a href="restaurantes.html" class="mobile-link">Restaurantes</a>
+    <a href="hoteis.html" class="mobile-link">Hotéis</a>
+    <a href="montanhas.html" class="mobile-link">Montanhas</a>
+    <a href="curiosidades.html" class="mobile-link">Curiosidades</a>
+    <a href="guia.html" class="mobile-link">Guia</a>
+    <a href="quiz.html" class="mobile-link">Quiz</a>
+  </div>
+
+  <!-- Sub-hero -->
+  <section class="sub-hero">
+    <div class="sub-hero-bg" id="sub-hero-bg" style="background-image: url('https://picsum.photos/seed/swiss-alps-hero/1800/900');"></div>
+    <div class="sub-hero-overlay"></div>
+    <div class="sub-hero-content">
+      <span class="sub-hero-eyebrow">Suíça — Para Ela</span>
+      <h1 class="sub-hero-title">Lugares Românticos</h1>
+      <p class="sub-hero-subtitle">Onde o romance floresce nos Alpes</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="section section--dark">
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <span class="section-label">Onde o romance floresce</span>
+        <h2 class="section-title">Lugares<br />Românticos</h2>
+        <p class="section-subtitle">Cada uma dessas cidades tem uma alma própria — pedras antigas, lagos espelhados e o silêncio perfeito para se perder de mãos dadas.</p>
+      </div>
+
+      <div class="cards-grid">
+        <article class="card fade-in fade-in-delay-1" data-place="grindelwald">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/grindelwald-eiger/800/600" alt="Grindelwald com o Eiger ao fundo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Oberland Bernês</span>
+            <h3 class="card-title">Grindelwald</h3>
+            <p class="card-text">A vila mais dramática dos Alpes. O Eiger ergue-se atrás dos chalés enquanto a neve cobre tudo de branco absoluto. Um cenário que parece pintado.</p>
+            <div class="card-detail">
+              <span class="card-detail-icon">✦</span>
+              <span>Altitude: 1.034 m · Cantão de Berna</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card fade-in fade-in-delay-2" data-place="montreux">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/montreux-lago/800/600" alt="Montreux à beira do Lago Genebra" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Lago Leman</span>
+            <h3 class="card-title">Montreux</h3>
+            <p class="card-text">A Riviera Suíça. Palmeiras à beira do lago, o Château de Chillon como cenário e um clima surpreendentemente suave. Romântica em todas as estações.</p>
+            <div class="card-detail">
+              <span class="card-detail-icon">✦</span>
+              <span>À beira do Lago Genebra · Cantão de Vaud</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card fade-in fade-in-delay-3" data-place="lucerna">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/lucerna-ponte/800/600" alt="Ponte da Capela em Lucerna" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Centro da Suíça</span>
+            <h3 class="card-title">Lucerna</h3>
+            <p class="card-text">A Kapellbrücke — a ponte de madeira medieval mais famosa do mundo — reflete nas águas do Rio Reuss. Caminhar aqui ao entardecer é quase irreal.</p>
+            <div class="card-detail">
+              <span class="card-detail-icon">✦</span>
+              <span>Ponte da Capela, séc. XIV · Cantão de Lucerna</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card fade-in fade-in-delay-4" data-place="interlaken">
+          <div class="card-img">
+            <img src="https://picsum.photos/seed/interlaken-lagos/800/600" alt="Vista de Interlaken entre os lagos" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Entre os Lagos</span>
+            <h3 class="card-title">Interlaken</h3>
+            <p class="card-text">Situada entre o Lago Thun e o Lago Brienz, com o trio de picos Eiger, Mönch e Jungfrau no horizonte. A porta de entrada para o coração dos Alpes.</p>
+            <div class="card-detail">
+              <span class="card-detail-icon">✦</span>
+              <span>Lagos Thun &amp; Brienz · Cantão de Berna</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-logo">Suíça <span>—</span> Para Ela</span>
+    <span class="footer-tagline">Um guia curado com muito carinho</span>
+    <ul class="footer-links">
+      <li><a href="lugares.html">Lugares</a></li>
+      <li><a href="restaurantes.html">Restaurantes</a></li>
+      <li><a href="hoteis.html">Hotéis</a></li>
+      <li><a href="montanhas.html">Montanhas</a></li>
+      <li><a href="curiosidades.html">Curiosidades</a></li>
+      <li><a href="guia.html">Guia</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+    <div class="footer-divider"></div>
+    <p class="footer-copy">Feito com <span class="footer-heart">♥</span> para uma pessoa especial · Fotos via Unsplash</p>
+  </footer>
+
+  <!-- Detail Overlay -->
+  <div id="detail-overlay" class="detail-overlay" aria-hidden="true">
+    <button class="detail-back" id="detail-back">← Voltar</button>
+    <div class="detail-hero">
+      <img id="detail-hero-img" src="" alt="" loading="eager" />
+      <div class="detail-hero-overlay"></div>
+      <div class="detail-hero-content">
+        <span id="detail-tag" class="detail-tag"></span>
+        <h1 id="detail-title" class="detail-title"></h1>
+        <p id="detail-subtitle" class="detail-subtitle"></p>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div id="detail-content" class="detail-content"></div>
+    </div>
+  </div>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const nav = document.getElementById('nav');
+    const progressBar = document.getElementById('scroll-progress');
+    function updateScrollUI() {
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 60);
+      if (progressBar) {
+        const docH = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.width = (docH > 0 ? Math.min(100, (y / docH) * 100) : 0) + '%';
+      }
+    }
+    updateScrollUI();
+
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('mobile-close');
+    const openMenu  = () => { menu.classList.add('open'); toggle.classList.add('active'); toggle.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; };
+    const closeMenu = () => { menu.classList.remove('open'); toggle.classList.remove('active'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
+    toggle.addEventListener('click', () => menu.classList.contains('open') ? closeMenu() : openMenu());
+    closeBtn.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMenu(); closeDetail(); } });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in, .reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => revealObserver.observe(el));
+
+    // Sub-hero parallax
+    const subHeroBg = document.getElementById('sub-hero-bg');
+    let latestY = 0, rafPending = false;
+    window.addEventListener('scroll', () => {
+      latestY = window.scrollY;
+      updateScrollUI();
+      if (!rafPending) { rafPending = true; requestAnimationFrame(() => {
+        if (!prefersReducedMotion && subHeroBg) subHeroBg.style.transform = `translate3d(0, ${latestY * 0.25}px, 0)`;
+        rafPending = false;
+      }); }
+    }, { passive: true });
+
+    // PLACES data
+    const PLACES = {
+      grindelwald: {
+        tag: 'Oberland Bernês · Cantão de Berna',
+        title: 'Grindelwald',
+        subtitle: 'A vila mais dramática dos Alpes',
+        img: 'https://picsum.photos/seed/grindelwald-eiger/1400/800',
+        sections: [
+          { heading: 'História', text: 'Grindelwald foi descoberta por viajantes britânicos no século XIX, que a chamavam de "A Geleira". Foi um dos primeiros destinos alpinos a receber turistas, muito antes dos resorts modernos. O Eiger — com sua imponente Nordwand (parede norte) de 1.800 metros de rocha vertical — tornou-se o símbolo máximo do alpinismo europeu após décadas de tentativas heroicas e trágicas de escalada a partir dos anos 1930.' },
+          { heading: 'O que fazer', text: 'Tome o funicular até Männlichen para uma vista panorâmica do tridente Eiger-Mönch-Jungfrau. Caminhe o Eiger Trail, que rasga a base da parede norte com trilha de tirar o fôlego. No inverno, esquie nas pistas de First e Kleine Scheidegg. Visite a aldeia em si: chalés com varandas floridas, padarias com pão de centeio e lojas de artesanato genuínas.' },
+          { heading: 'Como chegar', text: 'De Interlaken Ost, tome o trem BOB (Berner Oberland-Bahn) diretamente até Grindelwald — 35 minutos de trajeto. Os trens partem a cada 30 minutos. Com o Swiss Travel Pass, o trajeto é gratuito. De carro, siga pela A8 até Interlaken e depois pela Cantonalstraße — mas o trem é muito mais panorâmico.' },
+          { heading: 'Melhor época', text: 'Julho e agosto para caminhadas com flores alpinas e clima agradável (10–22°C). Dezembro a março para neve impecável e atmosfera natalina nas ruas de chalés. Junho oferece o equilíbrio perfeito: poucos turistas, neve nas alturas, verde nos vales.' },
+          { heading: 'Dica especial', text: 'Acorde cedo — antes das 7h — e caminhe até a base do Eiger. A luz da manhã batendo na parede norte é um espetáculo fotográfico impossível de reproduzir. Evite ir apenas de teleférico: a caminhada até Pfingstegg (40 minutos de trilha fácil) revela ângulos que nenhuma foto de cartão-postal mostra.' }
+        ],
+        quiz: [
+          { q: "Qual é a altitude de Grindelwald?", opts: ["634 m","1.034 m","2.034 m","3.034 m"], correct: 1, feedback: "Grindelwald fica a 1.034 metros de altitude no Oberland Bernês." },
+          { q: "Como se chama a parede norte do Eiger?", opts: ["Ostwand","Südwand","Nordwand","Westwand"], correct: 2, feedback: "A Nordwand do Eiger tem 1.800 metros de rocha vertical — uma das mais temidas do alpinismo." },
+          { q: "Qual trem conecta Interlaken Ost a Grindelwald?", opts: ["RER","TGV","BOB","ICE"], correct: 2, feedback: "O BOB (Berner Oberland-Bahn) faz o trajeto em 35 minutos." },
+          { q: "Para onde leva o funicular Männlichen?", opts: ["Topo do Eiger","Vista panorâmica do trio alpino","Geleira Aletsch","Lago Brienz"], correct: 1, feedback: "O funicular de Männlichen oferece uma das vistas mais completas do trio Eiger-Mönch-Jungfrau." }
+        ]
+      },
+      montreux: {
+        tag: 'Lago Léman · Cantão de Vaud',
+        title: 'Montreux',
+        subtitle: 'A Riviera Suíça à beira do lago',
+        img: 'https://picsum.photos/seed/montreux-lago/1400/800',
+        sections: [
+          { heading: 'História', text: 'Montreux conquistou fama internacional no século XIX quando artistas, escritores e aristocratas europeus a descobriram como refúgio de inverno. Lord Byron escreveu parte do "Prisioneiro de Chillon" inspirado na fortaleza medieval que flutua no lago. No século XX, tornou-se o lar do icônico Montreux Jazz Festival, fundado em 1967 por Claude Nobs, que ainda hoje reúne os maiores nomes da música mundial cada julho.' },
+          { heading: 'O que fazer', text: 'Passeie pela Quai Fleurie — o calçadão à beira do lago com flores tropicais que desafiam o clima alpino. Visite o Château de Chillon, castela medieval perfeitamente conservada na água. Em julho, mergulhe no Montreux Jazz Festival. Suba de trem de cremalheira até Rochers-de-Naye (2.042 m) para vista do Monte Blanc num dia limpo.' },
+          { heading: 'Como chegar', text: 'De Genebra, são 70 minutos de trem direto. De Lausanne, apenas 25 minutos. Trens IC e RE passam frequentemente — com o Swiss Travel Pass, o trajeto é incluído. Há também ferry no verão saindo de Genebra que faz a rota pelo lago em 3h30, com paradas em Lausanne e Vevey — a mais bela maneira de chegar.' },
+          { heading: 'Melhor época', text: 'Julho para o Jazz Festival (reserve hotel com 6+ meses de antecedência). Junho e setembro para clima ameno, menos turistas e lago azul-esmeralda sem multidão. Dezembro tem a magia do Natal com mercados tradicionais e luzes refletidas no lago.' },
+          { heading: 'Dica especial', text: 'Vá até Vevey (15 minutos de trem) e visite o museu Charlie Chaplin, que viveu ali até o fim da vida. Depois, caminhe de volta a Montreux pela margem do lago — 1 hora de caminhada plana com vistas constantes para o lago e os Alpes franceses. Um dos percursos mais belos da Europa.' }
+        ],
+        quiz: [
+          { q: "Em que mês ocorre o famoso festival de Montreux?", opts: ["Março","Julho","Outubro","Dezembro"], correct: 1, feedback: "O Montreux Jazz Festival acontece em julho, desde 1967." },
+          { q: "Qual escritor imortalizou o Château de Chillon?", opts: ["Victor Hugo","Voltaire","Lord Byron","Alexandre Dumas"], correct: 2, feedback: "Lord Byron escreveu 'O Prisioneiro de Chillon' inspirado na fortaleza medieval no lago." },
+          { q: "Quanto tempo dura o trem de Genebra a Montreux?", opts: ["30 minutos","70 minutos","2 horas","3 horas"], correct: 1, feedback: "De Genebra, são aproximadamente 70 minutos de trem direto até Montreux." },
+          { q: "Qual é o apelido da região de Montreux?", opts: ["Riviera Alpina","Riviera Suíça","Costa do Lago","Paraíso do Léman"], correct: 1, feedback: "Montreux é conhecida como a 'Riviera Suíça' pelo seu clima suave e palmeiras à beira do Lago Léman." }
+        ]
+      },
+      lucerna: {
+        tag: 'Centro da Suíça · Cantão de Lucerna',
+        title: 'Lucerna',
+        subtitle: 'Ponte medieval, lago e montanha num só horizonte',
+        img: 'https://picsum.photos/seed/lucerna-ponte/1400/800',
+        sections: [
+          { heading: 'História', text: 'Lucerna foi fundada por monges beneditinos por volta do ano 750 d.C. e cresceu como ponto estratégico de passagem dos Alpes. A Kapellbrücke — Ponte da Capela — foi construída em 1333 como parte das muralhas da cidade, tornando-se a ponte de madeira mais antiga da Europa. Dentro dela há pinturas do século XVII retratando a história suíça. Em 1993, um incêndio destruiu dois terços da ponte; a reconstrução foi concluída com impressionante fidelidade ao original.' },
+          { heading: 'O que fazer', text: 'Atravesse a Kapellbrücke ao entardecer, quando a luz dourada tinge as pinturas. Suba de funicular até o Pilatus (2.132 m) — "a montanha do dragão" — e desça de gondola. Visite o Museu de Transportes, o mais visitado da Suíça. Passeie de barco pelo Lago dos Quatro Cantões. Não perca o Lion Monument, esculpido diretamente na rocha: Mark Twain o chamou de "a escultura mais triste e comovente do mundo".' },
+          { heading: 'Como chegar', text: 'De Zurique: 50 minutos de trem direto (IC, a cada 30 minutos). De Interlaken: 2 horas de trem panorâmico pela rota do Golden Pass, com vistas dos lagos. De Basileia: 1h20. Lucerna tem uma das estações ferroviárias mais bonitas da Suíça, em frente ao lago — chegue e já se encante.' },
+          { heading: 'Melhor época', text: 'Qualquer época funciona — Lucerna é uma das poucas cidades suíças igualmente linda no verão e no inverno. Agosto tem o Festival Internacional de Música, um dos mais respeitados do mundo clássico. Dezembro tem o Mercado de Natal na Franziskanerplatz, com presentes artesanais e glühwein.' },
+          { heading: 'Dica especial', text: 'Reserve jantar no Restaurant Schiffrestaurant Wilhelm Tell — um barco ancorado no lago que serve fondue e raclette com vista para as montanhas. Depois, caminhe pelas ruelas do centro histórico após as 22h, quando os turistas somem e a cidade revela sua alma medieval e silenciosa.' }
+        ],
+        quiz: [
+          { q: "Em que século foi construída a Kapellbrücke?", opts: ["Século X","Século XIV","Século XVI","Século XVIII"], correct: 1, feedback: "A Kapellbrücke foi construída em 1333 — século XIV — como parte das muralhas da cidade de Lucerna." },
+          { q: "O que Mark Twain disse sobre o Lion Monument de Lucerna?", opts: ["'A escultura mais bela da Europa'","'A escultura mais triste e comovente do mundo'","'Um monumento ao valor suíço'","'A obra de arte mais impressionante dos Alpes'"], correct: 1, feedback: "Mark Twain chamou o Lion Monument de 'a escultura mais triste e comovente do mundo'." },
+          { q: "Qual é o lago onde fica Lucerna?", opts: ["Lago Thun","Lago Léman","Lago dos Quatro Cantões","Lago Brienz"], correct: 2, feedback: "Lucerna fica às margens do Vierwaldstättersee — o Lago dos Quatro Cantões." },
+          { q: "Quanto tempo leva o trem de Zurique a Lucerna?", opts: ["20 minutos","50 minutos","1h30","2 horas"], correct: 1, feedback: "De Zurique, o trem IC chega a Lucerna em aproximadamente 50 minutos." }
+        ]
+      },
+      interlaken: {
+        tag: 'Entre os Lagos · Cantão de Berna',
+        title: 'Interlaken',
+        subtitle: 'Entre o Thun e o Brienz, aos pés do trio alpino',
+        img: 'https://picsum.photos/seed/interlaken-lagos/1400/800',
+        sections: [
+          { heading: 'História', text: 'O nome já diz tudo: "entre os lagos". Interlaken nasceu como vilarejo monástico no século XII, na língua de terra que separa o Lago Thun do Lago Brienz. O turismo chegou no início do século XIX, quando viajantes britânicos "descobriram" a rota pelos Alpes. Em 1890, o trem de cremalheira até Grindelwald foi inaugurado, e Interlaken se tornou a capital logística do Oberland Bernês — papel que mantém até hoje.' },
+          { heading: 'O que fazer', text: 'Suba ao Harder Kulm de funicular para a vista dos dois lagos simultâneos. Faça passeio de barco no Lago Thun até o Château de Spiez (castelo medieval à beira d\'água). Tome o trem para Jungfraujoch diretamente de Interlaken Ost. No verão, faça caiaque no Lago Brienz — cor de turquesa intenso. Visite o Höheweg, o boulevard central com vista direta para o Jungfrau.' },
+          { heading: 'Como chegar', text: 'Há duas estações: Interlaken West (trens de Berna e Spiez) e Interlaken Ost (trens para Grindelwald, Lauterbrunnen e Jungfraujoch). De Berna: 55 minutos. De Zurique: 2 horas com uma troca em Berna. De Lucerna: 2 horas pela rota do Golden Pass — belíssima, especialmente a parte por Brienz.' },
+          { heading: 'Melhor época', text: 'Junho a setembro para os dois lagos no auge da cor e caminhadas nas montanhas vizinhas. Inverno (dezembro a março) é mais tranquilo, com neve nas alturas e preços de hotel melhores. Evite agosto nos fins de semana — Interlaken fica extremamente movimentada com turistas asiáticos e grupos.' },
+          { heading: 'Dica especial', text: 'Alugue uma bicicleta em Interlaken e pedale até o vilarejo de Iseltwald (20 km) à beira do Lago Brienz — o mesmo local viralizado pelo K-drama "Crash Landing on You". A ciclovia à beira do lago é plana e asfaltada. Leve piquenique e passe a tarde ali: poucos lugares na Europa têm água tão azul e montanhas tão próximas.' }
+        ],
+        quiz: [
+          { q: "O que significa o nome 'Interlaken'?", opts: ["Entre as montanhas","Entre os lagos","Entre os vales","Entre os rios"], correct: 1, feedback: "Interlaken significa literalmente 'entre os lagos' — ela fica entre o Lago Thun e o Lago Brienz." },
+          { q: "Qual K-drama tornou o Lago Brienz famoso mundialmente?", opts: ["Goblin","Descendants of the Sun","Crash Landing on You","My Love from the Star"], correct: 2, feedback: "O vilarejo de Iseltwald, à beira do Lago Brienz, viralizou após aparecer em 'Crash Landing on You'." },
+          { q: "Quais são os três picos visíveis do Höheweg de Interlaken?", opts: ["Matterhorn, Eiger, Jungfrau","Eiger, Mönch, Jungfrau","Titlis, Mönch, Pilatus","Rigi, Eiger, Titlis"], correct: 1, feedback: "Do centro de Interlaken, vê-se o trio Eiger, Mönch e Jungfrau — os picos mais icônicos do Oberland Bernês." },
+          { q: "De qual estação de Interlaken partem os trens para o Jungfraujoch?", opts: ["Interlaken West","Interlaken Central","Interlaken Ost","Interlaken Berg"], correct: 0, feedback: "Os trens para Grindelwald, Lauterbrunnen e Jungfraujoch partem de Interlaken Ost — a estação leste." }
+        ]
+      }
+    };
+
+    // Detail overlay logic
+    const overlay      = document.getElementById('detail-overlay');
+    const detailBack   = document.getElementById('detail-back');
+    const detailImg    = document.getElementById('detail-hero-img');
+    const detailTag    = document.getElementById('detail-tag');
+    const detailTitle  = document.getElementById('detail-title');
+    const detailSub    = document.getElementById('detail-subtitle');
+    const detailContent = document.getElementById('detail-content');
+
+    function buildQuizHTML(questions, wrapId) {
+      let current = 0, score = 0;
+      const wrap = document.getElementById(wrapId) || (() => { const el = document.createElement('div'); el.id = wrapId; return el; })();
+      function renderQuestion() {
+        if (current >= questions.length) {
+          wrap.innerHTML = `<div class="quiz-result-box"><span class="quiz-score-text">Você acertou ${score} de ${questions.length}! ${score === questions.length ? '🎉 Perfeito!' : score >= questions.length / 2 ? '👏 Muito bem!' : '💪 Continue explorando!'}</span><button class="quiz-restart-btn">Tentar novamente</button></div>`;
+          wrap.querySelector('.quiz-restart-btn').addEventListener('click', () => { current = 0; score = 0; renderQuestion(); });
+          return;
+        }
+        const q = questions[current];
+        wrap.innerHTML = `<div class="quiz-q-wrap"><span class="quiz-q-num">Pergunta ${current + 1} de ${questions.length}</span><p class="quiz-q-text">${q.q}</p></div><div class="quiz-options">${q.opts.map((o, i) => `<button class="quiz-opt" data-idx="${i}">${o}</button>`).join('')}</div><p class="quiz-feedback"></p>`;
+        wrap.querySelectorAll('.quiz-opt').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const chosen = +this.dataset.idx;
+            wrap.querySelectorAll('.quiz-opt').forEach(b => { b.disabled = true; if (+b.dataset.idx === q.correct) b.classList.add('correct'); else if (+b.dataset.idx === chosen) b.classList.add('wrong'); });
+            wrap.querySelector('.quiz-feedback').textContent = q.feedback;
+            if (chosen === q.correct) score++;
+            setTimeout(() => { current++; renderQuestion(); }, 1800);
+          });
+        });
+      }
+      renderQuestion();
+      return wrap;
+    }
+
+    function openDetail(slug) {
+      const d = PLACES[slug];
+      if (!d) return;
+      detailImg.src = d.img; detailImg.alt = d.title;
+      detailTag.textContent = d.tag;
+      detailTitle.textContent = d.title;
+      detailSub.textContent = d.subtitle;
+      const sectionsHTML = d.sections.map((s, i) => {
+        const imgUrl = `https://picsum.photos/seed/${slug}-s${i}/600/420`;
+        const imgTag = `<img class="detail-section-img" src="${imgUrl}" alt="${s.heading}" loading="lazy" />`;
+        const prose  = `<div class="detail-section-prose"><h2 class="detail-section-heading">${s.heading}</h2><p class="detail-section-text">${s.text}</p></div>`;
+        const inner  = i % 2 === 0 ? `${imgTag}${prose}` : `${prose}${imgTag}`;
+        return `<div class="detail-section"><div class="detail-section-inner">${inner}</div></div>`;
+      }).join('');
+      detailContent.innerHTML = sectionsHTML + `<div class="detail-quiz"><h2 class="detail-quiz-title">✦ Quiz — teste seus conhecimentos</h2><div id="card-quiz-body"></div></div>`;
+      buildQuizHTML(d.quiz, 'card-quiz-body');
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      overlay.scrollTo(0, 0);
+    }
+
+    function closeDetail() {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-place]').forEach(card => card.addEventListener('click', () => openDetail(card.dataset.place)));
+    detailBack.addEventListener('click', closeDetail);
+  </script>
+</body>
+</html>
