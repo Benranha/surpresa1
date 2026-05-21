@@ -481,6 +481,48 @@
     .section--dark .card-text  { color: rgba(255,255,255,.55); }
     .section--dark .card-detail { border-color: rgba(255,255,255,.1); color: rgba(255,255,255,.4); }
 
+    /* ─── Pagination ────────────────────────────────────── */
+    .pagination-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+    .pagination-btn {
+      background: none;
+      border: 1px solid currentColor;
+      color: inherit;
+      padding: .5rem 1.25rem;
+      font-family: var(--font-body);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background .2s, color .2s, opacity .2s;
+      opacity: .55;
+    }
+    .pagination-btn:not([disabled]):hover { opacity: 1; }
+    .pagination-btn[disabled] { opacity: .18; cursor: default; pointer-events: none; }
+    .pagination-dots {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+    .pagination-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: .2;
+      transition: opacity .25s, transform .25s;
+      cursor: pointer;
+    }
+    .pagination-dot.active { opacity: .8; transform: scale(1.45); cursor: default; }
+    .section--dark .pagination-btn { color: var(--white); }
+    .section--dark .pagination-dot { background: var(--white); }
+
     /* ─── Feature Layout (2 col) ────────────────────────── */
     .feature-grid {
       display: grid;
@@ -632,13 +674,6 @@
     .hotel-card:nth-child(4),
     .hotel-card:nth-child(5) {
       grid-column: span 1;
-    }
-
-    .hotels-grid-bottom {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 2rem;
     }
 
     .hotel-img {
@@ -1198,7 +1233,6 @@
       .restaurant-body { padding: 1.5rem 1.4rem; }
 
       .hotels-grid { grid-template-columns: 1fr 1fr; gap: 1.4rem; }
-      .hotels-grid-bottom { grid-template-columns: 1fr; gap: 1.4rem; }
       .hotel-body { padding: 1.4rem 1.3rem; }
       .hotel-img { height: 210px; }
 
@@ -1254,7 +1288,6 @@
       .card-title { font-size: 1.3rem; }
 
       .hotels-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-      .hotels-grid-bottom { grid-template-columns: 1fr; gap: 1.25rem; margin-top: 1.25rem; }
       .hotel-img { height: 220px; }
       .facts-grid { grid-template-columns: 1fr; gap: 1rem; }
 
@@ -2084,10 +2117,7 @@
             </div>
           </div>
         </article>
-      </div>
 
-      <!-- Bottom 2 -->
-      <div class="hotels-grid-bottom" style="margin-top: 2rem;">
         <!-- Schweizerhof -->
         <article class="hotel-card fade-in fade-in-delay-4" data-place="schweizerhof">
           <div class="hotel-img">
@@ -2130,6 +2160,7 @@
   </section>
 
   <!-- ═══ MONTANHAS ═════════════════════════════════════ -->
+
   <section class="section" id="montanhas">
     <div class="section-inner">
       <div class="section-header fade-in">
@@ -3036,6 +3067,68 @@
 
       render();
       restart.addEventListener('click', () => { current = 0; score = 0; render(); });
+    })();
+
+    /* ── Paginação por Seção ────────────────────────────── */
+    (function initSectionPagination() {
+      const ITEMS_PER_PAGE = 3;
+
+      const sections = [
+        { gridSel: '#lugares .cards-grid',       cardSel: 'article.card' },
+        { gridSel: '#restaurantes .restaurant-list', cardSel: 'article.restaurant-card' },
+        { gridSel: '#hoteis .hotels-grid',        cardSel: 'article.hotel-card' },
+        { gridSel: '#montanhas .mountains-grid',  cardSel: 'article.mountain-card' },
+      ];
+
+      sections.forEach(({ gridSel, cardSel }) => {
+        const grid = document.querySelector(gridSel);
+        if (!grid) return;
+        const cards = Array.from(grid.querySelectorAll(cardSel));
+        if (cards.length <= ITEMS_PER_PAGE) return;
+
+        const totalPages = Math.ceil(cards.length / ITEMS_PER_PAGE);
+        let page = 0;
+
+        function showPage(p) {
+          page = p;
+          cards.forEach((c, i) => {
+            c.style.display = (i >= p * ITEMS_PER_PAGE && i < (p + 1) * ITEMS_PER_PAGE) ? '' : 'none';
+          });
+          prevBtn.disabled = page === 0;
+          nextBtn.disabled = page === totalPages - 1;
+          dots.forEach((d, i) => d.classList.toggle('active', i === page));
+        }
+
+        const wrap = document.createElement('div');
+        wrap.className = 'pagination-wrap';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'pagination-btn';
+        prevBtn.textContent = '← Anterior';
+        prevBtn.addEventListener('click', () => showPage(page - 1));
+
+        const dotsWrap = document.createElement('div');
+        dotsWrap.className = 'pagination-dots';
+        const dots = Array.from({ length: totalPages }, (_, i) => {
+          const d = document.createElement('span');
+          d.className = 'pagination-dot';
+          d.addEventListener('click', () => showPage(i));
+          dotsWrap.appendChild(d);
+          return d;
+        });
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'pagination-btn';
+        nextBtn.textContent = 'Próxima →';
+        nextBtn.addEventListener('click', () => showPage(page + 1));
+
+        wrap.appendChild(prevBtn);
+        wrap.appendChild(dotsWrap);
+        wrap.appendChild(nextBtn);
+        grid.parentElement.appendChild(wrap);
+
+        showPage(0);
+      });
     })();
   </script>
 </body>
