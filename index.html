@@ -1654,6 +1654,102 @@
     .general-quiz-wrap .quiz-feedback    { color: rgba(247,243,236,.6); }
     .general-quiz-wrap .quiz-score-text  { color: var(--cream); }
     .general-quiz-wrap .quiz-result-box  { border-color: rgba(184,146,74,.25); }
+
+    /* ─── Mapa & Links sociais no detalhe ──────────── */
+    .place-map-wrap {
+      margin-bottom: 1.75rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .place-map-iframe {
+      width: 100%;
+      height: 220px;
+      border: none;
+      display: block;
+      filter: saturate(.85) brightness(.97);
+    }
+
+    .place-map-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .6rem 1rem;
+      background: var(--forest);
+      gap: .75rem;
+    }
+
+    .place-map-label {
+      font-family: 'Jost', sans-serif;
+      font-size: .65rem;
+      font-weight: 400;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .place-routes-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .38rem 1rem;
+      background: var(--gold);
+      color: var(--forest);
+      font-family: 'Jost', sans-serif;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background .22s ease;
+    }
+
+    .place-routes-btn:hover { background: var(--gold2); }
+
+    .place-social-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 2rem;
+    }
+
+    .place-social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .45rem 1.1rem;
+      border: 1px solid rgba(184,146,74,.3);
+      border-radius: var(--radius);
+      font-family: 'Jost', sans-serif;
+      font-size: .72rem;
+      font-weight: 400;
+      letter-spacing: .04em;
+      color: var(--forest);
+      text-decoration: none;
+      transition: background .2s ease, border-color .2s ease, color .2s ease;
+    }
+
+    .place-social-link:hover {
+      background: var(--cream2);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .place-social-link .sicon {
+      font-size: .85rem;
+      line-height: 1;
+    }
+
+    @media (max-width: 600px) {
+      .place-map-iframe { height: 175px; }
+    }
   </style>
 </head>
 <body>
@@ -2738,6 +2834,27 @@
       }
     };
 
+    /* ── Metadados por lugar (mapa + redes sociais) ── */
+    const PLACE_META = {
+      grindelwald:  { lat: 46.6242, lon:  8.0411, website: 'grindelwald.swiss',         instagram: 'grindelwald' },
+      montreux:     { lat: 46.4312, lon:  6.9100, website: 'montreuxriviera.com',        instagram: 'montreux_officiel' },
+      lucerna:      { lat: 47.0502, lon:  8.3093, website: 'luzern.com',                instagram: 'luzern_tourismus' },
+      interlaken:   { lat: 46.6863, lon:  7.8632, website: 'interlaken.ch',             instagram: 'interlakentourism' },
+      memories:     { lat: 47.0025, lon:  9.5012, website: 'grand-resort.ch',           instagram: 'memoriesrestaurant' },
+      chesery:      { lat: 46.4764, lon:  7.2837, website: 'chesery.ch',                instagram: 'restaurantchesery' },
+      pizgloria:    { lat: 46.5585, lon:  7.8352, website: 'schilthorn.ch',             instagram: 'schilthornbahn' },
+      cafedusoleil: { lat: 46.2135, lon:  6.1399, website: 'cafedusoleil-geneve.ch',    instagram: 'cafedusoleilgeneve' },
+      badrutts:     { lat: 46.4988, lon:  9.8376, website: 'badruttspalace.com',        instagram: 'badruttspalace' },
+      alpina:       { lat: 46.4764, lon:  7.2837, website: 'thealpinagstaad.ch',        instagram: 'thealpinagstaad' },
+      omnia:        { lat: 46.0207, lon:  7.7491, website: 'the-omnia.com',             instagram: 'theomniahotel' },
+      schweizerhof: { lat: 46.9481, lon:  7.4421, website: 'schweizerhofbern.ch',       instagram: 'schweizerhofbern' },
+      cambrian:     { lat: 46.4908, lon:  7.5590, website: 'thecambrianadelboden.com',  instagram: 'thecambrian_adelboden' },
+      jungfraujoch: { lat: 46.5474, lon:  7.9835, website: 'jungfrau.ch',              instagram: 'jungfraujoch' },
+      gornergrat:   { lat: 45.9839, lon:  7.7853, website: 'gornergrat.ch',             instagram: 'gornergrat' },
+      titlis:       { lat: 46.7731, lon:  8.4267, website: 'titlis.ch',                instagram: 'titlisengelberg' },
+      harderkulm:   { lat: 46.6967, lon:  7.8567, website: 'harderbahn.ch',             instagram: 'harderkulm' },
+    };
+
     /* ── Detail overlay logic ──────────────────────── */
     const overlay      = document.getElementById('detail-overlay');
     const detailBack   = document.getElementById('detail-back');
@@ -2800,6 +2917,31 @@
       detailTitle.textContent = d.title;
       detailSub.textContent = d.subtitle;
 
+      const meta = PLACE_META[slug] || {};
+
+      /* mapa OSM + botão rotas */
+      let mapHTML = '';
+      if (meta.lat && meta.lon) {
+        const d2 = 0.022;
+        const bbox = `${(meta.lon - d2).toFixed(5)},${(meta.lat - d2 / 2).toFixed(5)},${(meta.lon + d2).toFixed(5)},${(meta.lat + d2 / 2).toFixed(5)}`;
+        const osmUrl   = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${meta.lat},${meta.lon}`;
+        const mapsUrl  = `https://www.google.com/maps/dir/?api=1&destination=${meta.lat},${meta.lon}`;
+        mapHTML = `<div class="place-map-wrap">
+          <iframe class="place-map-iframe" src="${osmUrl}" loading="lazy" title="Mapa — ${d.title}"></iframe>
+          <div class="place-map-bar">
+            <span class="place-map-label">📍 ${d.title}</span>
+            <a class="place-routes-btn" href="${mapsUrl}" target="_blank" rel="noopener noreferrer">↗ Ver Rotas</a>
+          </div>
+        </div>`;
+      }
+
+      /* instagram + site */
+      let socialHTML = '';
+      const socialLinks = [];
+      if (meta.instagram) socialLinks.push(`<a class="place-social-link" href="https://www.instagram.com/${meta.instagram}/" target="_blank" rel="noopener noreferrer"><span class="sicon">📷</span> @${meta.instagram}</a>`);
+      if (meta.website)   socialLinks.push(`<a class="place-social-link" href="https://${meta.website}" target="_blank" rel="noopener noreferrer"><span class="sicon">🌐</span> ${meta.website}</a>`);
+      if (socialLinks.length) socialHTML = `<div class="place-social-bar">${socialLinks.join('')}</div>`;
+
       const sectionsHTML = d.sections.map((s, i) => {
         const imgUrl = `https://picsum.photos/seed/${slug}-s${i}/600/420`;
         const imgTag = `<img class="detail-section-img" src="${imgUrl}" alt="${s.heading}" loading="lazy" />`;
@@ -2811,7 +2953,7 @@
         return `<div class="detail-section"><div class="detail-section-inner">${inner}</div></div>`;
       }).join('');
 
-      detailContent.innerHTML = sectionsHTML + `<div class="detail-quiz">
+      detailContent.innerHTML = mapHTML + socialHTML + sectionsHTML + `<div class="detail-quiz">
         <h2 class="detail-quiz-title">✦ Quiz — teste seus conhecimentos</h2>
         <div id="card-quiz-body"></div>
       </div>`;
