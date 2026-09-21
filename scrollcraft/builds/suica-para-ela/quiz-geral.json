@@ -1,0 +1,112 @@
+[
+  {
+    "q": "Qual é a moeda oficial da Suíça?",
+    "opts": [
+      "Euro",
+      "Franco Suíço",
+      "Coroa Suíça",
+      "Libra"
+    ],
+    "correct": 1,
+    "feedback": "A Suíça usa o Franco Suíço (CHF). O país nunca adotou o Euro, apesar de estar geograficamente no coração da Europa."
+  },
+  {
+    "q": "Quantos cantões tem a Suíça?",
+    "opts": [
+      "20",
+      "23",
+      "26",
+      "30"
+    ],
+    "correct": 2,
+    "feedback": "A Suíça tem 26 cantões, cada um com sua própria constituição, parlamento e governo."
+  },
+  {
+    "q": "Quais são os idiomas oficiais da Suíça?",
+    "opts": [
+      "Alemão e Francês",
+      "Alemão, Francês e Italiano",
+      "Alemão, Francês, Italiano e Romanche",
+      "Alemão, Inglês e Francês"
+    ],
+    "correct": 2,
+    "feedback": "A Suíça tem 4 idiomas oficiais: alemão (63%), francês (23%), italiano (8%) e romanche (menos de 1%)."
+  },
+  {
+    "q": "Qual é a altitude do Jungfraujoch, o ponto ferroviário mais alto da Europa?",
+    "opts": [
+      "2.500 m",
+      "3.000 m",
+      "3.454 m",
+      "4.158 m"
+    ],
+    "correct": 2,
+    "feedback": "O Jungfraujoch fica a 3.454 metros de altitude e tem estação ferroviária desde 1912."
+  },
+  {
+    "q": "O que é o Swiss Travel Pass?",
+    "opts": [
+      "Um passaporte especial para turistas",
+      "Um passe de transporte ilimitado em trens, ônibus e barcos",
+      "Um seguro viagem obrigatório",
+      "Um cartão de crédito suíço"
+    ],
+    "correct": 1,
+    "feedback": "O Swiss Travel Pass dá acesso ilimitado à rede de transporte público suíça — trens, ônibus e barcos — por 3 a 15 dias."
+  },
+  {
+    "q": "Em que cidade fica o famoso Château de Chillon?",
+    "opts": [
+      "Genebra",
+      "Berna",
+      "Zurique",
+      "Montreux"
+    ],
+    "correct": 3,
+    "feedback": "O Château de Chillon fica às margens do Lago Léman, perto de Montreux, e foi imortalizado por Lord Byron no poema 'O Prisioneiro de Chillon'."
+  },
+  {
+    "q": "Qual é o pico mais icônico de Zermatt?",
+    "opts": [
+      "Eiger",
+      "Jungfrau",
+      "Matterhorn",
+      "Mont Blanc"
+    ],
+    "correct": 2,
+    "feedback": "O Matterhorn (4.478 m) é a montanha em forma de pirâmide símbolo da Suíça e um dos picos mais fotografados do mundo, em Zermatt."
+  },
+  {
+    "q": "O que é único sobre Zermatt em relação ao transporte?",
+    "opts": [
+      "Tem o maior aeroporto dos Alpes",
+      "É completamente sem carros a motor",
+      "Só se acessa de helicóptero no inverno",
+      "Tem teleférico 24 horas"
+    ],
+    "correct": 1,
+    "feedback": "Zermatt é uma das raras cidades europeias totalmente sem carros a combustão — apenas veículos elétricos circulam. Carros ficam estacionados em Täsch."
+  },
+  {
+    "q": "Qual festival internacional acontece em Montreux todo mês de julho?",
+    "opts": [
+      "Festival de Cinema",
+      "Festival de Jazz",
+      "Festival de Ópera",
+      "Festival de Queijo"
+    ],
+    "correct": 1,
+    "feedback": "O Montreux Jazz Festival, fundado em 1967 por Claude Nobs, é um dos maiores e mais prestigiados festivais de música do mundo."
+  },
+  {
+    "q": "Qual glaciar é visível do Jungfraujoch e é o maior dos Alpes?",
+    "opts": [
+      "Glaciar do Ródano",
+      "Glaciar Mer de Glace",
+      "Glaciar Aletsch",
+      "Glaciar Gorner"
+    ],
+    "correct": 2,
+    "feedback": "O Glaciar Aletsch tem 23 km de extensão e 900 metros de profundidade em alguns pontos — é o maior glaciar dos Alpes e Patrimônio Mundial da UNESCO."
+  }
+]

@@ -1,0 +1,362 @@
+/* ─────────────────────────────────────────────────────────────
+   Suíça, Para Ela
+   Piso de design compartilhado por todas as páginas.
+   O motor (scrollcraft.css / .js) não é tocado: só tematizado.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  /* Seis papéis, um acento. Paleta fria de papel, deliberadamente longe
+     do creme-e-latão que é o reflexo automático de toda marca artesanal. */
+  --sc-canvas:     #EDEFEE;
+  --sc-surface:    #E0E5E4;
+  --sc-ink:        #14171A;
+  --sc-ink-soft:   #565F60;
+  --sc-accent:     #1B4C72;
+  --sc-accent-ink: #EDEFEE;
+
+  --sc-font-display: "Newsreader", Georgia, serif;
+  --sc-font-text:    "Newsreader", Georgia, serif;
+
+  /* Segunda família: só fólio, etiquetas, legendas e o horário. */
+  --font-label: "Archivo", system-ui, sans-serif;
+
+  /* Canvas claro: as sombras do motor são calibradas para fundo quase preto.
+     Metade da força e re-tingidas na direção do papel (worlds.md). */
+  --sc-shadow-color: 210 14% 12%;
+  --sc-e1: 0 1px 2px hsl(var(--sc-shadow-color) / .06);
+  --sc-e2: 0 4px 14px hsl(var(--sc-shadow-color) / .08);
+  --sc-e3: 0 14px 40px hsl(var(--sc-shadow-color) / .10);
+  --sc-edge: inset 0 1px 0 hsl(0 0% 100% / .7);
+
+  --rule: 1px solid hsl(200 8% 58% / .38);
+  --rule-strong: 1px solid hsl(200 10% 34% / .55);
+
+  /* ── O MOVIMENTO-ASSINATURA ──────────────────────────────────
+     --day corre de 0 (manhã fria) a 1 (fim de tarde) ao longo do scroll.
+     Um instrumento só governa margem, papel, tinta e filetes.
+     Os FUNDOS dos capítulos continuam em corte duro, pintados por seção:
+     a gramática de capítulos recusa interpolação entre dois papéis. */
+  --day: 0;
+  --sun-angle: calc(-58deg + (var(--day) * 116deg));
+  --sun-length: calc(1 + (var(--day) * 1.35));
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  /* O ponto branco do papel esquenta com o dia. Passo pequeno de propósito:
+     invisível de um quadro para o outro, óbvio do topo ao fim. */
+  background:
+    hsl(calc(150 - (var(--day) * 118)) calc(6% + (var(--day) * 14%))
+        calc(93.5% - (var(--day) * 1.5%)));
+  color: var(--sc-ink);
+  font-family: var(--sc-font-text);
+  font-size: clamp(1.02rem, .97rem + .22vw, 1.18rem);
+  line-height: 1.62;
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--sc-accent); color: var(--sc-accent-ink); }
+
+:focus-visible {
+  outline: 2px solid var(--sc-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Pular para o conteúdo: fora da tela até receber foco pelo teclado.
+   Não é classe do motor, então o estilo é daqui. */
+.sc-skip {
+  position: fixed;
+  top: .6rem;
+  left: .6rem;
+  z-index: 90;
+  padding: .7rem 1rem;
+  background: var(--sc-accent);
+  color: var(--sc-accent-ink);
+  font-family: var(--font-label);
+  font-size: .82rem;
+  letter-spacing: .06em;
+  text-decoration: none;
+  border-radius: 2px;
+  transform: translateY(calc(-100% - 1.2rem));
+  transition: transform 160ms var(--sc-ease-out, ease-out);
+}
+.sc-skip:focus-visible { transform: none; }
+
+img { display: block; max-width: 100%; }
+
+/* ── Tipografia ───────────────────────────────────────────── */
+
+h1, h2, h3 {
+  font-family: var(--sc-font-display);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -.016em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p { text-wrap: pretty; margin: 0; }
+
+.display {
+  font-size: clamp(2.6rem, 1.5rem + 4.6vw, 5.4rem);
+  line-height: .98;
+  letter-spacing: -.024em;
+}
+.display--sm { font-size: clamp(1.9rem, 1.3rem + 2.4vw, 3.1rem); line-height: 1.04; }
+
+.lede {
+  font-size: clamp(1.22rem, 1.08rem + .6vw, 1.62rem);
+  line-height: 1.46;
+  color: var(--sc-ink);
+  max-width: 34ch;
+}
+
+.prose { max-width: 62ch; }
+.prose p + p { margin-top: 1.1em; }
+
+.label {
+  font-family: var(--font-label);
+  font-size: .715rem;
+  font-weight: 500;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--sc-ink-soft);
+  font-feature-settings: "tnum" 1;
+}
+
+.caption {
+  font-family: var(--font-label);
+  font-size: .78rem;
+  line-height: 1.5;
+  color: var(--sc-ink-soft);
+  letter-spacing: .005em;
+}
+
+/* Um filete acima da legenda vale mais que uma caixa em volta dela. */
+figure { margin: 0; }
+figcaption { padding-top: .7rem; margin-top: .9rem; border-top: var(--rule); }
+
+/* ── Links ────────────────────────────────────────────────── */
+
+a { color: inherit; }
+
+a.link {
+  color: var(--sc-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+  transition: text-decoration-color 140ms var(--sc-ease-out, ease-out);
+}
+a.link:hover { text-decoration-color: transparent; }
+
+/* O convite para a página de detalhe. Editorial: um filete e uma linha de
+   texto, não uma ilha de botão. Alvo de toque acima de 44px mesmo assim. */
+.go {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .7rem;
+  min-height: 44px;
+  padding: .85rem 0 .7rem;
+  border-top: var(--rule-strong);
+  font-family: var(--font-label);
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--sc-accent);
+  text-decoration: none;
+}
+.go::after {
+  content: "";
+  width: 2.4rem; height: 1px;
+  align-self: center;
+  background: currentColor;
+  transition: width 180ms var(--sc-ease-out, ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .go:hover::after { width: 3.6rem; }
+}
+.go:active { transform: translateY(1px); }
+
+/* ── O FÓLIO, que é um relógio de sol ─────────────────────────
+   A chrome desta gramática. Não é barra fixa: é margem impressa. */
+
+.folio {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 40;
+  width: clamp(5.5rem, 8vw, 8.5rem);
+  height: 100vh;
+  height: 100dvh;
+  padding: clamp(1.1rem, 2vw, 1.8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+.folio__mark {
+  font-family: var(--font-label);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  color: var(--sc-ink);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* O gnômon: um fio, e a sombra que ele projeta na margem. */
+.dial { position: relative; width: 100%; height: clamp(4.5rem, 8vw, 6.5rem); }
+.dial__gnomon {
+  position: absolute;
+  left: 50%; bottom: 0;
+  width: 1px; height: 100%;
+  background: var(--sc-ink);
+  transform: translateX(-.5px);
+}
+.dial__shadow {
+  position: absolute;
+  left: 50%; bottom: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to top,
+    hsl(212 24% 30% / .46), hsl(212 24% 30% / 0));
+  transform-origin: 50% 100%;
+  /* Gira e alonga: a única coisa da página que se move continuamente. */
+  transform: translateX(-.5px) rotate(var(--sun-angle)) scaleY(var(--sun-length));
+}
+.dial__hour {
+  position: absolute;
+  left: 0; bottom: -1.5rem;
+  font-family: var(--font-label);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  color: var(--sc-ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.folio__chapter {
+  font-family: var(--font-label);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--sc-ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+.folio__chapter b { display: block; font-weight: 600; color: var(--sc-ink); }
+
+/* No celular a margem não cabe. Vira um rodapé fino, e o relógio deita. */
+@media (max-width: 860px) {
+  .folio {
+    top: auto; bottom: 0;
+    width: 100%; height: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: .55rem clamp(1rem, 4vw, 1.4rem);
+    background: hsl(0 0% 100% / .55);
+    backdrop-filter: blur(10px);
+    border-top: var(--rule);
+  }
+  .folio__mark { writing-mode: horizontal-tb; transform: none; font-size: .66rem; }
+  .dial { width: 2.2rem; height: 2.2rem; flex: 0 0 auto; }
+  .dial__hour { left: 2.7rem; bottom: .55rem; }
+  .folio__chapter { margin-left: auto; text-align: right; }
+}
+
+/* ── Estrutura de página ──────────────────────────────────── */
+
+.page { margin-left: clamp(5.5rem, 8vw, 8.5rem); }
+@media (max-width: 860px) { .page { margin-left: 0; padding-bottom: 3.2rem; } }
+
+.wrap {
+  width: min(100% - 2 * clamp(1.15rem, 5vw, 4rem), 78rem);
+  margin-inline: auto;
+}
+
+/* Cada capítulo pinta o próprio chão. Corte duro, nunca interpolação. */
+.chapter { position: relative; padding-block: clamp(4.5rem, 9vw, 8.5rem); }
+.chapter--paper  { background: transparent; }
+.chapter--tint   { background: hsl(196 13% 90% / .72); }
+.chapter--deep   { background: hsl(205 22% 15%); }
+
+.chapter--deep,
+.chapter--deep h1, .chapter--deep h2, .chapter--deep h3 {
+  /* Redefinir o token não re-tinge o que já resolveu a cor no body.
+     Reafirmar `color` no mesmo escopo é obrigatório (taste.md). */
+  --sc-ink: #F0F3F4;
+  --sc-ink-soft: #9FB0B6;
+  --sc-accent: #93BDDD;
+  color: var(--sc-ink);
+}
+.chapter--deep .label,
+.chapter--deep .caption { color: var(--sc-ink-soft); }
+.chapter--deep .go { color: var(--sc-accent); border-top-color: hsl(200 20% 70% / .4); }
+
+/* Intertítulo: o corte entre capítulos, que numa revista é uma página
+   inteira em branco com o número e o nome. */
+.intertitle {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1rem, 3vw, 2.4rem);
+  padding-bottom: clamp(1.6rem, 3vw, 2.6rem);
+  margin-bottom: clamp(2.2rem, 4vw, 3.6rem);
+  border-bottom: var(--rule-strong);
+}
+.intertitle__num {
+  font-family: var(--font-label);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  color: var(--sc-ink-soft);
+  font-variant-numeric: tabular-nums;
+  flex: 0 0 auto;
+}
+
+/* Grade assimétrica, nunca três colunas iguais de cards. */
+.spread {
+  display: grid;
+  gap: clamp(1.8rem, 4vw, 3.4rem);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .spread--text-media { grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr); }
+  .spread--media-text { grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr); }
+  .spread--wide-text  { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
+}
+
+.stack > * + * { margin-top: clamp(1rem, 1.8vw, 1.5rem); }
+/* Mais espaço acima de um título do que abaixo dele. */
+.stack > h2 + * { margin-top: .85rem; }
+
+/* Lista de itens reais como etiquetas de museu, não como cards. */
+.ledger { list-style: none; margin: 0; padding: 0; }
+.ledger li { padding: .95rem 0; border-top: var(--rule); }
+.ledger li:last-child { border-bottom: var(--rule); }
+.ledger__name { font-size: 1.06rem; }
+.ledger__fact {
+  font-family: var(--font-label);
+  font-size: .76rem;
+  letter-spacing: .04em;
+  color: var(--sc-ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 640px) {
+  .ledger li { display: flex; justify-content: space-between; align-items: baseline; gap: 2rem; }
+  .ledger__fact { text-align: right; flex: 0 0 auto; }
+}
+
+/* ── Movimento ────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .dial__shadow { transition: none; }
+  html { scroll-behavior: auto; }
+}
